@@ -41,14 +41,43 @@ body {
 }
 
 .introduction {
-  background-color: #E6E6FA;
+  background-color: #FFFFFF;
   padding: 100px 35%;
   text-align: center;
+}
+
+.statistics {
+    border: solid 1px #6A5ACD;
+    margin: 50px auto;
+    font-size: 20px;
+}
+
+.team {
+    text-align: center;
+    height: 400px;
+    margin: 0 auto;
+    width: 1000px;
+}
+
+.teamMember {
+  width: 200px;
+  padding: 10px;
+  border: solid 1px #6A5ACD;
+  margin: 10px;
+  text-align: center;
+  float: left;
+}
+
+.face {
+  padding: 30% 0%;
+  margin: 5% 20%;
+  background-image: url(team/davide_liu.jpg);
+  background-size: cover;
 }
 
 .footer {
   background-color: #2F4F4F;
   padding: 10px;
-  text-align: left;
+  text-align: center;
   color: #FFFFFF;
 }
