@@ -29,9 +29,6 @@ body {
 .description {
   background-color: #E6E6FA;
   padding: 150px 30%;
-}
-
-.description p {
   text-align: center;
 }
 
@@ -39,4 +36,11 @@ body {
   background-color: #E6E6FA;
   padding: 100px 35%;
   text-align: center;
+}
+
+.footer {
+  background-color: #2F4F4F;
+  padding: 10px;
+  text-align: left;
+  color: #FFFFFF;
 }
