@@ -1,0 +1,42 @@
+body {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+.menu {
+    background-color: #6A5ACD;
+    overflow: auto;
+    font-size: 20px;
+}
+
+.menu a {
+    float: left;
+    display: block;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 20px 50px;
+    text-decoration: none;
+}
+
+.menu a:hover {
+    background-color: #191970;
+}
+
+.top_rated {
+  height: 3px;
+}
+
+.description {
+  background-color: #E6E6FA;
+  padding: 150px 30%;
+}
+
+.description p {
+  text-align: center;
+}
+
+.introduction {
+  background-color: #E6E6FA;
+  padding: 100px 35%;
+  text-align: center;
+}
