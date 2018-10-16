@@ -26,10 +26,18 @@ body {
   height: 3px;
 }
 
+.overlay {
+    padding: 200px 20%;
+    background-color: rgba(0,0,0,0.4);
+}
+
 .description {
-  background-color: #E6E6FA;
-  padding: 150px 30%;
-  text-align: center;
+    background-color: #E6E6FA;
+    background-image: url(description.jpg);
+    background-size: cover;
+    text-align: center;
+    color: white;
+    font-size: 25px;
 }
 
 .introduction {
