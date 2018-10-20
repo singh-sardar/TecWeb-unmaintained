@@ -7,6 +7,7 @@
   <meta name="keywords" content="artwork,picture,image,database"/>
   <meta name="author" content="Daniele Bianchin, Pardeep Singh, Davide Liu, Harwinder Singh"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="Style/home.css"/>
   <title>Artbit</title>
 </head>
 
