@@ -40,6 +40,7 @@ CREATE TABLE Commenti (
     FOREIGN KEY(`Utente`) REFERENCES `Artisti` (`Username`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;  
 
+INSERT INTO Artisti (`Username`, `Password`, `Nome`, `Cognome`) VALUES ('admin','$2y$10$1Y06TdnAi7bOyvWaNHsT3O2c.ngTSbQwT1jT8Outv/nIgwbDQHEF6', 'Admin', 'IsHere');
 INSERT INTO Artisti (`Username`, `Password`, `Nome`, `Cognome`) VALUES ('daniele.bianchin','f69613c60164b7c802db39fd256d626ead320e107ae7fd4f043f56e3d27148ef', 'Daniele', 'Bianchin');
 INSERT INTO Opere (`Nome`, `Descrizione`, `Data_upload`, `Artista`, `Categoria`) VALUES ('Carpe Noctem', 'Unkown', '2017-05-06 22:51:59','daniele.bianchin' ,'Fantasy');
 INSERT INTO Opere (`Nome`, `Descrizione`, `Data_upload`, `Artista`, `Categoria`) VALUES ('High Altitude Vegetation', 'Unkown', '2017-02-11 13:20:11','daniele.bianchin' ,'Fantasy');

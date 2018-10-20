@@ -123,7 +123,14 @@ button {
 button:hover {
 	opacity: 0.8;
 }
-
+.logOutButton{
+    color: white;
+    padding: 1em;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    background: #0f4167;
+}
 /* Extra styles for the cancel button */
 .cancelbtn {
 	background-color: #f44336;
