@@ -49,3 +49,7 @@ INSERT INTO Opere (`Nome`, `Descrizione`, `Data_upload`, `Artista`, `Categoria`)
 
 INSERT INTO Commenti (`ID`, `Opera`, `Utente`, `Creatore`, `Commento`) VALUES (0, 'Carpe Noctem', 'daniele.bianchin', 'daniele.bianchin', 'Auto-commento');
 INSERT INTO Likes (`Opera`,`Utente`, `Creatore`) VALUES ('Carpe Noctem', 'daniele.bianchin', 'daniele.bianchin');
+INSERT INTO Likes (`Opera`,`Utente`, `Creatore`) VALUES ('Wild-fi', 'daniele.bianchin', 'daniele.bianchin');
+INSERT INTO Likes (`Opera`,`Utente`, `Creatore`) VALUES ('High Altitude Vegetation', 'daniele.bianchin', 'daniele.bianchin');
+INSERT INTO Likes (`Opera`,`Utente`, `Creatore`) VALUES ('Super Orbit', 'daniele.bianchin', 'daniele.bianchin');
+INSERT INTO Likes (`Opera`,`Utente`, `Creatore`) VALUES ('Water on Planet X', 'daniele.bianchin', 'daniele.bianchin');
