@@ -1,83 +1,208 @@
-body {
+* {
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
+    padding: 0;
+    font-size: 1.0em;
 }
+
+.font_medium {
+    font-size: 1.3em;
+}
+
+.title {
+  font-size: 1.5em;
+  margin-bottom: 5vh;
+  text-align: center
+}
+
 .menu {
     background-color: #6A5ACD;
     overflow: auto;
-    font-size: 20px;
 }
 
 .menu a {
     float: left;
-    display: block;
     color: #FFFFFF;
-    text-align: center;
-    padding: 20px 50px;
+    padding: 3vh 2vw;
     text-decoration: none;
+    text-align: center;
 }
 
 .menu a:hover {
     background-color: #191970;
 }
 
-.top_rated {
-  height: 3px;
+.description {
+    background-image: url(../Images/Art/description.jpg);
+    background-size: cover;
 }
 
 .overlay {
-    padding: 200px 20%;
+    padding: 25vh 20vw;
     background-color: rgba(0,0,0,0.4);
-}
-
-.description {
-    background-color: #E6E6FA;
-    background-image: url("../Images/Art/description.jpg");
-    background-size: cover;
-    text-align: center;
     color: white;
-    font-size: 25px;
+    text-align: center;
 }
 
 .introduction {
   background-color: #FFFFFF;
-  padding: 100px 35%;
+  margin: 12vh auto;
   text-align: center;
+  max-width: 600px;
+  width: 100%;
 }
 
 .statistics {
-    border: solid 1px #6A5ACD;
-    margin: 50px auto;
-    font-size: 20px;
+  border: solid 1px #6A5ACD;
+  padding: 3vh 0;
+  margin-top: 10vh;
+}
+
+.statistics p {
+  margin: 3vh 0;
 }
 
 .team {
-    text-align: center;
-    height: 400px;
-    margin: 0 auto;
-    width: 1000px;
+  margin: 0 auto;
+  overflow: auto;
+  width: 100%;
+  max-width: 800px;
 }
 
 .teamMember {
-  width: 200px;
-  padding: 10px;
+  width: 24%;
+  padding: 2%;
   border: solid 1px #6A5ACD;
-  margin: 10px;
   text-align: center;
   float: left;
+  margin: 0 0.5% 10vh;
 }
 
 .face {
   padding: 30% 0%;
-  margin: 5% 20%;
-  background-image: url("../Images/Team/davide_liu.jpg");
+  margin: 0% 20% 10%;
+  background-image: url(../Images/Team/davide_liu.jpg);
   background-size: cover;
 }
 
 .footer {
   background-color: #2F4F4F;
-  padding: 10px;
+  padding: 1.0em;
   text-align: center;
   color: #FFFFFF;
 }
+/*login css---------------------------------------------------------------------------------------------------------*/
+
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+	width: 100%;
+	padding: 1em;
+	margin: 1em 0;
+	display: inline-block;
+	box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+	background-color: #0F4167;
+	color: white;
+	padding: 1em;
+	border: none;
+	cursor: pointer;
+}
+
+.loginModal button{
+	width: 49%;
+    float: left;
+    margin: 0.5%;
+	font-size:1.5em;
+}
+
+button:hover {
+	opacity: 0.8;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+	background-color: #f44336;
+}
+
+/*head for the login moadl*/
+.loginHead {
+	text-align:center;
+	position: relative;
+	padding: 0.8em 0em;
+	font-size:1.5em;
+}
+/*footer for the login modal*/
+.loginFotter{
+background-color:#f1f1f1;
+}
+
+.container {
+	padding: 1em;
+	overflow: auto;
+}
+
+
+/* Modal */
+.loginModal {
+	display: none; 
+	position: fixed; 
+	z-index: 1; 
+	left: 0;
+	top: 0;
+	width: 100%; 
+	height: 100%; 
+	overflow: auto; 
+	background-color: rgba(0,0,0,0.4); 
+}
+
+/* Modal Content/Box */
+.loginModal-content {
+	background-color: #fefefe;
+	margin: 5% auto 15% auto;
+	width: 80%; 
+}
+
+/* The Close Button (x) */
+.close {
+	position: absolute;
+	right: 1em;
+	top: 0;
+	color: #000;
+	font-size: 2em;
+	font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+	color: red;
+	cursor: pointer;
+}
+
+
+/* Add Zoom Animation */
+.animate {
+	-webkit-animation: animatezoom 0.6s;
+	animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+	from {-webkit-transform: scale(0)} 
+	to {-webkit-transform: scale(1)}
+}
+	
+@keyframes animatezoom {
+	from {transform: scale(0)} 
+	to {transform: scale(1)}
+}
+
+@media screen and (max-width: 300px) {
+    .loginModal button {
+        width: 100%;
+    }
+}
+
