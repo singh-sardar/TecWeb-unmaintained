@@ -92,3 +92,117 @@
   text-align: center;
   color: #FFFFFF;
 }
+/*login css---------------------------------------------------------------------------------------------------------*/
+
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+	width: 100%;
+	padding: 1em;
+	margin: 1em 0;
+	display: inline-block;
+	box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+	background-color: #0F4167;
+	color: white;
+	padding: 1em;
+	border: none;
+	cursor: pointer;
+}
+
+.loginModal button{
+	width: 49%;
+    float: left;
+    margin: 0.5%;
+	font-size:1.5em;
+}
+
+button:hover {
+	opacity: 0.8;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+	background-color: #f44336;
+}
+
+/*head for the login moadl*/
+.loginHead {
+	text-align:center;
+	position: relative;
+	padding: 0.8em 0em;
+	font-size:1.5em;
+}
+/*footer for the login modal*/
+.loginFotter{
+background-color:#f1f1f1;
+}
+
+.container {
+	padding: 1em;
+	overflow: auto;
+}
+
+
+/* Modal */
+.loginModal {
+	display: none; 
+	position: fixed; 
+	z-index: 1; 
+	left: 0;
+	top: 0;
+	width: 100%; 
+	height: 100%; 
+	overflow: auto; 
+	background-color: rgba(0,0,0,0.4); 
+}
+
+/* Modal Content/Box */
+.loginModal-content {
+	background-color: #fefefe;
+	margin: 5% auto 15% auto;
+	width: 80%; 
+}
+
+/* The Close Button (x) */
+.close {
+	position: absolute;
+	right: 1em;
+	top: 0;
+	color: #000;
+	font-size: 2em;
+	font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+	color: red;
+	cursor: pointer;
+}
+
+
+/* Add Zoom Animation */
+.animate {
+	-webkit-animation: animatezoom 0.6s;
+	animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+	from {-webkit-transform: scale(0)} 
+	to {-webkit-transform: scale(1)}
+}
+	
+@keyframes animatezoom {
+	from {transform: scale(0)} 
+	to {transform: scale(1)}
+}
+
+@media screen and (max-width: 300px) {
+    .loginModal button {
+        width: 100%;
+    }
+}
+
