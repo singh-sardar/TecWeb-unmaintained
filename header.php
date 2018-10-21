@@ -28,8 +28,8 @@
 	<li><a href="#">Upload</a></li>
 	<li><a href="#team">Team</a></li>
 	<li><a href="#intro">Services</a></li>
-	<li><a href="#">Gallery</a></li>
-	<li><a href="#">Home</a></li>
+	<li><a href="gallery.php">Gallery</a></li>
+	<li><a href="home.php">Home</a></li>
 
 
 
