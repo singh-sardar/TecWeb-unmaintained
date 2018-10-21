@@ -18,7 +18,7 @@
 		<?php //Questa è una funzioncina per fare login e log out
 		session_start();
 		if(isset($_SESSION["isLogged"])&&$_SESSION["isLogged"]=="true"){
-			echo '<a class="logOutButton" href="doLogOut.php?page=login.php">LogOut '.$_SESSION["Username"].'</a>';
+			echo '<button onclick="doLogOut()" >Log Out '.$_SESSION["Username"].'</button>';
 			
 		}else
 		{

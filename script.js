@@ -59,4 +59,34 @@ function doLogin(event) {
   return false;
 }
 
+//function to lofOut using ajax
+function doLogOut(event) {
+	
+	// creating ajax object
+	var xhttp;
+	if (window.XMLHttpRequest) {
+	// code for modern browsers
+	xhttp = new XMLHttpRequest();
+	} else {
+	// code for IE6, IE5
+	xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	//calback function for the request
+	xhttp.onreadystatechange = function() {
+	if (this.readyState == 4 && this.status == 200) {
+		//if status is ok
+		if(this.responseText=="success"){
+			location.reload();//reload page if logged out
+
+		}
+		
+	}
+	};
+	//doing th ajax request
+	xhttp.open("POST", "doLogOut.php", true);
+	xhttp.send();
+
+  return false;
+}
+
 

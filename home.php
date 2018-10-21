@@ -7,20 +7,19 @@
   <meta name="keywords" content="artwork,picture,image,database"/>
   <meta name="author" content="Daniele Bianchin, Pardeep Singh, Davide Liu, Harwinder Singh"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="Style/home.css"/>
+	<link rel="stylesheet" href="Style/home.css"/>
+	
+	<link rel="stylesheet" href="Style/style.css"/>
+	<script type="text/javascript" src="script.js" ></script>
   <title>Artbit</title>
 </head>
 
-<body>
-  <?php $conn = new mysqli("localhost", "root", "","tecweb");?> <!-- Create connection to the tecweb database-->
-  <div class="menu font_medium"><!--menu-->
-    <a href="#">Home</a>
-    <a href="#">Gallery</a>
-    <a href="#intro">Services</a>
-    <a href="#team">Team</a>
-    <a href="#">Upload</a>
-    <a href="#">Login</a>
-  </div>
+<body onload="eventListnerforLoginModal()" >
+  <?php $conn = new mysqli("localhost", "root", "","tecweb"); //Create connection to the tecweb database
+	require_once "header.php";
+	require_once "loginModal.php";
+  ?> 
+ 
   <div class="description"><!--general description-->
       <div class="overlay font_medium">
         <p>
