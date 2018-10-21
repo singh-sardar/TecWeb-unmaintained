@@ -20,6 +20,8 @@
 			echo "Success";
 			$_SESSION["isLogged"] = "true";
 			$_SESSION["Username"] = $usr;
+			mkdir("./Images/Art/$usr", 0777, true);
+
 			
 		}else{
 			echo 'Username already exists. Try another one';
