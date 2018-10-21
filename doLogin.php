@@ -29,4 +29,5 @@
 	}
 	else 
 		echo "Connection Error";
+	$myDb->disconnect();
 ?>

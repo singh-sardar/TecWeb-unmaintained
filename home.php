@@ -16,6 +16,9 @@
   <?php $conn = new mysqli("localhost", "root", "","tecweb"); //Create connection to the tecweb database
 	require_once "header.php";
 	require_once "loginModal.php";
+	require_once "signUpModal.php";
+	require_once "editProfileModal.php";
+
   ?>
 
   <div class="description"><!--general description-->
