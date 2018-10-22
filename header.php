@@ -6,22 +6,22 @@
     <?php //Questa è una funzioncina per fare login e log out
     	session_start();
     	if(isset($_SESSION["isLogged"])&&$_SESSION["isLogged"]=="true"){
-    		echo '<button onclick="doLogOut()" >Log Out '.$_SESSION["Username"].'</button>';
+    		echo '<a href="#" onclick="doLogOut()" >Log Out '.$_SESSION["Username"].'</a>';
 
     	}else
     	{
-    		echo '<button onclick="openLoginModal()">Login</button>';
+    		echo '<a href="#" onclick="openLoginModal()">Login</a>';
     	}
     ?>
     </li>
 	<li>
     <?php //To Sign in or edit profile of User
     	if(isset($_SESSION["isLogged"])&&$_SESSION["isLogged"]=="true"){
-			echo '<button onclick="openEditProfileModal()">Edit Profile</button>';
+			echo '<a href="#" onclick="openEditProfileModal()">Edit Profile</a>';
 
     	}else
     	{
-			echo '<button onclick="openSignUpModal()" >Sign Up</button>';
+			echo '<a href="#" onclick="openSignUpModal()" >Sign Up</a>';
     	}
     ?>
     </li>
@@ -33,6 +33,6 @@
 
 
 
-  
+
   </ul>
 </div>

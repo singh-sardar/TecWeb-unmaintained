@@ -130,6 +130,7 @@
 
 /*---------Team member---------------------------------------------------------*/
 .teamMember {
+  border-radius: 8%;
   width: 24%;
   padding: 2%;
   border: solid 1px #6A5ACD;
@@ -238,7 +239,7 @@ background-color:#f1f1f1;
 	width: 80%;
 	font-weight:bold;
 	overflow-y:auto;
-	max-height:100%;
+	max-height:80%;
 }
 
 /* The Close Button (x) */
