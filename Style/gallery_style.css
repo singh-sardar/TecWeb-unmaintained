@@ -1,26 +1,76 @@
+/* -------- Stile per il pulsante di ricerca libera (Start) --------- */
+
+.inputSearch input[type=text]{
+    padding: 1em;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    background: #dddddd2b;
+    margin: 0;
+}
+
+.inputSearch button{
+    float: left;
+    width: 20%;
+    padding: 1em;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+    background-image: url("../Images/magnifying-glass.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    color: white;
+    padding-bottom: 2.15em;
+}
+
+.divCategoryFilter{
+    margin: 1em 0;
+}
+
+div.divCategoryButtons button{
+    display: inline-block;
+    color: #333;
+    height: 3em;
+    width: 7em;
+    text-align: center;
+    margin-right: 0.5em;
+    background-color: #f8f8f8;
+    cursor: pointer;
+    margin-bottom: 0.8em;
+    float: left;
+}
+
+.divCategoryButtons .active{
+    background-color: #44778F;
+    color: #fcfefd;
+}
+
+.inputSearch::after{
+    content: '';
+    clear: both;
+    display: table;
+}
+/* -------- Stile per il pulsante di ricerca libera (End)--------- */
 
 #gallery{
     width: 90%;
     max-width: 1200px;
     margin: 4vh auto;
-    /*font: normal 14px/1.5 "Montserrat", "Helvetica Neue", sans-serif;*/
-    /*background: #cfd8dc;*/
-    /*color: #37474f;*/
 }
 
-#galleryBoard figure{
+#galleryBoard .galleryFigureWrapper{
     background: whitesmoke;
     margin: 0 0 40px;
     box-shadow: 0px 3px 4px rgba(0,0,0,0.2);
 }
 
-#galleryBoard figcaption{
-    padding: 20px;
+#galleryBoard .galleryCaption{
+    padding: 1em;
 }
 
 #galleryBoard img{
     max-width: 100%;
-    height: auto;
+    position: relative;
     display: block;
 }
 
@@ -35,15 +85,33 @@
     padding: 0;
 }
 
+.like-btn{
+    cursor: pointer;
+    width: 36px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    height: 36px;
+    z-index: 1;
+    background: url(../Images/collectinglove.png) no-repeat;
+    background-size: 100% 100%;
+}
+
 #artFilter{
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 4em;
+    padding: 1em 0 0 0;
+    margin: 1em 1em 2em;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    overflow: auto;
+}
+
+.titleImageOfGallery{
+    text-align: center;
 }
 
 #artFilter .dropdown{
     float: left;
-    margin-right: 5vh
+    margin-right: 5vh;
 }
 
 .dropdown{
@@ -98,23 +166,6 @@
     padding-left: 15px;
     padding-right: 15px;
     box-sizing: border-box;
-}
-
-.btnGreen{
-	background-color: #4CAF50; /* Green */
-    border: 1px solid green;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    cursor: pointer;
-	width:100%;
-}
-
-.btnGreen:hover{
-	background-color: #3e8e41;
 }
 
 @media screen and (min-width:400px){

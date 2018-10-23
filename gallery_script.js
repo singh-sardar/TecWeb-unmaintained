@@ -54,3 +54,7 @@ function fillGallery(arr){
         </figure>';
     }
 }
+
+function galCatOnClick(){
+    document.getElementsByName('gallerySearch')[0].value = "";
+}

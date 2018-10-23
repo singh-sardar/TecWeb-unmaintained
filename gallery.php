@@ -18,7 +18,10 @@
     <?php
         require_once "header.php";
         require_once "loginModal.php";
+        require_once "signUpModal.php";
+        require_once "editProfileModal.php";
         require_once "functions.php";
+        require_once "DbConnector.php";
     ?>
     <div id="gallery">
         <form method="post" action="" name="formArtFilter">
@@ -37,111 +40,83 @@
                     </div>
                 </div>
                 -->
-                <div class="dropdown">
-                    <select name="dropArt" onchange="submitArtFilterForm()">
-                        <option value="">- Artist -</option>
-                        <?php
-                            $listArt = listArtists();
-                            for ($i=0; $i < count($listArt); $i++){
-                                if(!isset($_POST['dropArt']) || (isset($_POST['dropArt']) && ($_POST['dropArt'] != $listArt[$i]))){
-                                    echo '<option value="'.$listArt[$i].'">'.$listArt[$i].'</option>';
-                                }elseif($_POST['dropArt'] == $listArt[$i]){
-                                    echo '<option value="'.$listArt[$i].'" selected="selected">'.$listArt[$i].'</option>';
-                                }
-                            }
-                        ?>
-                    </select>
+                <div class="inputSearch">
+                    <?php 
+                        if(isset($_POST['gallerySearch']) && ($_POST['gallerySearch'] != '')){
+                            echo '<input type="text" placeholder="Cerca per categoria, artista o descrizione .." name="gallerySearch" value="'.$_POST['gallerySearch'].'">';
+                        }else{
+                            echo '<input type="text" placeholder="Cerca per categoria, artista o descrizione .." name="gallerySearch">';
+                        }
+                    ?>
+                    <button type="submit"><span class="searchIcon"></span></button>
+                </div>
+                <div class="divCategoryFilter">
+                    <p>Categories</p>
+                    <input type="hidden" id="type_id" name="type" value="">
+                    <div class="divCategoryButtons" id="divCatBut">
+                        <button type="submit" name="galleryCategory" onclick="galCatOnClick()" value="All" <?php if(isset($_POST['galleryCategory']) && $_POST['galleryCategory']=='All'){echo "class='active'";} ?> ">All</button>
+                        <button type="submit" name="galleryCategory" onclick="galCatOnClick()" value="Landscape" <?php if(isset($_POST['galleryCategory']) && $_POST['galleryCategory']=='Landscape'){echo "class='active'";} ?>>Landscape</button>
+                        <button type="submit" name="galleryCategory" onclick="galCatOnClick()" value="Fantasy" <?php if(isset($_POST['galleryCategory']) && $_POST['galleryCategory']=='Fantasy'){echo "class='active'";} ?>>Fantasy</button>
+                        <button type="submit" name="galleryCategory" onclick="galCatOnClick()" value="Abstract" <?php if(isset($_POST['galleryCategory']) && $_POST['galleryCategory']=='Abstract'){echo "class='active'";} ?>>Abstract</button>
+                        <button type="submit" name="galleryCategory" onclick="galCatOnClick()" value="Cartoon" <?php if(isset($_POST['galleryCategory']) && $_POST['galleryCategory']=='Cartoon'){echo "class='active'";} ?>>Cartoon</button>
+                        <button type="submit" name="galleryCategory" onclick="galCatOnClick()" value="Portrait" <?php if(isset($_POST['galleryCategory']) && $_POST['galleryCategory']=='Portrait'){echo "class='active'";} ?>>Portrait</button>
+                        <button type="submit" name="galleryCategory" onclick="galCatOnClick()" value="Nature" <?php if(isset($_POST['galleryCategory']) && $_POST['galleryCategory']=='Nature'){echo "class='active'";} ?>>Nature</button>
+                        <button type="submit" name="galleryCategory" onclick="galCatOnClick()" value="Others" <?php if(isset($_POST['galleryCategory']) && $_POST['galleryCategory']=='Others'){echo "class='active'";} ?>>Others</button>
+                    </div>
                 </div>
 
-                <div class="dropdown">
-                    <select name="dropCat" onchange="submitArtFilterForm()">
-                        <option value="">- Category -</option>
-                        <?php
-                            $listCat = listCategories();
-                            for ($i=0; $i < count($listCat); $i++){
-                                if(!isset($_POST['dropCat']) || (isset($_POST['dropCat']) && ($_POST['dropCat'] != $listCat[$i]))){
-                                    echo '<option value="'.$listCat[$i].'">'.$listCat[$i].'</option>';
-                                }elseif($_POST['dropCat'] == $listCat[$i]){
-                                    echo '<option value="'.$listCat[$i].'" selected="selected">'.$listCat[$i].'</option>';
-                                }
-                            }
-                        ?>
-                    </select>
-                </div>
             </div>
         </form>
         
         <ul class="clearfix" id="galleryBoard">
             <?php
-                if(isset($_POST['dropArt']) && isset($_POST['dropCat'])){
-                    $arr = filterImages($_POST['dropArt'],$_POST['dropCat']);
+                if(isset($_POST["gallerySearch"]) && ($_POST['gallerySearch'] != '')){
+                    //connecting to db
+                    $myDb= new DbConnector();
+                    $myDb->openDBConnection();
+                    $param = htmlspecialchars($_POST["gallerySearch"], ENT_QUOTES, "UTF-8");//cleaning the input
+                    $result = array();
+                    if($myDb->connected){
+                        $qrStr = "SELECT Artista,Nome, Descrizione FROM Opere WHERE Descrizione LIKE '%".$param."%' OR Categoria LIKE '%".$param."%' OR Artista LIKE '%".$param."%'";
+                        $result = $myDb->doQuery($qrStr);
+                    }
+                    else 
+                        echo "Errore connessione";
+                    $myDb->disconnect();
 
-                    for ($i=0; $i < count($arr); $i++){
-                        echo "<li>";
-                        echo "   <figure>";
-                        echo '        <img src="Images/Art/'.$_POST['dropArt'].'/'.$arr[$i].'.png" alt="">';
-                        echo '        <figcaption>';
-                        echo '            Enterdum et malesuada fames ac ante ipsum primis in faucibus.';
-                        echo '            <button class="btnGreen" type="button">Click Me!</button>';
-                        echo '       </figcaption>';
-                        echo '   </figure>';
-                        echo '</li>';
+                    if($result){
+                        for ($i = 0; $i < $result->num_rows; $i++) {
+                            $row = $result->fetch_assoc();
+                            insertImageInGallery($row['Artista'],$row['Nome'],$row['Descrizione']);
+                        }
+                    }
+                }elseif(isset($_POST['galleryCategory']) && ($_POST['galleryCategory'] != '')){
+                    //connecting to db
+                    $myDb= new DbConnector();
+                    $myDb->openDBConnection();
+                    $param = htmlspecialchars($_POST["galleryCategory"], ENT_QUOTES, "UTF-8");//cleaning the input
+                    $result = array();
+                    if($myDb->connected){
+                        
+                        if($param == 'All'){
+                            $qrStr = "SELECT Artista,Nome,Descrizione FROM Opere;";
+                        }else{
+                            $qrStr = "SELECT Artista,Nome,Descrizione FROM Opere WHERE Categoria='".$param."'";
+                        }
+                        $result = $myDb->doQuery($qrStr);
+                    }
+                    else 
+                        echo "Errore connessione";
+                    $myDb->disconnect();
+
+                    if($result){
+                        for ($i = 0; $i < $result->num_rows; $i++) {
+                            $row = $result->fetch_assoc();
+                            insertImageInGallery($row['Artista'],$row['Nome'],$row['Descrizione']);
+                        }
                     }
                 }
             ?>
-            <!--
-            <li>
-                <figure>
-                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/1.png" alt="">
-                    <figcaption>
-                        Enterdum et malesuada fames ac ante ipsum primis in faucibus.
-                        <button class="btnGreen" type="button">Click Me!</button>
-                    </figcaption>
-                </figure>
-            </li>
-            <li>
-                <figure>
-                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/2.png" alt="">
-                    <figcaption>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</figcaption>
-                </figure>
-            </li>
-            <li>
-                <figure>
-                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/4.png" alt="">
-                    <figcaption>Fusce ac felis vel metus.</figcaption>
-                </figure>
-            </li>
-            <li>
-                <figure>
-                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/5.png" alt="">
-                    <figcaption>Phasellus blandit, eros ac aliquet sollicitudin.</figcaption>
-                </figure>
-            </li>
-            <li>
-                <figure>
-                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/6.png" alt="">
-                    <figcaption>Cras et tincidunt nisi, ut semper ex. Ut iaculis eget urna sed auctor.</figcaption>
-                </figure>
-            </li>
-            <li>
-                <figure>
-                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/7.png" alt="">
-                    <figcaption>Nulla suscipit vestibulum dolor. Praesent tincidunt justo risus, ac aliquam purus scelerisque.</figcaption>
-                </figure>
-            </li>
-            <li>
-                <figure>
-                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/8.png" alt="">
-                    <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
-                </figure>
-            </li>
-            <li>
-                <figure>
-                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/9.png" alt="">
-                    <figcaption>Phasellus ornare rutrum fringilla.</figcaption>
-                </figure>
-            </li>
-            -->
         </ul> 
     </div>
 </body>
