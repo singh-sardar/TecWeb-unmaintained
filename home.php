@@ -13,12 +13,14 @@
 </head>
 
 <body onload="eventListnerforLoginModal()" >
-  <?php $conn = new mysqli("localhost", "root", "","tecweb"); //Create connection to the tecweb database
+  <?php
 	require_once "header.php";
 	require_once "loginModal.php";
 	require_once "signUpModal.php";
 	require_once "editProfileModal.php";
-
+  require_once "DbConnector.php";
+  $myDb= new DbConnector();
+  $myDb->openDBConnection();
   ?>
 
   <div class="description"><!--general description-->
@@ -33,7 +35,7 @@
   <div class="section"><!--top rated-->
     <div class="title">Top rated</div>
     <?php
-    $result = $conn->query("SELECT Nome, Artista, COUNT(Nome) as Likes FROM opere JOIN likes on Nome=Opera and Artista=Creatore
+    $result = $myDb->doQuery("SELECT Nome, Artista, COUNT(Nome) as Likes FROM opere JOIN likes on Nome=Opera and Artista=Creatore
                             GROUP BY Nome, Artista ORDER BY COUNT(Nome) DESC LIMIT 5");
     $nome=array($result->num_rows);
     $artista=array($result->num_rows);
@@ -55,18 +57,20 @@
   <div class="section" id="intro"><!--website Introduction-->
     <div class="title">Introduction</div>
     <p>
-      This website is a collection of digital artworks, everyone can upload his own masterpieces
-      sharing them with the world and get popularity.
+      Innovation is the key to the future, let the art invade the digital world.
+      This website is meant to be collection of digital artworks, everyone can
+      register and upload his own masterpieces sharing them with the world and
+      get popularity.
     </p>
     <div class="statistics">
       <?php
-      $result = $conn->query("SELECT COUNT(*) as tot_opere FROM opere");
+      $result = $myDb->doQuery("SELECT COUNT(*) as tot_opere FROM opere");
       $row = $result->fetch_assoc();
       $tot_opere = $row["tot_opere"];
-      $result = $conn->query("SELECT COUNT(Username) as tot_artisti FROM artisti");
+      $result = $myDb->doQuery("SELECT COUNT(Username) as tot_artisti FROM artisti");
       $row = $result->fetch_assoc();
       $tot_artisti = $row["tot_artisti"];
-      $result = $conn->query("SELECT COUNT(*) as tot_likes FROM likes");
+      $result = $myDb->doQuery("SELECT COUNT(*) as tot_likes FROM likes");
       $row = $result->fetch_assoc();
       $tot_likes = $row["tot_likes"];
       ?>
