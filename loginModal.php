@@ -14,14 +14,14 @@
 			<input id="usr" type="text" placeholder="Enter Username" name="uname" required/>
 
 			<label for="psw">Password</label>
-			<input id="pwd" type="password" placeholder="Enter Password" name="psw" required/>
+			<input  id="pwd" type="password" placeholder="Enter Password" name="psw" required/>
 
 		</div>
 		<div class="container" id="InvalidLogin">
 			<!--container for invalid login message-->
-			
+
 		</div>
-		
+
 		<div class="container modalFotter" >
 			<button type="submit">Login</button>
 			<button type="button" onclick="closeLoginModal()" class="cancelbtn">Cancel</button>
@@ -29,4 +29,3 @@
 
 	</form>
 </div>
-	
