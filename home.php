@@ -82,22 +82,22 @@
   <div class="section" id="team"><!--team-->
     <div class="title">Team</div>
     <div class="teamMember">
-      <div class="face"></div>
+      <img src="Images/Team/davide_liu.jpg" alt='Team member face'>
       <h2>Davide Liu</h2>
       <p>Software Engineer</p>
     </div>
     <div class="teamMember">
-      <div class="face"></div>
+      <img src="Images/Team/davide_liu.jpg" alt='Team member face'>
       <h2>Davide Liu</h2>
       <p>Software Engineer</p>
     </div>
     <div class="teamMember">
-      <div class="face"></div>
+      <img src="Images/Team/davide_liu.jpg" alt='Team member face'>
       <h2>Davide Liu</h2>
       <p>Software Engineer</p>
     </div>
     <div class="teamMember">
-      <div class="face"></div>
+      <img src="Images/Team/davide_liu.jpg" alt='Team member face'>
       <h2>Davide Liu</h2>
       <p>Software Engineer</p>
     </div>

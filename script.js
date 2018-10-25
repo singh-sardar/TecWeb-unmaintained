@@ -28,7 +28,7 @@ function openEditProfileModal() {
 	document.getElementById('EditProfileModal').style.display='block';
 }
 
-//function to close the  modal clicking outside 
+//function to close the  modal clicking outside
 function eventListnerforLoginModal() {
 
 	// When the user clicks anywhere outside of the modal, close it
@@ -82,7 +82,7 @@ function doLogin(event) {
 
 //function to lofOut using ajax
 function doLogOut(event) {
-	
+
 	// creating ajax object
 	var xhttp;
 	if (window.XMLHttpRequest) {
@@ -100,7 +100,7 @@ function doLogOut(event) {
 			location.reload();//reload page if logged out
 
 		}
-		
+
 	}
 	};
 	//doing th ajax request
@@ -184,5 +184,12 @@ function doEditProfile(event) {
   return false;
 }
 
-
-
+//drobdown menu event
+function openDrobDownMenu() {
+    var x = document.getElementById("Topnav");
+    if (x.className === "menu") {
+        x.className += " responsive";
+    } else {
+        x.className = "menu";
+    }
+}

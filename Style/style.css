@@ -21,14 +21,24 @@
 
 /*---------LOGIN.PHP-----------------------------------------------------------*/
 /*---------Menù e pulsanti-----------------------------------------------------*/
+.menu {
+	background-color: #6A5ACD;
+	overflow: hidden;
+}
+
 .menu ul {
     list-style-type: none;
-    background-color: #6A5ACD;
-    overflow: hidden;
 }
 
 .menu li {
     float: left;
+}
+
+.menu img {
+	float: left;
+	width: 10%;
+	height: 3.0em;
+	width: 3.0em;
 }
 
 .menu a{
@@ -44,23 +54,23 @@
     background-color: #191970;
 }
 
-.icon {
+.hamburgerMenu {
   display: none;
 }
 
 @media screen and (max-width: 700px) {
   .menu li {display: none;}
-  .menu li.icon {
-    float: left;
+  .menu li.hamburgerMenu {
+    float: right;
     display: block;
   }
 }
 
 @media screen and (max-width: 700px) {
   .menu.responsive {position: relative;}
-  .menu.responsive .icon {
+  .menu.responsive .hamburgerMenu {
     position: absolute;
-    left: 0;
+    right: 0;
     top: 0;
   }
   .menu.responsive li {
@@ -69,6 +79,7 @@
     text-align: left;
   }
 }
+
 /*---------HOME.PHP------------------------------------------------------------*/
 /*---------Descrizione---------------------------------------------------------*/
 .description {
@@ -153,11 +164,9 @@
   }
 }
 
-.face {
-  padding: 30% 0%;
-  margin: 0% 20% 10%;
-  background-image: url(../Images/Team/davide_liu.jpg);
-  background-size: cover;
+.teamMember img {
+  margin: 0% auto 10%;
+  width: 50%;
   border-radius: 50%;
 }
 
