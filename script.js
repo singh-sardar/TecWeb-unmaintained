@@ -193,3 +193,41 @@ function openDrobDownMenu() {
         x.className = "menu";
     }
 }
+
+/*
+Function by page gallery.php
+*/
+function btnLikeOnClick(obj){
+	// creating ajax object
+	var xhttp;
+	if (window.XMLHttpRequest) {
+        // code for modern browsers
+        xhttp = new XMLHttpRequest();
+    } else {
+        // code for IE6, IE5
+        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    
+    //calback function for the request
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            //if status is ok
+            if(this.responseText=="0"){//finestra di login
+                openLoginModal();
+            }else if(this.responseText == "1"){//like inserito
+                obj.classList.add("like-btn-added");
+            }else if(this.responseText == "2"){//like rimosso
+                obj.classList.remove("like-btn-added");
+            }else{//errore
+                alert("Errore");
+            }
+        }
+	};
+	//doing th ajax request
+	xhttp.open("POST", "giveLike.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    var thisId = obj.id;
+    var nomeArtista = thisId.substring(0,thisId.indexOf('_'));
+    var nomeImmagine = thisId.substring(thisId.indexOf('_')+1);
+    xhttp.send("art="+nomeArtista+"&nomeImg="+nomeImmagine);
+}
