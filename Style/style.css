@@ -19,7 +19,6 @@
   text-align: center
 }
 
-/*---------LOGIN.PHP-----------------------------------------------------------*/
 /*---------Menù e pulsanti-----------------------------------------------------*/
 .menu {
 	background-color: #6A5ACD;
@@ -36,9 +35,11 @@
 
 .menu img {
 	float: left;
-	width: 10%;
 	height: 3.0em;
 	width: 3.0em;
+	background-color:white;
+	border-radius:100%;
+	margin: 0em 1em;
 }
 
 .menu a{
@@ -58,29 +59,33 @@
   display: none;
 }
 
-@media screen and (max-width: 700px) {
-  .menu li {display: none;}
-  .menu li.hamburgerMenu {
-    float: right;
-    display: block;
-  }
+.line1, .line2, .line3 {
+    width: 2em;
+    height: 0.3em;
+    background-color: white;
+    margin: 0.3em 0;
+    transition: 0.4s;
+}
+/*rotate effect for the buttons*/
+.rotate .line1 {
+    -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+    transform: rotate(-45deg) translate(-9px, 6px);
 }
 
-@media screen and (max-width: 700px) {
-  .menu.responsive {position: relative;}
-  .menu.responsive .hamburgerMenu {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  .menu.responsive li {
-    float: none;
-    display: block;
-    text-align: left;
-  }
+.rotate .line2 {opacity: 0;}
+
+.rotate .line3 {
+    -webkit-transform: rotate(45deg) translate(-8px, -8px);
+    transform: rotate(45deg) translate(-8px, -8px);
 }
+
+
 
 /*---------HOME.PHP------------------------------------------------------------*/
+hr{
+    border: solid 0.5px #6b5bcd;
+    margin: 0.5em;
+}
 /*---------Descrizione---------------------------------------------------------*/
 .description {
     background-image: url(../Images/description.jpg);
@@ -98,7 +103,8 @@
 
 /*----------Layout generale per sezioni menù-----------------------------------*/
 .section {
-  margin: 0 auto 10vh;
+  margin: auto;
+  padding:1em;
   overflow: hidden;
   width: 100%;
   max-width: 1000px;
@@ -136,9 +142,7 @@
 .statistics {
   border: solid 1px #6A5ACD;
   padding: 3vh;
-  margin: 10vh auto 0;
-  max-width: 600px;
-  border-radius: 50%;
+  margin: 1em 0em;
 }
 
 .statistics p {
@@ -166,7 +170,7 @@
 
 .teamMember img {
   margin: 0% auto 10%;
-  width: 50%;
+  height: 5em;
   border-radius: 50%;
 }
 
@@ -297,9 +301,52 @@ background-color:#f1f1f1;
 	from {transform: scale(0)}
 	to {transform: scale(1)}
 }
+/*MEDIA QUERY-----------------------------------------------------*/
 
-@media screen and (max-width: 300px) {
-    .Modal button {
-        width: 100%;
-    }
+
+@media screen and (max-width: 700px) {
+	/*menu*/
+	.menu li {display: none;}
+	.menu li.hamburgerMenu {
+		float: right;
+		display: block;
+	}
+
+	.menu.responsive {position: relative;}
+	.menu.responsive .hamburgerMenu {
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+	.menu.responsive li {
+		float: none;
+		display: block;
+		text-align: left;
+	}
+	.menu ul{
+		top:0;
+		right:0;
+		position: relative;
+	}
+	.menu img {
+		margin:0.5em;
+	}
+	.firstMenuItem{
+	padding-top:4em;	
+	}
+	
+	/*wide screen modal*/
+	.modal-content{
+		margin:auto;
+		width:100%;
+		max-height:100%;
+		height:100%;
+	}
+	.modalFotter{
+		background-color: none;
+	}
+	.Modal button{
+		width:100%;
+	}
 }
+

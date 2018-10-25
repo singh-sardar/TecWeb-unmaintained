@@ -33,13 +33,13 @@ function eventListnerforLoginModal() {
 
 	// When the user clicks anywhere outside of the modal, close it
 	window.onclick = function(event) {
-		if (event.target == document.getElementById('LoginModal')) {
+		if (event.target === document.getElementById('LoginModal')) {
 			document.getElementById('LoginModal').style.display = "none";
 		}
-		if (event.target == document.getElementById('SignUpModal')) {
+		if (event.target === document.getElementById('SignUpModal')) {
 			document.getElementById('SignUpModal').style.display = "none";
 		}
-		if (event.target == document.getElementById('EditProfileModal')) {
+		if (event.target === document.getElementById('EditProfileModal')) {
 			document.getElementById('EditProfileModal').style.display = "none";
 		}
 	}
@@ -59,9 +59,9 @@ function doLogin(event) {
 	}
 	//calback function for the request
 	xhttp.onreadystatechange = function() {
-	if (this.readyState == 4 && this.status == 200) {
+	if (this.readyState === 4 && this.status === 200) {
 		//if status is ok
-		if(this.responseText=="Success")
+		if(this.responseText==="Success")
 			location.reload();
 		else
 			document.getElementById("InvalidLogin").innerHTML = this.responseText;
@@ -94,7 +94,7 @@ function doLogOut(event) {
 	}
 	//calback function for the request
 	xhttp.onreadystatechange = function() {
-	if (this.readyState == 4 && this.status == 200) {
+	if (this.readyState === 4 && this.status == 200) {
 		//if status is ok
 		if(this.responseText=="success"){
 			location.reload();//reload page if logged out
@@ -127,7 +127,7 @@ function doSignUp(event) {
 	xhttp.onreadystatechange = function() {
 	if (this.readyState == 4 && this.status == 200) {
 		//if status is ok
-		if(this.responseText=="Success"){
+		if(this.responseText==="Success"){
 			location.reload();
 		}else{
 			document.getElementById("SignUpMessage").innerHTML = this.responseText;
@@ -165,7 +165,7 @@ function doEditProfile(event) {
 	}
 	//calback function for the request
 	xhttp.onreadystatechange = function() {
-	if (this.readyState == 4 && this.status == 200) {
+	if (this.readyState === 4 && this.status === 200) {
 		//if status is ok
 		document.getElementById("EditProfileMessage").innerHTML = this.responseText;
 
@@ -185,11 +185,13 @@ function doEditProfile(event) {
 }
 
 //drobdown menu event
-function openDrobDownMenu() {
+function openDrobDownMenu(btn) {
     var x = document.getElementById("Topnav");
     if (x.className === "menu") {
         x.className += " responsive";
     } else {
         x.className = "menu";
     }
+	btn.classList.toggle("rotate");
+
 }

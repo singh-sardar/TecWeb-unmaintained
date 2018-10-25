@@ -60,7 +60,7 @@
       Innovation is the key to the future, let the art invade the digital world.
       This website is meant to be collection of digital artworks, everyone can
       register and upload his own masterpieces sharing them with the world and
-      get popularity.
+      </br>get popularity. Down here you can find some statistics of our site.
     </p>
     <div class="statistics">
       <?php
@@ -80,25 +80,29 @@
     </div>
   </div>
   <div class="section" id="team"><!--team-->
-    <div class="title">Team</div>
+    <div class="title">Our Amazing Team</div>
     <div class="teamMember">
       <img src="Images/Team/davide_liu.jpg" alt='Team member face'>
       <h2>Davide Liu</h2>
+	  <hr/>
+      <p>Software Engineer</p>
+    </div>
+    <div class="teamMember">
+      <img src="Images/Team/harwinder_singh.jpg" alt='Team member face'>
+      <h2>Harwinder Singh</h2>
+	  <hr/>
       <p>Software Engineer</p>
     </div>
     <div class="teamMember">
       <img src="Images/Team/davide_liu.jpg" alt='Team member face'>
       <h2>Davide Liu</h2>
+	  <hr/>
       <p>Software Engineer</p>
     </div>
     <div class="teamMember">
       <img src="Images/Team/davide_liu.jpg" alt='Team member face'>
       <h2>Davide Liu</h2>
-      <p>Software Engineer</p>
-    </div>
-    <div class="teamMember">
-      <img src="Images/Team/davide_liu.jpg" alt='Team member face'>
-      <h2>Davide Liu</h2>
+	  <hr/>
       <p>Software Engineer</p>
     </div>
   </div>

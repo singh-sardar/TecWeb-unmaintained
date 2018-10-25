@@ -1,11 +1,9 @@
-<link rel="stylesheet" href="Style/icons.css">
 
-<html>
-<body>
 <div class="menu" id="Topnav">
   <img src="Images/logo.png" alt="Logo"/>
   <ul>
-    <li><a href="home.php">Home</a></li>
+
+    <li class="firstMenuItem"><a href="home.php" >Home</a></li>
     <li><a href="home.php#intro">Services</a></li>
     <li><a href="home.php#team">Team</a></li>
     <li><a href="gallery.php">Gallery</a></li>
@@ -33,11 +31,14 @@
         }
       ?>
     </li>
-    <li class="hamburgerMenu">
-      <a href="#" onclick="openDrobDownMenu()"><div class="fa fa-bars"></div></a>
+      <li class="hamburgerMenu">
+		<a href="#" onclick="openDrobDownMenu(this)">
+			<div class="line1"></div>
+			<div class="line2"></div>
+			<div class="line3"></div>
+		</a>
     </li>
   </ul>
 </div>
 
-</body>
-</html>
+
