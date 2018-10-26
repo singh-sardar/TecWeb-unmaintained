@@ -11,17 +11,21 @@
 	$myDb->openDBConnection();
 	$pwd=password_hash($pwd,PASSWORD_BCRYPT);
 	if($myDb->connected){
+		if(isset($_SESSION['Username']))
+		{
+			$result = $myDb->doQuery("UPDATE artisti SET Password='$pwd', Nome='$name', Cognome='$surname' where Username ='$usr'");//excecute query
+			if($result === TRUE){//if inserted
 
-		$result = $myDb->doQuery("UPDATE artisti SET Password='$pwd', Nome='$name', Cognome='$surname' where Username ='$usr'");//excecute query
-		if($result === TRUE){//if inserted
+				echo "New updates saved correctly";
+				$_SESSION["isLogged"] = "true";
+				$_SESSION["Username"] = $usr;
 
-			echo "New updates saved correctly";
-			$_SESSION["isLogged"] = "true";
-			$_SESSION["Username"] = $usr;
-
-		}else{
-			echo 'Error. Try Again';
+			}else{
+				echo 'Error. Try Again';
+			}
 		}
+		else
+			echo 'Please login before';
 	}
 	else
 		echo "Connection Error";
