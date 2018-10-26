@@ -56,7 +56,7 @@ h1 {
   text-align: center;
 }
 
-.menu a:hover, .menu button:hover{
+.menu a:hover,  button:hover{
     background-color: #191970;
 }
 
