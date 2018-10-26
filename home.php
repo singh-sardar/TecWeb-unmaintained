@@ -33,7 +33,7 @@
     </div>
   </div>
   <div class="section"><!--top rated-->
-    <div class="title">Top rated</div>
+    <h1>Top rated</h1>
     <?php
     $result = $myDb->doQuery("SELECT Nome, Artista, COUNT(Nome) as Likes FROM opere JOIN likes on Nome=Opera and Artista=Creatore
                             GROUP BY Nome, Artista ORDER BY COUNT(Nome) DESC LIMIT 5");
@@ -55,7 +55,7 @@
     ?>
   </div>
   <div class="section" id="intro"><!--website Introduction-->
-    <div class="title">Introduction</div>
+    <h1>Introduction</h1>
     <p>
       Innovation is the key to the future, let the art invade the digital world.
       This website is meant to be collection of digital artworks, everyone can
@@ -73,6 +73,7 @@
       $result = $myDb->doQuery("SELECT COUNT(*) as tot_likes FROM likes");
       $row = $result->fetch_assoc();
       $tot_likes = $row["tot_likes"];
+      $myDb->disconnect();
       ?>
       <p>Registered artworks: <?php echo $tot_opere ?></p>
       <p>Registered painters: <?php echo $tot_artisti ?></p>
@@ -80,7 +81,7 @@
     </div>
   </div>
   <div class="section" id="team"><!--team-->
-    <div class="title">Our Amazing Team</div>
+    <h1>Our Amazing Team</h1>
     <div class="teamMember">
       <img src="Images/Team/davide_liu.jpg" alt='Team member face'>
       <h2>Davide Liu</h2>
