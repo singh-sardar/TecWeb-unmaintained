@@ -33,7 +33,7 @@
     </div>
   </div>
   <div class="section"><!--top rated-->
-    <h1>Top rated</h1>
+    <div class="title"><h1>Top rated</h1></div>
     <?php
     $result = $myDb->doQuery("SELECT Nome, Artista, COUNT(Nome) as Likes FROM opere JOIN likes on Nome=Opera and Artista=Creatore
                             GROUP BY Nome, Artista ORDER BY COUNT(Nome) DESC LIMIT 5");
@@ -55,7 +55,7 @@
     ?>
   </div>
   <div class="section" id="intro"><!--website Introduction-->
-    <h1>Introduction</h1>
+    <div class="title"><h1>Introduction</h1></div>
     <p>
       Innovation is the key to the future, let the art invade the digital world.
       This website is meant to be collection of digital artworks, everyone can
@@ -81,7 +81,7 @@
     </div>
   </div>
   <div class="section" id="team"><!--team-->
-    <h1>Our Amazing Team</h1>
+    <div class="title"><h1>Our Amazing Team</h1></div>
     <div class="teamMember">
       <img src="Images/Team/davide_liu.jpg" alt='Team member face'>
       <h2>Davide Liu</h2>

@@ -13,11 +13,15 @@
 }
 
 /*---------Titoli dei paragrafi------------------------------------------------*/
-h1 {
-  font-size: 1.5em;
+.title {
   margin-bottom: 2.0em;
   margin-top: 2.0em;
   text-align: center
+}
+
+h1 {
+  font-size: 1.5em;
+  font-weight: normal;
 }
 
 /*---------MenÃ¹ e pulsanti-----------------------------------------------------*/
