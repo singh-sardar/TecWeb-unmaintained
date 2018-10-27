@@ -233,3 +233,57 @@ function btnLikeOnClick(obj){
     var nomeImmagine = thisId.substring(thisId.indexOf('_')+1);
     xhttp.send("art="+nomeArtista+"&nomeImg="+nomeImmagine);
 }
+
+//onclick function for pagination buttons
+function btnPaginationOnClick(id){
+	var arr = document.querySelectorAll('[id^="galImgDiv"]');
+	for(i=0; i< arr.length; i++){ //hide all the divs
+		var item = arr[i];
+		item.classList.remove('display-block');
+		item.classList.add('display-none');
+	}
+	var divNumber = id.substring("btnPagination".length,id.length);
+	
+	//show only one gallery images container div 
+	document.querySelector('[id="galImgDiv'+divNumber+'"]').classList.add('display-block');
+	//remove active status to all pagination buttons
+	var arr=document.querySelectorAll('[id^="btnPagination"]');
+	for(i=0; i< arr.length; i++){
+		var item = arr[i];
+		item.classList.remove('btnPaginationActive');
+	}
+	
+	document.querySelector('[id="btnPagination'+divNumber+'"]').classList.add('btnPaginationActive');
+	/*
+	document.getElementById("btnPagBack").classList.remove("btnPaginationDeactive");
+	document.getElementById("btnPagForward").classList.remove("btnPaginationDeactive");
+	*/
+	document.getElementById("btnPagBack").classList.remove("display-none");
+	document.getElementById("btnPagForward").classList.remove("display-none");
+	if(divNumber == 1){//if it is the first btn of pagination
+		//document.getElementById("btnPagBack").classList.add("btnPaginationDeactive");
+		document.getElementById("btnPagBack").classList.add("display-none");
+	}
+	if(divNumber == document.querySelectorAll('[id^="galImgDiv"]').length){
+		//document.getElementById("btnPagForward").classList.add("btnPaginationDeactive");
+		document.getElementById("btnPagForward").classList.add("display-none");
+	}
+}
+
+//btn pagination back on click
+function btnPagBackOnClick(){
+	var activeBtnPag = document.querySelector('.btnPaginationActive');
+	var num = Number(activeBtnPag.id.substring("btnPagination".length,activeBtnPag.id.length));
+	if (num > 1){
+		btnPaginationOnClick("btnPagination"+(num-1));
+	}
+}
+
+//btn pagination forward on click
+function btnPagForwardOnClick(){
+	var activeBtnPag = document.querySelector('.btnPaginationActive');
+	var num = Number(activeBtnPag.id.substring("btnPagination".length,activeBtnPag.id.length));
+	if (num < document.querySelectorAll('[id^="galImgDiv"]').length){
+		btnPaginationOnClick("btnPagination"+(num+1));
+	}
+}

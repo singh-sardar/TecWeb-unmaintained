@@ -27,6 +27,17 @@
     margin: 1em 0;
 }
 
+div.divCategoryButtons{
+    display: inline-block;
+    width: auto;
+}
+
+div.divCategoryButtons::after, div.divCategoryButtons::before{
+    content: "";
+    display: table;
+    clear: both;
+}
+
 div.divCategoryButtons button{
     display: inline-block;
     color: #333;
@@ -170,4 +181,79 @@ div.divCategoryButtons button{
     #galleryBoard li:nth-of-type(4n+1) {
         clear: left;
     }
+}
+
+/* Pagination ..........---------------*/
+.div-bar:before, .div-bar:after{
+    content: "";
+    display: table;
+    clear: both;
+}
+.div-center {
+    text-align: center!important;
+}
+.div-center .div-bar {
+    display: inline-block;
+    width: auto;
+}
+.gal-pag-border {
+    border: 1px solid #ccc!important;
+}
+.gal-border-round{
+    border-radius: 4px;
+}
+.div-bar {
+    width: 100%;
+    overflow: hidden;
+}
+.div-bar .gal-pag-button {
+    white-space: normal;
+}
+.div-bar .div-bar-item {
+    padding: 8px 16px;
+    float: left;
+    width: auto;
+    border: none;
+    display: block;
+    outline: 0;
+}
+.gal-pag-button {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.gal-pag-button:hover {
+    color: #000!important;
+    background-color: #ccc!important;
+}
+.gal-pag-button {
+    border: none;
+    display: inline-block;
+    padding: 0.2em 0.4em;
+    vertical-align: middle;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    background-color: inherit;
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap;
+}
+.btnPaginationActive{
+    color: #fff!important;
+    background-color: #44778F!important;
+}
+.display-none{
+    display: none !important;
+}
+.display-block{
+    display: block !important;
+}
+.btnPaginationDeactive{
+    background-color: #ececec;
+    color: white;
+    cursor: not-allowed;
 }

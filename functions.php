@@ -24,17 +24,16 @@
         }
         echo '<li>';
         echo     '<div class="galleryFigureWrapper">';
-        echo '      <img src="Images/Art/'.$artista.'/'.$nomeImmagine.'.png" alt="">';
+        echo '      <img src="Images/Art/'.$artista.'/'.$nomeImmagine.'" alt="">';
         echo '      <div class="galleryCaption">';
         echo '          <div class="wrapper">';
-        echo '              <p class="titleImageOfGallery">'.$nomeImmagine.'</p>';
+        echo '              <p class="titleImageOfGallery">'.substr($nomeImmagine,0,strpos($nomeImmagine,'.')).'</p>';
         if($isLiked == true){
             echo '              <div class="like-btn like-btn-added" onclick="btnLikeOnClick(this)" id="'.$artista.'_'.$nomeImmagine.'"></div>';
         }else{
             echo '              <div class="like-btn" onclick="btnLikeOnClick(this)" id="'.$artista.'_'.$nomeImmagine.'"></div>';
         }
         echo '          </div>';
-        echo '          <p class="descImageOfGallery">'.$descrizione.'</p>';
         echo '      </div>';
         echo '   </div>';
         echo '</li>';
@@ -47,7 +46,7 @@
         $myDb->openDBConnection();
         
         if($myDb->connected){
-            $result = $myDb->doQuery('SELECT Utente FROM Likes WHERE Opera="'.$nomeImmagine.'" AND Utente="'.$username.'" AND Creatore="'.$artista.'";');
+            $result = $myDb->doQuery('SELECT Utente FROM Likes WHERE opera="'.$nomeImmagine.'" AND Utente="'.$username.'" AND Creatore="'.$artista.'";');
             if($result){
                 if($result->num_rows==0){//significa che il like non è ancora presente per l'opera
                     return false;        
@@ -61,5 +60,53 @@
         else 
             echo "Connection Error";
         $myDb->disconnect();
+    }
+
+    //prints div containing buttons for pagination in the gallery page
+    //IN:
+    // - $i: number of buttons to be displayed
+    function printDivPagination($i){
+        echo '<div class="div-center">';
+        echo '   <div class="div-bar gal-pag-border gal-border-round">';
+        echo '      <a href="#" class="div-bar-item gal-pag-button" id="btnPagBack" onclick="btnPagBackOnClick()">&laquo;</a>';
+        for($j=1; $j < $i; $j++){
+            echo '  <a href="#" class="div-bar-item gal-pag-button" id="btnPagination'.$j.'" onclick="btnPaginationOnClick(this.id)">'.$j.'</a>';
+        }
+        echo '      <a href="#" class="div-bar-item gal-pag-button" id="btnPagForward" onclick="btnPagForwardOnClick()">&raquo;</a>';
+        echo '  </div>';
+        echo '</div>';
+    }
+
+    /*
+    * Function for printing gallery items
+    * IN:
+    *   - $result: object returned after doing $myDb->doQuery()
+    * OUT:
+    *   - $j: number of pages to be displayed
+    */
+    function printGalleryItems($result){
+        $j=0;//solo una pagina
+        $j=1;
+        $boolChiudi = False;
+        for ($i = 0; $i < $result->num_rows; $i++) {
+            if($i%8 == 0){
+                if($boolChiudi == FALSE){
+                    echo "<div id='galImgDiv".$j."'>";
+                    $j++;
+                    $boolChiudi = TRUE;
+                }else{
+                    echo "</div>";
+                    echo "<div id='galImgDiv".$j."'>";
+                    $j++;
+                    $boolChiudi = FALSE;
+                }
+            }
+            $row = $result->fetch_assoc();
+            insertImageInGallery($row['Artista'],$row['Nome'],$row['Descrizione']);
+        }
+        if($boolChiudi == TRUE && ($i%($result->num_rows)!= 1)){
+            echo "</div>";
+        }
+        return $j;
     }
 ?>

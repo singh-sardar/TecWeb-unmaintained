@@ -17,15 +17,15 @@
         if($myDb->connected){
             //echo 'INSERT INTO Likes (Opera, Utente, Creatore) VALUES ("'.$nomeImmagine.'", "'.$_SESSION["Username"].'", "'.$artista.'");';
             //$result = $myDb->doQuery('INSERT INTO Likes (Opera, Utente, Creatore) VALUES ("'.$nomeImmagine.'", "'.$_SESSION['Username'].'", "'.$artista.'");');//excecute query
-            $result = $myDb->doQuery('SELECT Utente FROM Likes WHERE Opera="'.$nomeImmagine.'" AND Utente="'.$_SESSION['Username'].'" AND Creatore="'.$artista.'";');
+            $result = $myDb->doQuery('SELECT Utente FROM likes WHERE Opera="'.$nomeImmagine.'" AND Utente="'.$_SESSION['Username'].'" AND Creatore="'.$artista.'";');
             //echo $myDb->getLastErrorString();
             if($result){
                 if($result->num_rows==0){//significa che il like non è ancora presente per l'opera
-                    $result = $myDb->doQuery('INSERT INTO Likes (Opera, Utente, Creatore) VALUES ("'.$nomeImmagine.'", "'.$_SESSION['Username'].'", "'.$artista.'");');//excecute query
+                    $result = $myDb->doQuery('INSERT INTO likes (Opera, Utente, Creatore) VALUES ("'.$nomeImmagine.'", "'.$_SESSION['Username'].'", "'.$artista.'");');//excecute query
                     if($result)
                         echo 1;        
                 }else if($result->num_rows==1){
-                    $result = $myDb->doQuery('DELETE FROM Likes WHERE Opera="'.$nomeImmagine.'" AND Utente="'.$_SESSION['Username'].'" AND Creatore="'.$artista.'";');//excecute query
+                    $result = $myDb->doQuery('DELETE FROM likes WHERE Opera="'.$nomeImmagine.'" AND Utente="'.$_SESSION['Username'].'" AND Creatore="'.$artista.'";');//excecute query
                     if($result)
                         echo 2;
                 }

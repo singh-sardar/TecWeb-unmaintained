@@ -23,7 +23,7 @@
         require_once "functions.php";
     ?>
     <div id="gallery">
-        <form method="get" action="" name="formArtFilter" id="formArtFilter">
+        <form method="get" action="" name="formArtFilter">
             <div id="artFilter">
                 <div class="inputSearch">
                     <?php 
@@ -46,21 +46,24 @@
                         if(!isset($_GET['galleryCategory'])){$_GET['galleryCategory']= $_SESSION['galleryCategory'];}
                         else{ $_SESSION['galleryCategory'] = $_GET['galleryCategory']; }
                     ?>
-                    <div class="divCategoryButtons" id="divCatBut">
-                        <button type="submit" name="galleryCategory" id="btnAll" value="All" <?php if(isset($_GET['galleryCategory']) && $_GET['galleryCategory']=='All'){echo "class='active'";} ?> ">All</button>
-                        <button type="submit" name="galleryCategory" id="btnLandscape" value="Landscape" <?php if(isset($_GET['galleryCategory']) && $_GET['galleryCategory']=='Landscape'){echo "class='active'";} ?>>Landscape</button>
-                        <button type="submit" name="galleryCategory" id="btnFantasy" value="Fantasy" <?php if(isset($_GET['galleryCategory']) && $_GET['galleryCategory']=='Fantasy'){echo "class='active'";} ?>>Fantasy</button>
-                        <button type="submit" name="galleryCategory" id="btnAbstract" value="Abstract" <?php if(isset($_GET['galleryCategory']) && $_GET['galleryCategory']=='Abstract'){echo "class='active'";} ?>>Abstract</button>
-                        <button type="submit" name="galleryCategory" id="btnCartoon" value="Cartoon" <?php if(isset($_GET['galleryCategory']) && $_GET['galleryCategory']=='Cartoon'){echo "class='active'";} ?>>Cartoon</button>
-                        <button type="submit" name="galleryCategory" id="btnPortrait" value="Portrait" <?php if(isset($_GET['galleryCategory']) && $_GET['galleryCategory']=='Portrait'){echo "class='active'";} ?>>Portrait</button>
-                        <button type="submit" name="galleryCategory" id="btnNature" value="Nature" <?php if(isset($_GET['galleryCategory']) && $_GET['galleryCategory']=='Nature'){echo "class='active'";} ?>>Nature</button>
-                        <button type="submit" name="galleryCategory" id="btnOthers" value="Others" <?php if(isset($_GET['galleryCategory']) && $_GET['galleryCategory']=='Others'){echo "class='active'";} ?>>Others</button>
+                    <div class="div-center">
+                        <div class="divCategoryButtons">
+                            <button type="submit" name="galleryCategory" value="All" <?php if(isset($_GET['galleryCategory']) && $_GET['galleryCategory']=='All'){echo "class='active'";} ?>>All</button>
+                            <button type="submit" name="galleryCategory" value="Landscape" <?php if(isset($_GET['galleryCategory']) && $_GET['galleryCategory']=='Landscape'){echo "class='active'";} ?>>Landscape</button>
+                            <button type="submit" name="galleryCategory" value="Fantasy" <?php if(isset($_GET['galleryCategory']) && $_GET['galleryCategory']=='Fantasy'){echo "class='active'";} ?>>Fantasy</button>
+                            <button type="submit" name="galleryCategory" value="Abstract" <?php if(isset($_GET['galleryCategory']) && $_GET['galleryCategory']=='Abstract'){echo "class='active'";} ?>>Abstract</button>
+                            <button type="submit" name="galleryCategory" value="Cartoon" <?php if(isset($_GET['galleryCategory']) && $_GET['galleryCategory']=='Cartoon'){echo "class='active'";} ?>>Cartoon</button>
+                            <button type="submit" name="galleryCategory" value="Portrait" <?php if(isset($_GET['galleryCategory']) && $_GET['galleryCategory']=='Portrait'){echo "class='active'";} ?>>Portrait</button>
+                            <button type="submit" name="galleryCategory" value="Nature" <?php if(isset($_GET['galleryCategory']) && $_GET['galleryCategory']=='Nature'){echo "class='active'";} ?>>Nature</button>
+                            <button type="submit" name="galleryCategory" value="Others" <?php if(isset($_GET['galleryCategory']) && $_GET['galleryCategory']=='Others'){echo "class='active'";} ?>>Others</button>
+                        </div>                  
                     </div>
                 </div>
 
             </div>
         </form>
         
+        <?php $mostraPagination=FALSE; $j=0;?>
         <ul class="clearfix" id="galleryBoard">
             <?php
                 if(isset($_GET["gallerySearch"])){
@@ -71,9 +74,9 @@
                     $result = array();
                     if($myDb->connected){
                         if(!isset($_GET['galleryCategory']) || (isset($_GET['galleryCategory']) && ($_GET['galleryCategory'] == 'All'))){
-                            $qrStr = "SELECT Artista,Nome, Descrizione FROM Opere WHERE Descrizione LIKE '%".$param."%' OR Categoria LIKE '%".$param."%' OR Artista LIKE '%".$param."%'";
+                            $qrStr = "SELECT Artista,Nome, Descrizione FROM opere WHERE Descrizione LIKE '%".$param."%' OR Categoria LIKE '%".$param."%' OR Artista LIKE '%".$param."%'";
                         }elseif(isset($_GET['galleryCategory']) && ($_GET['galleryCategory'] != 'All')){
-                            $qrStr = 'SELECT Artista,Nome,Descrizione FROM Opere WHERE Categoria="'.$_GET['galleryCategory'].'" AND (Descrizione LIKE "%'.$param.'%" OR Artista LIKE "%'.$param.'%")';
+                            $qrStr = 'SELECT Artista,Nome,Descrizione FROM opere WHERE Categoria="'.$_GET['galleryCategory'].'" AND (Descrizione LIKE "%'.$param.'%" OR Artista LIKE "%'.$param.'%")';
                         }
                         $result = $myDb->doQuery($qrStr);
                     }
@@ -81,11 +84,9 @@
                         echo "Errore connessione";
                     $myDb->disconnect();
 
-                    if($result){
-                        for ($i = 0; $i < $result->num_rows; $i++) {
-                            $row = $result->fetch_assoc();
-                            insertImageInGallery($row['Artista'],$row['Nome'],$row['Descrizione']);
-                        }
+                    if($result && ($result->num_rows > 0)){
+                        $mostraPagination = ($result->num_rows <= 8) ? false : true;
+                        $j = printGalleryItems($result);
                     }
                 }elseif(isset($_GET['galleryCategory'])){
                     //connecting to db
@@ -96,9 +97,9 @@
                     if($myDb->connected){
                         
                         if($param == 'All'){
-                            $qrStr = "SELECT Artista,Nome,Descrizione FROM Opere;";
+                            $qrStr = "SELECT Artista,Nome,Descrizione FROM opere;";
                         }else{
-                            $qrStr = "SELECT Artista,Nome,Descrizione FROM Opere WHERE Categoria='".$param."'";
+                            $qrStr = "SELECT Artista,Nome,Descrizione FROM opere WHERE Categoria='".$param."'";
                         }
                         $result = $myDb->doQuery($qrStr);
                     }
@@ -106,15 +107,20 @@
                         echo "Errore connessione";
                     $myDb->disconnect();
 
-                    if($result){
-                        for ($i = 0; $i < $result->num_rows; $i++) {
-                            $row = $result->fetch_assoc();
-                            insertImageInGallery($row['Artista'],$row['Nome'],$row['Descrizione']);
-                        }
+                    if($result && ($result->num_rows > 0)){
+                        $mostraPagination = ($result->num_rows <= 8) ? false : true;
+                        $j = printGalleryItems($result);
                     }
                 }
             ?>
+            
         </ul> 
+        <?php
+        if($mostraPagination == TRUE && ($j > 2)){
+            printDivPagination($j);
+            echo "<script>btnPaginationOnClick('btnPagination1');</script>";
+        }
+        ?>
     </div>
 </body>
 
