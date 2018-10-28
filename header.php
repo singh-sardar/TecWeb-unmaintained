@@ -12,6 +12,15 @@
         else
           echo '<a href="#" onclick="openLoginModal()">Upload</a>';
       ?>
+    </li>
+    <li>
+      <?php
+        //Se l'utente è loggato allora può vedere i suoi preferiti
+        if(isset($_SESSION['isLogged']) && ($_SESSION['isLogged'] == "true")){
+          echo '<a href="likedItems.php">Liked Images</a>';
+        }
+      ?>
+    </li>
     <li>
     <?php //Questa è una funzioncina per fare login e log out
       if(isset($_SESSION["isLogged"])&&$_SESSION["isLogged"]=="true")
@@ -25,6 +34,7 @@
         else
           echo '<a href="#" onclick="openSignUpModal()" >Sign Up</a>';
       ?>
+    </li>
     <li class="username">
       <?php
         if(isset($_SESSION["isLogged"])&&$_SESSION["isLogged"]=="true")
@@ -33,12 +43,15 @@
           echo '<a href="#" onclick="openLoginModal()">Login</a>';
       ?>
     </li>
-      <li class="hamburgerMenu">
-		<a href="#" onclick="openDrobDownMenu(this)">
-			<div class="line1"></div>
-			<div class="line2"></div>
-			<div class="line3"></div>
-		</a>
+    <li>
+      <a class="btnSearch" href="#" onclick="openSearchModal()"><span class="searchIcon"></span></a>
+    </li>
+    <li class="hamburgerMenu">
+        <a href="#" onclick="openDrobDownMenu(this)">
+          <div class="line1"></div>
+          <div class="line2"></div>
+          <div class="line3"></div>
+        </a>
     </li>
   </ul>
 </div>
