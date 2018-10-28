@@ -14,6 +14,9 @@
         }
       ?>
     </li>
+    <li>
+      <a class="btnSearch" href="#" onclick="openSearchModal()"><span class="searchIcon"></span></a>
+    </li>
     <li class="user">
       <?php //To Sign in or edit profile of User
         if(isset($_SESSION["isLogged"])&&$_SESSION["isLogged"]=="true")
@@ -28,9 +31,6 @@
         else
           echo '<a href="#" onclick="openLoginModal()">Login</a>';
       ?>
-    </li>
-    <li>
-      <a class="btnSearch" href="#" onclick="openSearchModal()"><span class="searchIcon"></span></a>
     </li>
     <li class="hamburgerMenu">
         <a href="#" onclick="openDrobDownMenu(this)">
