@@ -7,7 +7,6 @@
     <meta name="keywords" content="artwork,picture,image,database"/>
     <meta name="author" content="Daniele Bianchin, Pardeep Singh, Davide Liu, Harwinder Singh"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="Style/gallery_style.css"/>
     <link rel="stylesheet" href="Style/style.css"/>
     <script type="text/javascript" src="script.js" ></script>
     <title>Artbit</title>
@@ -17,14 +16,15 @@
     <?php
         require_once "header.php";
         require_once "loginModal.php";
+        require_once "searchModal.php";
         require_once "signUpModal.php";
         require_once "editProfileModal.php";
         require_once "DbConnector.php";
         require_once "functions.php";
     ?>
-    <div id="gallery">
+    <div class="gallery">
         <form method="get" action="" name="formArtFilter">
-            <div id="artFilter">
+            <div class="artFilter">
                 <div class="inputSearch">
                     <?php 
                         if(isset($_GET['gallerySearch'])){
@@ -34,7 +34,7 @@
                         }
                         
                     ?>
-                    <button type="submit"><span class="searchIcon"></span></button>
+                    <button class="btnSearch" type="submit"><span class="searchIcon"></span></button>
                 </div>
                 <div class="divCategoryFilter">
                     <p>Categories</p>
@@ -64,7 +64,7 @@
         </form>
         
         <?php $mostraPagination=FALSE; $j=0;?>
-        <ul class="clearfix" id="galleryBoard">
+        <ul class="clearfix galleryBoard">
             <?php
                 if(isset($_GET["gallerySearch"])){
                     //connecting to db
@@ -139,5 +139,4 @@
         ?>
     </div>
 </body>
-
 </html>
