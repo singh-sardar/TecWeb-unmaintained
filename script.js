@@ -42,6 +42,9 @@ function eventListnerforLoginModal() {
 		if (event.target === document.getElementById('EditProfileModal')) {
 			document.getElementById('EditProfileModal').style.display = "none";
 		}
+		if (event.target === document.getElementById('SearchModal')) {
+			document.getElementById('SearchModal').style.display = "none";
+		}
 	}
 }
 //function to login using ajax
@@ -196,6 +199,15 @@ function openDrobDownMenu(btn) {
 
 }
 
+function openSearchModal(){
+	document.getElementById('SearchModal').style.display='block';
+}
+
+//function to close the login modal with button
+function closeSearchModal() {
+	document.getElementById('SearchModal').style.display='none';
+}
+
 /*
 Function by page gallery.php
 */
@@ -222,7 +234,8 @@ function btnLikeOnClick(obj){
                 obj.classList.remove("like-btn-added");
             }else{//errore
                 alert("Errore");
-            }
+			}
+			location.reload();
         }
 	};
 	//doing th ajax request
