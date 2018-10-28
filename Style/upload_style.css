@@ -1,0 +1,28 @@
+.section form {
+  max-width: 1000px;
+  padding: 1.0em;
+  margin: auto;
+}
+
+.section input[type="text"],
+.section input[type="file"],
+.section textarea,
+.section select {
+  border: none;
+  height: auto;
+  margin: 0;
+  padding: 1.0em;
+  width: 100%;
+  background-color: #e8eeef;
+  color: #8a97a0;
+  margin-bottom: 1.5em;
+}
+
+.section button {
+  width: 100%;
+}
+
+.section label {
+  display: block;
+  margin-bottom: 0.5em;
+}

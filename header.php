@@ -1,14 +1,19 @@
-
 <div class="menu" id="Topnav">
   <img src="Images/logo.png" alt="Logo"/>
   <ul>
-    <li class="firstMenuItem"><a href="home.php" >Home</a></li>
+    <li class="firstMenuItem"><a href="home.php">Home</a></li>
     <li><a href="home.php#team">Team</a></li>
     <li><a href="gallery.php">Gallery</a></li>
-    <li><a href="#">Upload</a></li>
+    <li>
+      <?php //Se l'utente non è loggato allora la pagina upload porta al login
+        session_start();
+        if(isset($_SESSION["isLogged"])&&$_SESSION["isLogged"]=="true")
+          echo '<a href="upload.php">Upload</a>';
+        else
+          echo '<a href="#" onclick="openLoginModal()">Upload</a>';
+      ?>
     <li>
     <?php //Questa è una funzioncina per fare login e log out
-      session_start();
       if(isset($_SESSION["isLogged"])&&$_SESSION["isLogged"]=="true")
         echo '<a href="#" onclick="doLogOut()" >Log Out</a>';
     ?>

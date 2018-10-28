@@ -11,7 +11,7 @@
 		</div>
 		<div class="container">
 			<label for="usrSighUp">Username</label>
-			<input id="usrSighUp" type="text" placeholder="Enter Username" name="usrSighUp" required/>
+			<input id="usrSighUp" type="text" placeholder="Enter Username" name="usrSighUp" maxlength="20" required=""/>
 
 			<label for="pwdSignUp">Password</label>
 			<input pattern=".{5,}"   required title="5 characters minimum" id="pwdSignUp" type="password" placeholder="Enter Password" name="pwdSignUp" required/>
@@ -35,4 +35,3 @@
 
 	</form>
 </div>
-	
