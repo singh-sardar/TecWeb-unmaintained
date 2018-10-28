@@ -287,3 +287,15 @@ function btnPagForwardOnClick(){
 		btnPaginationOnClick("btnPagination"+(num+1));
 	}
 }
+
+function populateImages(){
+	var arr = document.querySelectorAll('.galleryFigureWrapper');
+	for(i=0; i< arr.length; i++){
+		var item = arr[i];
+		var id = item.id;
+		var artista = document.querySelector('[id="'+id+'"] [name="nameArtist"]').value;
+		var immg = document.querySelector('[id="'+id+'"] [name="nameImage"]').value;
+		var imgSrc = document.getElementById("img_"+artista+"-"+immg).src;
+		var divImg = document.querySelector('[id="'+id+'"] .image-div').style.backgroundImage = "url('"+imgSrc+"')";
+	}
+}

@@ -128,7 +128,12 @@ div.divCategoryButtons button{
     overflow: auto;
 }
 
-.titleImageOfGallery{
+.image-div{
+    background-size: cover;
+    height: 20em;
+}
+
+#gallery #galleryBoard .wrapper h2{
     text-align: center;
     font-size: 1em;
     font-weight: 600;

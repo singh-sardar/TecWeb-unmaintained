@@ -74,9 +74,19 @@
                     $result = array();
                     if($myDb->connected){
                         if(!isset($_GET['galleryCategory']) || (isset($_GET['galleryCategory']) && ($_GET['galleryCategory'] == 'All'))){
-                            $qrStr = "SELECT Artista,Nome, Descrizione FROM opere WHERE Descrizione LIKE '%".$param."%' OR Categoria LIKE '%".$param."%' OR Artista LIKE '%".$param."%'";
+                            $qrStr = "SELECT Artista,Nome FROM opere WHERE Descrizione LIKE '%".$param."%' OR Categoria LIKE '%".$param."%' OR Artista LIKE '%".$param."%'";
+                            /*
+                            $qrStr = "SELECT Nome, Artista, COUNT(Nome) as Likes FROM opere o LEFT JOIN likes on Nome=Opera and Artista=Creatore
+                                    WHERE o.Descrizione LIKE '%".$param."%' OR o.Categoria LIKE '%".$param."%' OR o.Artista LIKE '%".$param."%'
+                                    GROUP BY o.Nome, o.Artista ORDER BY COUNT(Nome) DESC";
+                            */
                         }elseif(isset($_GET['galleryCategory']) && ($_GET['galleryCategory'] != 'All')){
-                            $qrStr = 'SELECT Artista,Nome,Descrizione FROM opere WHERE Categoria="'.$_GET['galleryCategory'].'" AND (Descrizione LIKE "%'.$param.'%" OR Artista LIKE "%'.$param.'%")';
+                            $qrStr = 'SELECT Artista,Nome FROM opere WHERE Categoria="'.$_GET['galleryCategory'].'" AND (Descrizione LIKE "%'.$param.'%" OR Artista LIKE "%'.$param.'%")';
+                            /*
+                            $qrStr = 'SELECT Nome, Artista, COUNT(Nome) as Likes FROM opere LEFT JOIN likes on Nome=Opera and Artista=Creatore
+                                     WHERE Categoria="'.$_GET['galleryCategory'].'" AND (Descrizione LIKE "%'.$param.'%" OR Artista LIKE "%'.$param.'%")
+                                     GROUP BY Nome, Artista ORDER BY COUNT(Nome) DESC';
+                            */
                         }
                         $result = $myDb->doQuery($qrStr);
                     }
@@ -97,9 +107,14 @@
                     if($myDb->connected){
                         
                         if($param == 'All'){
-                            $qrStr = "SELECT Artista,Nome,Descrizione FROM opere;";
+                            $qrStr = "SELECT Artista,Nome FROM opere;";
+                            //$qrStr = "SELECT Nome, Artista, COUNT(Nome) as Likes FROM opere LEFT JOIN likes on Nome=Opera and Artista=Creatore GROUP BY Nome, Artista ORDER BY COUNT(Nome) DESC";
                         }else{
-                            $qrStr = "SELECT Artista,Nome,Descrizione FROM opere WHERE Categoria='".$param."'";
+                            $qrStr = "SELECT Artista,Nome FROM opere WHERE Categoria='".$param."'";
+                            /*
+                            $qrStr = "SELECT Nome, Artista, COUNT(Nome) as Likes FROM opere JOIN likes on Nome=Opera and Artista=Creatore
+                                     WHERE Categoria='".$param."' GROUP BY Nome, Artista ORDER BY COUNT(Nome) DESC";
+                            */
                         }
                         $result = $myDb->doQuery($qrStr);
                     }
@@ -116,6 +131,7 @@
             
         </ul> 
         <?php
+        echo "<script>populateImages();</script>";
         if($mostraPagination == TRUE && ($j > 2)){
             printDivPagination($j);
             echo "<script>btnPaginationOnClick('btnPagination1');</script>";

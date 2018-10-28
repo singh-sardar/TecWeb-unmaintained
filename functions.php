@@ -16,24 +16,29 @@
         return FALSE;
     }
 
-    function insertImageInGallery($artista,$nomeImmagine,$descrizione){
+    function insertImageInGallery($artista,$nomeImmagine){
         if ( is_session_started() === FALSE || (!isset($_SESSION['Username']))){
             $isLiked = false;
         }else if(isset($_SESSION['Username'])){
             $isLiked = boolImageLiked($artista,$_SESSION['Username'],$nomeImmagine);
         }
         echo '<li>';
-        echo     '<div class="galleryFigureWrapper">';
-        echo '      <img src="Images/Art/'.$artista.'/'.$nomeImmagine.'" alt="">';
+        echo     '<div class="galleryFigureWrapper" id="wrapper_'.$artista.'-'.$nomeImmagine.'">';
+        echo '      <img src="Images/Art/'.$artista.'/'.$nomeImmagine.'" id="img_'.$artista.'-'.$nomeImmagine.'" class="display-none" alt="">';
+        echo '      <div class="image-div"></div>';
+        echo '      <input type="hidden" value="'.$artista.'" name="nameArtist"/>';
+        echo '      <input type="hidden" value="'.$nomeImmagine.'" name="nameImage"/>';
         echo '      <div class="galleryCaption">';
         echo '          <div class="wrapper">';
-        echo '              <p class="titleImageOfGallery">'.substr($nomeImmagine,0,strpos($nomeImmagine,'.')).'</p>';
+        echo '              <h2>'.substr($nomeImmagine,0,strpos($nomeImmagine,'.')).'</h2>';
         if($isLiked == true){
             echo '              <div class="like-btn like-btn-added" onclick="btnLikeOnClick(this)" id="'.$artista.'_'.$nomeImmagine.'"></div>';
         }else{
             echo '              <div class="like-btn" onclick="btnLikeOnClick(this)" id="'.$artista.'_'.$nomeImmagine.'"></div>';
         }
         echo '          </div>';
+        echo '          <p>Artista: '.$artista.'</p>';
+        echo '          <p>Likes: '.getLikesByItem($artista,$nomeImmagine).'</p>';
         echo '      </div>';
         echo '   </div>';
         echo '</li>';
@@ -102,11 +107,28 @@
                 }
             }
             $row = $result->fetch_assoc();
-            insertImageInGallery($row['Artista'],$row['Nome'],$row['Descrizione']);
+            insertImageInGallery($row['Artista'],$row['Nome']);
         }
         if($boolChiudi == TRUE && ($i%($result->num_rows)!= 1)){
             echo "</div>";
         }
         return $j;
+    }
+
+    function getLikesByItem($artista, $nomeImmagine){
+        $myDb= new DbConnector();
+        $myDb->openDBConnection();
+        
+        if($myDb->connected){
+            $qrStr= "SELECT COUNT(Opera) as Likes FROM likes WHERE Creatore='".$artista."' AND Opera='".$nomeImmagine."'";
+            $result = $myDb->doQuery($qrStr);
+            if($result){
+                return ($result->fetch_assoc())['Likes'];
+            }
+        }
+        else 
+            echo "Connection Error";
+        $myDb->disconnect();
+        
     }
 ?>
