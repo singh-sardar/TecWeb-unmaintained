@@ -4,31 +4,19 @@
     <li class="firstMenuItem"><a href="home.php">Home</a></li>
     <li><a href="home.php#team">Team</a></li>
     <li><a href="gallery.php">Gallery</a></li>
-    <li>
-      <?php //Se l'utente non è loggato allora la pagina upload porta al login
+    <li> <a href="upload.php">Upload</a><li>
+    <li class="user">
+      <?php //To Sign in or edit profile of User
         session_start();
         if(isset($_SESSION["isLogged"])&&$_SESSION["isLogged"]=="true")
-          echo '<a href="upload.php">Upload</a>';
-        else
-          echo '<a href="#" onclick="openLoginModal()">Upload</a>';
-      ?>
-    <li>
-    <?php //Questa è una funzioncina per fare login e log out
-      if(isset($_SESSION["isLogged"])&&$_SESSION["isLogged"]=="true")
-        echo '<a href="#" onclick="doLogOut()" >Log Out</a>';
-    ?>
-    </li>
-    <li>
-      <?php //To Sign in or edit profile of User
-        if(isset($_SESSION["isLogged"])&&$_SESSION["isLogged"]=="true")
-          echo '<a href="#" onclick="openEditProfileModal()">Edit Profile</a>';
+          echo '<a href="#" onclick="openEditProfileModal()">'.$_SESSION["Username"].'</a>';
         else
           echo '<a href="#" onclick="openSignUpModal()" >Sign Up</a>';
       ?>
-    <li class="username">
+    <li class="user">
       <?php
         if(isset($_SESSION["isLogged"])&&$_SESSION["isLogged"]=="true")
-          echo '<p>'.$_SESSION["Username"].'</p>';
+          echo '<a href="#" onclick="doLogOut()" >Log Out</a>';
         else
           echo '<a href="#" onclick="openLoginModal()">Login</a>';
       ?>
