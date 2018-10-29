@@ -23,7 +23,7 @@
   require_once "DbConnector.php";
   ?>
   <div class="section"><!--upload form-->
-    <title><h1>Register your artwork</h1></title>
+    <div class="title"><h1>Register your artwork</h1></div>
     <form action="" method="post" enctype="multipart/form-data" id="upload">
 
         <label>Title:</label>

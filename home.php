@@ -47,7 +47,7 @@
       $artista[$i] = $row["Artista"];
       $likes[$i] = $row["Likes"];
       echo "<div class='home_picture'>";
-      echo "<img src='Images/Art/$artista[$i]/$nome[$i].png' alt='Top rated images'>";
+      echo "<img src='Images/Art/$artista[$i]/$nome[$i].jpeg' alt='Top rated images'>";
       echo "<h2>$nome[$i]</h2>";
       echo "<p>$artista[$i]</p>";
       echo "<p>Likes: $likes[$i]</p>";
