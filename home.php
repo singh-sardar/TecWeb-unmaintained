@@ -63,7 +63,10 @@
       register and upload his own masterpieces sharing them with the world and
       </br>get popularity. Down here you can find some statistics of our site.
     </p>
+  </div>
+  <div class="section"><!--statistics-->
     <div class="statistics">
+      <div class="title"><h1>Statistics</h1></div>
       <?php
       $result = $myDb->doQuery("SELECT COUNT(*) as tot_opere FROM opere");
       $row = $result->fetch_assoc();
@@ -74,11 +77,41 @@
       $result = $myDb->doQuery("SELECT COUNT(*) as tot_likes FROM likes");
       $row = $result->fetch_assoc();
       $tot_likes = $row["tot_likes"];
-      $myDb->disconnect();
       ?>
       <p>Registered artworks: <?php echo $tot_opere ?></p>
       <p>Registered painters: <?php echo $tot_artisti ?></p>
       <p>Total likes: <?php echo $tot_likes ?></p>
+    </div>
+    <div class="semicolumn"><!--top artists-->
+      <div class="title"><h1>Most artworks</h1></div>
+      <?php
+      $result = $myDb->doQuery("SELECT Username, COUNT(Username) as tot_arts FROM artisti JOIN opere on Username=Artista
+                               GROUP BY (Username) ORDER BY COUNT(Username) DESC LIMIT 5");
+      $nome=array($result->num_rows);
+      $likes=array($result->num_rows);
+      for ($i = 0; $i < $result->num_rows; $i++) {
+        $row = $result->fetch_assoc();
+        $nome[$i] = $row["Username"];
+        $likes[$i] = $row["tot_arts"];
+        echo "<p>".($i+1).") $nome[$i]: $likes[$i] </p>";
+      }
+      ?>
+    </div>
+    <div class="semicolumn"><!--top artists-->
+      <div class="title"><h1>Most liked</h1></div>
+      <?php
+      $result = $myDb->doQuery("SELECT Username, COUNT(Username) as tot_likes FROM artisti JOIN likes on Username=Creatore
+                               GROUP BY (Username) ORDER BY COUNT(Username) DESC LIMIT 5");
+      $nome=array($result->num_rows);
+      $likes=array($result->num_rows);
+      for ($i = 0; $i < $result->num_rows; $i++) {
+        $row = $result->fetch_assoc();
+        $nome[$i] = $row["Username"];
+        $likes[$i] = $row["tot_likes"];
+        echo "<p>".($i+1).") $nome[$i]: $likes[$i] </p>";
+      }
+      $myDb->disconnect();
+      ?>
     </div>
   </div>
   <div class="section" id="team"><!--team-->

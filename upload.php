@@ -70,15 +70,15 @@
   	  echo '<p class="error_message">File size is too big (max 5Mb)</p>';
   	else if($myDb->connected){
 			//check if title already exists
-			$result = $myDb->doQuery("select Nome from Opere where Nome='".$title."' and Artista='".$username."'");
-			if($result->fetch_assoc())
+			$result = $myDb->doQuery("select Nome from opere where Nome='".$title."' and Artista='".$username."'");
+			if($result->num_rows>0)
 				echo '<p class="error_message">You have already uploaded an artwork with this name</p>';
 			else{
 				//store compressed image
 				$destination_img = "Images/Art/".$username."/".$title.".jpeg";
 				compress($filetmp, $destination_img, 80);
 				//update database
-				$result = $myDb->doQuery("insert into Opere values ('$title','$description','$time','$username','$category')");
+				$result = $myDb->doQuery("insert into opere values ('$title','$description','$time','$username','$category')");
 				echo '<p class="success_message">Update successfully</p>';
 			}
 			$myDb->disconnect();

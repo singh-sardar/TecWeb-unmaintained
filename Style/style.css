@@ -152,12 +152,27 @@ hr{
 /*---------Statistiche---------------------------------------------------------*/
 .statistics {
   border: solid 1px #6A5ACD;
-  padding: 1.0em;
-  margin: 1em 0em;
+  width: 98%;
+  margin: 1.0em 1%;
 }
 
-.statistics p {
-  margin: 1.5em 0;
+.semicolumn {
+  border: solid 1px #6A5ACD;
+  float: left;
+  width: 48%;
+  margin: auto 1%;
+}
+
+.semicolumn p, .statistics p {
+  margin: 1.2em 0;
+}
+
+@media screen and (max-width: 700px){
+	.semicolumn{
+		float: none;
+		margin: 1.0em auto;
+		width: 98%
+	}
 }
 
 /*---------Team member---------------------------------------------------------*/
@@ -182,6 +197,7 @@ hr{
 .teamMember img {
   margin: 0% auto 10%;
   height: 5em;
+  width: 5em;
   border-radius: 50%;
 }
 
