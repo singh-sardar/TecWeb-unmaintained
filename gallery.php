@@ -97,6 +97,8 @@
                     if($result && ($result->num_rows > 0)){
                         $mostraPagination = ($result->num_rows <= 8) ? false : true;
                         $j = printGalleryItems($result);
+                    }elseif(!$result || ($result->num_rows == 0)){
+                        echo "<div class='div-center'><p>Nothing to show here ... </p></div>";
                     }
                 }elseif(isset($_GET['galleryCategory'])){
                     //connecting to db
@@ -125,6 +127,8 @@
                     if($result && ($result->num_rows > 0)){
                         $mostraPagination = ($result->num_rows <= 8) ? false : true;
                         $j = printGalleryItems($result);
+                    }elseif(!$result || ($result->num_rows == 0)){
+                        echo "<div class='div-center'><p>Nothing to show here ... </p></div>";
                     }
                 }
             ?>

@@ -518,20 +518,26 @@ div.divCategoryButtons button{
     height: 20em;
 }
 
-.gallery .galleryBoard .wrapper h2{
+.gallery .galleryBoard .galleryCaption h2{
     text-align: center;
     font-size: 1em;
     font-weight: 600;
-    float: left;
+	/*
+	float: left;
     width: 85%;
-    max-width: 100%;
+	max-width: 100%;
+	*/
+}
+
+.margin-top-2-5-em{
+	margin-top: 2.5em;
 }
 
 .galleryBoard li{
     list-style-type: none;
     float: left;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
     box-sizing: border-box;
 }
 

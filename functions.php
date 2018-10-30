@@ -24,21 +24,21 @@
         }
         echo '<li>';
         echo     '<div class="galleryFigureWrapper" id="wrapper_'.$artista.'-'.$nomeImmagine.'">';
-        echo '      <img src="Images/Art/'.$artista.'/'.$nomeImmagine.'" id="img_'.$artista.'-'.$nomeImmagine.'" class="display-none" alt="">';
+        echo '      <img src="Images/Art/'.$artista.'/'.$nomeImmagine.'.jpeg" id="img_'.$artista.'-'.$nomeImmagine.'" class="display-none" alt="">';
         echo '      <div class="image-div"></div>';
         echo '      <input type="hidden" value="'.$artista.'" name="nameArtist"/>';
         echo '      <input type="hidden" value="'.$nomeImmagine.'" name="nameImage"/>';
         echo '      <div class="galleryCaption">';
-        echo '          <div class="wrapper">';
-        echo '              <h2>'.substr($nomeImmagine,0,strpos($nomeImmagine,'.')).'</h2>';
+        //echo '          <div class="wrapper">';
+        echo '              <h2>'.$nomeImmagine.'</h2>';
         if($isLiked == true){
             echo '              <div class="like-btn like-btn-added" onclick="btnLikeOnClick(this)" id="'.$artista.'_'.$nomeImmagine.'"></div>';
         }else{
             echo '              <div class="like-btn" onclick="btnLikeOnClick(this)" id="'.$artista.'_'.$nomeImmagine.'"></div>';
         }
-        echo '          </div>';
-        echo '          <p>Artista: '.$artista.'</p>';
-        echo '          <p>Likes: '.getLikesByItem($artista,$nomeImmagine).'</p>';
+        //echo '          </div>';
+        echo '          <p class="margin-top-2-5-em">Artista: '.$artista.'</p>';
+        echo '          <p id="Likes_'.$artista.'-'.$nomeImmagine.'">Likes: '.getLikesByItem($artista,$nomeImmagine).'</p>';
         echo '      </div>';
         echo '   </div>';
         echo '</li>';
@@ -51,7 +51,7 @@
         $myDb->openDBConnection();
         
         if($myDb->connected){
-            $result = $myDb->doQuery('SELECT Utente FROM Likes WHERE opera="'.$nomeImmagine.'" AND Utente="'.$username.'" AND Creatore="'.$artista.'";');
+            $result = $myDb->doQuery('SELECT Utente FROM likes WHERE opera="'.$nomeImmagine.'" AND Utente="'.$username.'" AND Creatore="'.$artista.'";');
             if($result){
                 if($result->num_rows==0){//significa che il like non è ancora presente per l'opera
                     return false;        
@@ -122,13 +122,34 @@
         if($myDb->connected){
             $qrStr= "SELECT COUNT(Opera) as Likes FROM likes WHERE Creatore='".$artista."' AND Opera='".$nomeImmagine."'";
             $result = $myDb->doQuery($qrStr);
-            if($result){
-                return ($result->fetch_assoc())['Likes'];
+            if($result && $result->num_rows == 1){
+                if($result && $result->num_rows == 1){
+                    $row = $result->fetch_assoc();
+                    return $row['Likes'];
+                }
             }
         }
         else 
             echo "Connection Error";
         $myDb->disconnect();
         
+    }
+
+    function compress($source, $destination, $quality) {
+
+        $info = getimagesize($source);
+    
+        if ($info['mime'] == 'image/jpeg')
+            $image = imagecreatefromjpeg($source);
+    
+        elseif ($info['mime'] == 'image/jpg')
+            $image = imagecreatefromgif($source);
+    
+        elseif ($info['mime'] == 'image/png')
+            $image = imagecreatefrompng($source);
+    
+        imagejpeg($image, $destination, $quality);
+        
+        return $destination;
     }
 ?>

@@ -214,6 +214,9 @@ Function by page gallery.php
 function btnLikeOnClick(obj){
 	// creating ajax object
 	var xhttp;
+	var thisId = obj.id;
+    var nomeArtista = thisId.substring(0,thisId.indexOf('_'));
+    var nomeImmagine = thisId.substring(thisId.indexOf('_')+1);
 	if (window.XMLHttpRequest) {
         // code for modern browsers
         xhttp = new XMLHttpRequest();
@@ -235,15 +238,47 @@ function btnLikeOnClick(obj){
             }else{//errore
                 alert("Errore");
 			}
-			location.reload();
+			if((window.location.href).indexOf("likedItems.php")!== -1){//it means the current page is likedItems
+				location.reload();
+			}else if(this.responseText == "1" || this.responseText == "2"){
+				updateLikeCounter(nomeArtista,nomeImmagine);
+			}
         }
 	};
 	//doing th ajax request
 	xhttp.open("POST", "giveLike.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    var thisId = obj.id;
-    var nomeArtista = thisId.substring(0,thisId.indexOf('_'));
-    var nomeImmagine = thisId.substring(thisId.indexOf('_')+1);
+    xhttp.send("art="+nomeArtista+"&nomeImg="+nomeImmagine);
+}
+
+//function used to update the like counter of an image
+function updateLikeCounter(nomeArtista,nomeImmagine){
+	// creating ajax object
+	var xhttp;
+	var obj = document.getElementById("Likes_"+nomeArtista+"-"+nomeImmagine);
+	if (window.XMLHttpRequest) {
+        // code for modern browsers
+        xhttp = new XMLHttpRequest();
+    } else {
+        // code for IE6, IE5
+        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    
+    //calback function for the request
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            //if status is ok
+            if(this.responseText=="Connection Error"){
+                obj.innerHTML = "Likes: 0";
+            }else{
+				console.log(this.responseText);
+				obj.innerHTML = "Likes: "+this.responseText;
+			}
+        }
+	};
+	//doing th ajax request
+	xhttp.open("POST", "getLikes.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("art="+nomeArtista+"&nomeImg="+nomeImmagine);
 }
 

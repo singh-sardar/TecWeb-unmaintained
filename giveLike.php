@@ -23,7 +23,7 @@
                 if($result->num_rows==0){//significa che il like non è ancora presente per l'opera
                     $result = $myDb->doQuery('INSERT INTO likes (Opera, Utente, Creatore) VALUES ("'.$nomeImmagine.'", "'.$_SESSION['Username'].'", "'.$artista.'");');//excecute query
                     if($result)
-                        echo 1;        
+                        echo 1;    
                 }else if($result->num_rows==1){
                     $result = $myDb->doQuery('DELETE FROM likes WHERE Opera="'.$nomeImmagine.'" AND Utente="'.$_SESSION['Username'].'" AND Creatore="'.$artista.'";');//excecute query
                     if($result)
