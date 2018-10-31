@@ -2,12 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html, charset=utf-8" />
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
     <meta name="description" content="Online artwork database"/>
     <meta name="keywords" content="artwork,picture,image,database"/>
     <meta name="author" content="Daniele Bianchin, Pardeep Singh, Davide Liu, Harwinder Singh"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="Style/style.css"/>
+    <link rel="stylesheet" href="Style/style.css" media="handheld, screen"/>
     <script type="text/javascript" src="script.js" ></script>
     <title>Artbit</title>
 </head>

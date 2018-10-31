@@ -293,6 +293,7 @@ function btnPaginationOnClick(id){
 	var divNumber = id.substring("btnPagination".length,id.length);
 	
 	//show only one gallery images container div 
+	document.querySelector('[id="galImgDiv'+divNumber+'"]').classList.remove('display-none');
 	document.querySelector('[id="galImgDiv'+divNumber+'"]').classList.add('display-block');
 	//remove active status to all pagination buttons
 	var arr=document.querySelectorAll('[id^="btnPagination"]');
@@ -306,15 +307,19 @@ function btnPaginationOnClick(id){
 	document.getElementById("btnPagBack").classList.remove("btnPaginationDeactive");
 	document.getElementById("btnPagForward").classList.remove("btnPaginationDeactive");
 	*/
-	document.getElementById("btnPagBack").classList.remove("display-none");
-	document.getElementById("btnPagForward").classList.remove("display-none");
+	//document.getElementById("btnPagBack").classList.remove("display-none");
+	//document.getElementById("btnPagForward").classList.remove("display-none");
+	document.getElementById("btnPagBack").style.display = 'block';
+	document.getElementById("btnPagForward").style.display = 'block';
 	if(divNumber == 1){//if it is the first btn of pagination
 		//document.getElementById("btnPagBack").classList.add("btnPaginationDeactive");
-		document.getElementById("btnPagBack").classList.add("display-none");
+		//document.getElementById("btnPagBack").classList.add("display-none");
+		document.getElementById("btnPagBack").style.display = 'none';
 	}
 	if(divNumber == document.querySelectorAll('[id^="galImgDiv"]').length){
 		//document.getElementById("btnPagForward").classList.add("btnPaginationDeactive");
-		document.getElementById("btnPagForward").classList.add("display-none");
+		//document.getElementById("btnPagForward").classList.add("display-none");
+		document.getElementById("btnPagForward").style.display = 'none';
 	}
 }
 
