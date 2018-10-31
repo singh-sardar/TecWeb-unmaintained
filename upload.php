@@ -66,6 +66,7 @@
   	//connecting to db
   	$myDb= new DbConnector();
   	$myDb->openDBConnection();
+    mkdir("./Images/Art/$username", 0777, true);
   	if($filesize>5242880 || $filesize==0)
   	  echo '<p class="error_message">File size is too big (max 5Mb)</p>';
   	else if($myDb->connected){
