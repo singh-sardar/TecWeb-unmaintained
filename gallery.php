@@ -29,6 +29,7 @@
                 <div class="inputSearch">
                     <?php 
                         if(isset($_GET['gallerySearch'])){
+                            $_GET['gallerySearch'] = htmlspecialchars($_GET["gallerySearch"], ENT_QUOTES, "UTF-8");//cleaning the input
                             echo '<input type="text" placeholder="Cerca per categoria, artista o descrizione .." name="gallerySearch" value="'.$_GET['gallerySearch'].'">';
                         }else{
                             echo '<input type="text" placeholder="Cerca per categoria, artista o descrizione .." name="gallerySearch">';
@@ -44,8 +45,12 @@
                         if(!isset($_SESSION['galleryCategory'])){
                             $_SESSION['galleryCategory'] = 'All';
                         }
-                        if(!isset($_GET['galleryCategory'])){$_GET['galleryCategory']= $_SESSION['galleryCategory'];}
-                        else{ $_SESSION['galleryCategory'] = $_GET['galleryCategory']; }
+                        if(!isset($_GET['galleryCategory'])){
+                            $_GET['galleryCategory']= $_SESSION['galleryCategory'];
+                        }else{ 
+                            $_GET['galleryCategory'] = htmlspecialchars($_GET["galleryCategory"], ENT_QUOTES, "UTF-8");//cleaning the input
+                            $_SESSION['galleryCategory'] = $_GET['galleryCategory']; 
+                        }
                     ?>
                     <div class="div-center">
                         <div class="divCategoryButtons">
@@ -97,7 +102,7 @@
 
                     if($result && ($result->num_rows > 0)){
                         $mostraPagination = ($result->num_rows <= 8) ? false : true;
-                        $j = printGalleryItems($result);
+                        $j = printGalleryItems($result,FALSE);
                     }elseif(!$result || ($result->num_rows == 0)){
                         echo "<div class='div-center'><p>Nothing to show here ... </p></div>";
                     }
@@ -127,7 +132,7 @@
 
                     if($result && ($result->num_rows > 0)){
                         $mostraPagination = ($result->num_rows <= 8) ? false : true;
-                        $j = printGalleryItems($result);
+                        $j = printGalleryItems($result,FALSE);
                     }elseif(!$result || ($result->num_rows == 0)){
                         echo "<div class='div-center'><p>Nothing to show here ... </p></div>";
                     }

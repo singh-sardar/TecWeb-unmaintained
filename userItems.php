@@ -20,6 +20,7 @@
         require_once "editProfileModal.php";
         require_once "DbConnector.php";
         require_once "functions.php";
+        require_once "searchModal.php";
     ?>
     <div class="gallery">
         <?php $mostraPagination=FALSE; $j=0;?>
@@ -40,7 +41,7 @@
 
                     if($result && ($result->num_rows > 0)){
                         $mostraPagination = ($result->num_rows <= 8) ? false : true;
-                        $j = printGalleryItems($result);
+                        $j = printGalleryItems($result,TRUE);
                     }elseif(!$result || ($result->num_rows == 0)){
                         echo "<div class='div-center'><p>Nothing to show here ... </p></div>";
                     }

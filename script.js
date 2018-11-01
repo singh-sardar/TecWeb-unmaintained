@@ -209,13 +209,50 @@ function closeSearchModal() {
 }
 
 /*
+Delete function
+*/
+function btnDeleteOnClick(obj){
+	if(confirm("Do you really want to delete this image?")){
+		// creating ajax object
+		var xhttp;
+		var thisId = obj.id.substring("DelBtn_".length);;
+		var nomeArtista = thisId.substring(0,thisId.indexOf('_'));
+    	var nomeImmagine = thisId.substring(thisId.indexOf('_')+1);
+		if (window.XMLHttpRequest) {
+			// code for modern browsers
+			xhttp = new XMLHttpRequest();
+		} else {
+			// code for IE6, IE5
+			xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		
+		//calback function for the request
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				//if status is ok
+				if(this.responseText == "1"){//Item deleted with success
+					location.reload();
+				}else if(this.responseText == "-1" || this.responseText == "Connection Error"){//Error
+					alert('Error');
+				}
+			}
+		};
+		//doing th ajax request
+		xhttp.open("POST", "deleteItem.php", true);
+		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xhttp.send("art="+nomeArtista+"&nomeImg="+nomeImmagine);
+	}
+}
+
+/*
 Function by page gallery.php
 */
 function btnLikeOnClick(obj){
 	// creating ajax object
 	var xhttp;
 	var thisId = obj.id;
-    var nomeArtista = thisId.substring(0,thisId.indexOf('_'));
+	thisId = thisId.substring(("LikeBtn_").length);
+	var nomeArtista = thisId.substring(0,thisId.indexOf('_'));
     var nomeImmagine = thisId.substring(thisId.indexOf('_')+1);
 	if (window.XMLHttpRequest) {
         // code for modern browsers
@@ -271,7 +308,6 @@ function updateLikeCounter(nomeArtista,nomeImmagine){
             if(this.responseText=="Connection Error"){
                 obj.innerHTML = "Likes: 0";
             }else{
-				console.log(this.responseText);
 				obj.innerHTML = "Likes: "+this.responseText;
 			}
         }

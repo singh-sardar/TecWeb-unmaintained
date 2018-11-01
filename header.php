@@ -17,7 +17,7 @@
     <li>
       <?php
         if(isset($_SESSION['isLogged']) && ($_SESSION['isLogged'] == "true")){
-          echo '<a href="userItems.php">Your artworks</a>';
+          echo '<a href="userItems.php">Your Images</a>';
         }
       ?>
     </li>

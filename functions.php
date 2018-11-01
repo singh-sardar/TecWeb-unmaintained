@@ -16,7 +16,7 @@
         return FALSE;
     }
 
-    function insertImageInGallery($artista,$nomeImmagine){
+    function insertImageInGallery($artista,$nomeImmagine, $boolDeleteButton){
         if ( is_session_started() === FALSE || (!isset($_SESSION['Username']))){
             $isLiked = false;
         }else if(isset($_SESSION['Username'])){
@@ -41,15 +41,18 @@
         //echo '          </div>';
         echo '          <div class="wrapper">';
         if($isLiked == true){
-            echo '              <div class="like-btn like-btn-added" onclick="btnLikeOnClick(this)" id="'.$artista.'_'.$nomeImmagine.'"></div>';
+            echo '              <div class="like-btn like-btn-added" onclick="btnLikeOnClick(this)" id="LikeBtn_'.$artista.'_'.$nomeImmagine.'"></div>';
         }else{
-            echo '              <div class="like-btn" onclick="btnLikeOnClick(this)" id="'.$artista.'_'.$nomeImmagine.'"></div>';
+            echo '              <div class="like-btn" onclick="btnLikeOnClick(this)" id="LikeBtn_'.$artista.'_'.$nomeImmagine.'"></div>';
         }
         echo '              <div class="width-85">';
         echo '                  <p>Artista: '.$artista.'</p>';
         echo '                  <p id="Likes_'.$artista.'-'.$nomeImmagine.'">Likes: '.getLikesByItem($artista,$nomeImmagine).'</p>';
         echo '              </div>';
         echo '          </div>';
+        if($boolDeleteButton == TRUE){
+            echo '<button class="btnDelete" type="submit" id="DelBtn_'.$artista.'_'.$nomeImmagine.'" onclick="btnDeleteOnClick(this)"><span class="searchIcon"></span>Delete</button>';
+        }
         echo '      </div>';
         echo '   </div>';
         echo '</li>';
@@ -100,7 +103,7 @@
     * OUT:
     *   - $j: number of pages to be displayed
     */
-    function printGalleryItems($result){
+    function printGalleryItems($result,$boolDeleteButton){
         $j=0;//solo una pagina
         $j=1;
         $boolChiudi = False;
@@ -118,7 +121,7 @@
                 }
             }
             $row = $result->fetch_assoc();
-            insertImageInGallery($row['Artista'],$row['Nome']);
+            insertImageInGallery($row['Artista'],$row['Nome'],$boolDeleteButton);
         }
         if($boolChiudi == TRUE && ($i%($result->num_rows)!= 1)){
             echo "</div>";
@@ -143,7 +146,24 @@
         else 
             echo "Connection Error";
         $myDb->disconnect();
-        
+    }
+
+    function deleteItem($artista, $nomeImmagine){
+        $myDb= new DbConnector();
+        $myDb->openDBConnection();
+
+        if($myDb->connected){
+            $qrStr= "DELETE FROM opere WHERE Artista='".$artista."' AND Nome='".$nomeImmagine."'";
+            $result = $myDb->doQuery($qrStr);
+            if ($result == TRUE) {
+                echo 1;
+            } else { //Error
+                echo -1;
+            }
+        }
+        else 
+            echo "Connection Error";
+        $myDb->disconnect();
     }
 
     function compress($source, $destination, $quality) {
