@@ -15,6 +15,13 @@
       ?>
     </li>
     <li>
+      <?php
+        if(isset($_SESSION['isLogged']) && ($_SESSION['isLogged'] == "true")){
+          echo '<a href="userItems.php">Your artworks</a>';
+        }
+      ?>
+    </li>
+    <li>
       <a class="btnSearch" href="#" onclick="openSearchModal()"><span class="searchIcon"></span></a>
     </li>
     <li class="user">

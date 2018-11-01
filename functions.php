@@ -31,14 +31,25 @@
         echo '      <div class="galleryCaption">';
         //echo '          <div class="wrapper">';
         echo '              <h2>'.$nomeImmagine.'</h2>';
+        /*
         if($isLiked == true){
             echo '              <div class="like-btn like-btn-added" onclick="btnLikeOnClick(this)" id="'.$artista.'_'.$nomeImmagine.'"></div>';
         }else{
             echo '              <div class="like-btn" onclick="btnLikeOnClick(this)" id="'.$artista.'_'.$nomeImmagine.'"></div>';
         }
+        */
         //echo '          </div>';
-        echo '          <p class="margin-top-2-5-em">Artista: '.$artista.'</p>';
-        echo '          <p id="Likes_'.$artista.'-'.$nomeImmagine.'">Likes: '.getLikesByItem($artista,$nomeImmagine).'</p>';
+        echo '          <div class="wrapper">';
+        if($isLiked == true){
+            echo '              <div class="like-btn like-btn-added" onclick="btnLikeOnClick(this)" id="'.$artista.'_'.$nomeImmagine.'"></div>';
+        }else{
+            echo '              <div class="like-btn" onclick="btnLikeOnClick(this)" id="'.$artista.'_'.$nomeImmagine.'"></div>';
+        }
+        echo '              <div class="width-85">';
+        echo '                  <p>Artista: '.$artista.'</p>';
+        echo '                  <p id="Likes_'.$artista.'-'.$nomeImmagine.'">Likes: '.getLikesByItem($artista,$nomeImmagine).'</p>';
+        echo '              </div>';
+        echo '          </div>';
         echo '      </div>';
         echo '   </div>';
         echo '</li>';

@@ -466,7 +466,7 @@ div.divCategoryButtons button{
 }
 
 .galleryBoard .galleryCaption{
-    padding: 1em;
+    padding: 0.5em;
 }
 
 .galleryBoard img{
@@ -490,7 +490,17 @@ div.divCategoryButtons button{
 }
 
 .wrapper{
+    width: 100%;
+}
+
+.galleryCaption .wrapper{
     height: 3.2em;
+    margin-top: 0.5em;
+}
+
+.wrapper .width-85{
+    width: 85%;
+    float: left;
 }
 
 .like-btn{
@@ -500,6 +510,7 @@ div.divCategoryButtons button{
     bottom: 4.5em;
     right: 0.2em;
     */
+    width: 15%;
     float: left;
     height: 2.0em;
     z-index: 1;
@@ -587,6 +598,14 @@ div.divCategoryButtons button{
     }
 }
 */
+@media screen and (max-width: 400px){
+    .wrapper{
+        padding-bottom: 4em;
+    }
+    .wrapper div{
+        width: 100%;
+    }
+}
 @media only screen and (max-width:767px){
     .galleryBoard li{
         width: 100%;
