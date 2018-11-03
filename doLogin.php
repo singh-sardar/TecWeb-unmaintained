@@ -9,17 +9,21 @@
 	$myDb= new DbConnector();
 	$myDb->openDBConnection();
 	
-	if($myDb->connected){
-	
+	if($myDb->connected)
+	{
 		$result = $myDb->doQuery("select * from artisti where Username='".$usr."'");//excecute query
-		if(isset($usr) && !is_null($result) && $result->num_rows === 1){//if return only one row
+		if(isset($usr) && !is_null($result) && $result->num_rows === 1)
+		{
 			$row = $result->fetch_assoc();
-			if (password_verify($pwd, $row["Password"])) {
+			if (password_verify($pwd, $row["Password"]))
+			{
 				$_SESSION["Username"] = $usr;
 				echo 'Success';
+			}
 			else
 				echo 'Invalid password';
-		}else
+		}
+		else
 			echo 'Invalid username';
 	}
 	else 
