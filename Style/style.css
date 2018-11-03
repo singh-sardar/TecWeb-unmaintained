@@ -330,7 +330,7 @@ background-color:#f1f1f1;
 /*MEDIA QUERY-----------------------------------------------------*/
 
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 855px) {
 	/*menu*/
 	.menu .btnSearch{float: none;}
 	.menu li {display: none;}
@@ -380,6 +380,10 @@ background-color:#f1f1f1;
 /* *************************************************** GALLERY PAGE ******************************************************************************/
 /* -------- Stile per il pulsante di ricerca libera (Start) --------- */
 
+.gallery .divCategoryButtons{
+    padding: 0.5em;
+}
+
 .btnDelete::before{
     content: url(../Images/garbage-white.png);
     position: absolute;
@@ -419,7 +423,7 @@ background-color:#f1f1f1;
 }
 
 .menu .btnSearch{
-    padding: 1.5em 1.0em;
+    padding: 1.5em 1.5em 1.7em 1.5em;
 }
 
 .inputSearch .btnSearch{
@@ -539,6 +543,7 @@ div.divCategoryButtons button{
 
 .like-btn-added{
     background: url(../Images/like-inserted.svg) no-repeat;
+    background-size: 100% 100%;
 }
 
 .artFilter{

@@ -42,21 +42,26 @@
                     <p>Categories</p>
                     
                     <?php 
-                        if(!isset($_GET["galleryCategory"]))
-                            $galleryCategory = 'All';
-                        else
+                        if(!isset($_SESSION['galleryCategory'])){
+                            $_SESSION['galleryCategory'] = $galleryCategory = 'All';
+                        }
+                        if(!isset($_GET['galleryCategory'])){
+                            $galleryCategory= $_SESSION['galleryCategory'];
+                        }else{ 
                             $galleryCategory = htmlspecialchars($_GET["galleryCategory"], ENT_QUOTES, "UTF-8");//cleaning the input
+                            $_SESSION['galleryCategory'] = $galleryCategory; 
+                        }
                     ?>
                     <div class="div-center">
                         <div class="divCategoryButtons">
-                            <button type="submit" name="galleryCategory" value="All" <?php if($galleryCategory === 'All'){echo "class='active'";} ?>>All</button>
-                            <button type="submit" name="galleryCategory" value="Landscape" <?php if($galleryCategory === 'Landscape'){echo "class='active'";} ?>>Landscape</button>
-                            <button type="submit" name="galleryCategory" value="Fantasy" <?php if($galleryCategory === 'Fantasy'){echo "class='active'";} ?>>Fantasy</button>
-                            <button type="submit" name="galleryCategory" value="Abstract" <?php if($galleryCategory === 'Abstract'){echo "class='active'";} ?>>Abstract</button>
-                            <button type="submit" name="galleryCategory" value="Cartoon" <?php if($galleryCategory === 'Cartoon'){echo "class='active'";} ?>>Cartoon</button>
-                            <button type="submit" name="galleryCategory" value="Portrait" <?php if($galleryCategory === 'Portrait'){echo "class='active'";} ?>>Portrait</button>
-                            <button type="submit" name="galleryCategory" value="Nature" <?php if($galleryCategory === 'Nature'){echo "class='active'";} ?>>Nature</button>
-                            <button type="submit" name="galleryCategory" value="Others" <?php if($galleryCategory === 'Others'){echo "class='active'";} ?>>Others</button>
+                            <button type="submit" name="galleryCategory" value="All" <?php if(isset($galleryCategory) && $galleryCategory=='All'){echo "class='active'";} ?>>All</button>
+                            <button type="submit" name="galleryCategory" value="Landscape" <?php if(isset($galleryCategory) && $galleryCategory=='Landscape'){echo "class='active'";} ?>>Landscape</button>
+                            <button type="submit" name="galleryCategory" value="Fantasy" <?php if(isset($galleryCategory) && $galleryCategory=='Fantasy'){echo "class='active'";} ?>>Fantasy</button>
+                            <button type="submit" name="galleryCategory" value="Abstract" <?php if(isset($galleryCategory) && $galleryCategory=='Abstract'){echo "class='active'";} ?>>Abstract</button>
+                            <button type="submit" name="galleryCategory" value="Cartoon" <?php if(isset($galleryCategory) && $galleryCategory=='Cartoon'){echo "class='active'";} ?>>Cartoon</button>
+                            <button type="submit" name="galleryCategory" value="Portrait" <?php if(isset($galleryCategory) && $galleryCategory=='Portrait'){echo "class='active'";} ?>>Portrait</button>
+                            <button type="submit" name="galleryCategory" value="Nature" <?php if(isset($galleryCategory) && $galleryCategory=='Nature'){echo "class='active'";} ?>>Nature</button>
+                            <button type="submit" name="galleryCategory" value="Others" <?php if(isset($galleryCategory) && $galleryCategory=='Others'){echo "class='active'";} ?>>Others</button>
                         </div>                  
                     </div>
                 </div>
@@ -67,22 +72,23 @@
         <?php $mostraPagination=FALSE; $j=0;?>
         <ul class="clearfix galleryBoard">
             <?php
-                if(isset($_GET["gallerySearch"])){
+                if(isset($gallerySearch)){
                     //connecting to db
                     $myDb= new DbConnector();
                     $myDb->openDBConnection();
-                    $param = htmlspecialchars($_GET["gallerySearch"], ENT_QUOTES, "UTF-8");//cleaning the input
+                    //$param = htmlspecialchars($gallerySearch, ENT_QUOTES, "UTF-8");//cleaning the input
+                    $param = $gallerySearch;
                     $result = array();
                     if($myDb->connected){
-                        if(!isset($_GET['galleryCategory']) || (isset($_GET['galleryCategory']) && ($_GET['galleryCategory'] == 'All'))){
+                        if(!isset($galleryCategory) || (isset($galleryCategory) && ($galleryCategory == 'All'))){
                             $qrStr = "SELECT Artista,Nome FROM opere WHERE Descrizione LIKE '%".$param."%' OR Categoria LIKE '%".$param."%' OR Artista LIKE '%".$param."%'";
                             /*
                             $qrStr = "SELECT Nome, Artista, COUNT(Nome) as Likes FROM opere o LEFT JOIN likes on Nome=Opera and Artista=Creatore
                                     WHERE o.Descrizione LIKE '%".$param."%' OR o.Categoria LIKE '%".$param."%' OR o.Artista LIKE '%".$param."%'
                                     GROUP BY o.Nome, o.Artista ORDER BY COUNT(Nome) DESC";
                             */
-                        }elseif(isset($_GET['galleryCategory']) && ($_GET['galleryCategory'] != 'All')){
-                            $qrStr = 'SELECT Artista,Nome FROM opere WHERE Categoria="'.$_GET['galleryCategory'].'" AND (Descrizione LIKE "%'.$param.'%" OR Artista LIKE "%'.$param.'%")';
+                        }elseif(isset($galleryCategory) && ($galleryCategory != 'All')){
+                            $qrStr = 'SELECT Artista,Nome FROM opere WHERE Categoria="'.$galleryCategory.'" AND (Descrizione LIKE "%'.$param.'%" OR Artista LIKE "%'.$param.'%")';
                             /*
                             $qrStr = 'SELECT Nome, Artista, COUNT(Nome) as Likes FROM opere LEFT JOIN likes on Nome=Opera and Artista=Creatore
                                      WHERE Categoria="'.$_GET['galleryCategory'].'" AND (Descrizione LIKE "%'.$param.'%" OR Artista LIKE "%'.$param.'%")
@@ -94,21 +100,20 @@
                     else 
                         echo "Errore connessione";
                     $myDb->disconnect();
-
                     if($result && ($result->num_rows > 0)){
                         $mostraPagination = ($result->num_rows <= 8) ? false : true;
                         $j = printGalleryItems($result,FALSE);
                     }elseif(!$result || ($result->num_rows == 0)){
                         echo "<div class='div-center'><p>Nothing to show here ... </p></div>";
                     }
-                }elseif(isset($_GET['galleryCategory'])){
+                }elseif(isset($galleryCategory)){
                     //connecting to db
                     $myDb= new DbConnector();
                     $myDb->openDBConnection();
-                    $param = htmlspecialchars($_GET["galleryCategory"], ENT_QUOTES, "UTF-8");//cleaning the input
+                    //$param = htmlspecialchars($galleryCategory, ENT_QUOTES, "UTF-8");//cleaning the input
+                    $param = $galleryCategory;
                     $result = array();
                     if($myDb->connected){
-                        
                         if($param == 'All'){
                             $qrStr = "SELECT Artista,Nome FROM opere;";
                             //$qrStr = "SELECT Nome, Artista, COUNT(Nome) as Likes FROM opere LEFT JOIN likes on Nome=Opera and Artista=Creatore GROUP BY Nome, Artista ORDER BY COUNT(Nome) DESC";
@@ -124,7 +129,6 @@
                     else 
                         echo "Errore connessione";
                     $myDb->disconnect();
-
                     if($result && ($result->num_rows > 0)){
                         $mostraPagination = ($result->num_rows <= 8) ? false : true;
                         $j = printGalleryItems($result,FALSE);
