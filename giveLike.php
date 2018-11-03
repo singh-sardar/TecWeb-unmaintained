@@ -3,8 +3,7 @@
     require_once "DbConnector.php";
 
     if ( is_session_started() === FALSE ) session_start();
-    //echo $_SESSION["isLogged"];
-    if(!isset($_SESSION["isLogged"]) || ($_SESSION["isLogged"]=="false")){
+    if(!isset($_SESSION["Username"]){
         echo 0; //utente non loggato
 
     }else{

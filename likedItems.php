@@ -26,7 +26,7 @@
         <?php $mostraPagination=FALSE; $j=0;?>
         <ul class="clearfix galleryBoard">
             <?php
-                if(isset($_SESSION["isLogged"]) && ($_SESSION["isLogged"]=="true")){
+                if(isset($_SESSION['Username'])){
                     //connecting to db
                     $myDb= new DbConnector();
                     $myDb->openDBConnection();

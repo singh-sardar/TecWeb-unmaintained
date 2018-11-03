@@ -17,18 +17,16 @@
 			if($result === TRUE){//if inserted
 
 				echo "New updates saved correctly";
-				$_SESSION["isLogged"] = "true";
 				$_SESSION["Username"] = $usr;
 
-			}else{
-				echo 'Error. Try Again';
 			}
+			else
+				echo 'Error. Try Again';
 		}
 		else
 			echo 'Please login before';
 	}
 	else
-		echo "Connection Error";
+		echo 'Connection Error';
 	$myDb->disconnect();
-
 ?>

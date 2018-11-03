@@ -29,8 +29,8 @@
                 <div class="inputSearch">
                     <?php 
                         if(isset($_GET['gallerySearch'])){
-                            $_GET['gallerySearch'] = htmlspecialchars($_GET["gallerySearch"], ENT_QUOTES, "UTF-8");//cleaning the input
-                            echo '<input type="text" placeholder="Cerca per categoria, artista o descrizione .." name="gallerySearch" value="'.$_GET['gallerySearch'].'">';
+                            $gallerySearch = htmlspecialchars($_GET["gallerySearch"], ENT_QUOTES, "UTF-8");//cleaning the input
+                            echo '<input type="text" placeholder="Cerca per categoria, artista o descrizione .." name="gallerySearch" value="'.$gallerySearch.'">';
                         }else{
                             echo '<input type="text" placeholder="Cerca per categoria, artista o descrizione .." name="gallerySearch">';
                         }
@@ -42,26 +42,21 @@
                     <p>Categories</p>
                     
                     <?php 
-                        if(!isset($_SESSION['galleryCategory'])){
-                            $_SESSION['galleryCategory'] = 'All';
-                        }
-                        if(!isset($_GET['galleryCategory'])){
-                            $_GET['galleryCategory']= $_SESSION['galleryCategory'];
-                        }else{ 
-                            $_GET['galleryCategory'] = htmlspecialchars($_GET["galleryCategory"], ENT_QUOTES, "UTF-8");//cleaning the input
-                            $_SESSION['galleryCategory'] = $_GET['galleryCategory']; 
-                        }
+                        if(!isset($_GET["galleryCategory"]))
+                            $galleryCategory = 'All';
+                        else
+                            $galleryCategory = htmlspecialchars($_GET["galleryCategory"], ENT_QUOTES, "UTF-8");//cleaning the input
                     ?>
                     <div class="div-center">
                         <div class="divCategoryButtons">
-                            <button type="submit" name="galleryCategory" value="All" <?php if(isset($_GET['galleryCategory']) && $_GET['galleryCategory']=='All'){echo "class='active'";} ?>>All</button>
-                            <button type="submit" name="galleryCategory" value="Landscape" <?php if(isset($_GET['galleryCategory']) && $_GET['galleryCategory']=='Landscape'){echo "class='active'";} ?>>Landscape</button>
-                            <button type="submit" name="galleryCategory" value="Fantasy" <?php if(isset($_GET['galleryCategory']) && $_GET['galleryCategory']=='Fantasy'){echo "class='active'";} ?>>Fantasy</button>
-                            <button type="submit" name="galleryCategory" value="Abstract" <?php if(isset($_GET['galleryCategory']) && $_GET['galleryCategory']=='Abstract'){echo "class='active'";} ?>>Abstract</button>
-                            <button type="submit" name="galleryCategory" value="Cartoon" <?php if(isset($_GET['galleryCategory']) && $_GET['galleryCategory']=='Cartoon'){echo "class='active'";} ?>>Cartoon</button>
-                            <button type="submit" name="galleryCategory" value="Portrait" <?php if(isset($_GET['galleryCategory']) && $_GET['galleryCategory']=='Portrait'){echo "class='active'";} ?>>Portrait</button>
-                            <button type="submit" name="galleryCategory" value="Nature" <?php if(isset($_GET['galleryCategory']) && $_GET['galleryCategory']=='Nature'){echo "class='active'";} ?>>Nature</button>
-                            <button type="submit" name="galleryCategory" value="Others" <?php if(isset($_GET['galleryCategory']) && $_GET['galleryCategory']=='Others'){echo "class='active'";} ?>>Others</button>
+                            <button type="submit" name="galleryCategory" value="All" <?php if($galleryCategory === 'All'){echo "class='active'";} ?>>All</button>
+                            <button type="submit" name="galleryCategory" value="Landscape" <?php if($galleryCategory === 'Landscape'){echo "class='active'";} ?>>Landscape</button>
+                            <button type="submit" name="galleryCategory" value="Fantasy" <?php if($galleryCategory === 'Fantasy'){echo "class='active'";} ?>>Fantasy</button>
+                            <button type="submit" name="galleryCategory" value="Abstract" <?php if($galleryCategory === 'Abstract'){echo "class='active'";} ?>>Abstract</button>
+                            <button type="submit" name="galleryCategory" value="Cartoon" <?php if($galleryCategory === 'Cartoon'){echo "class='active'";} ?>>Cartoon</button>
+                            <button type="submit" name="galleryCategory" value="Portrait" <?php if($galleryCategory === 'Portrait'){echo "class='active'";} ?>>Portrait</button>
+                            <button type="submit" name="galleryCategory" value="Nature" <?php if($galleryCategory === 'Nature'){echo "class='active'";} ?>>Nature</button>
+                            <button type="submit" name="galleryCategory" value="Others" <?php if($galleryCategory === 'Others'){echo "class='active'";} ?>>Others</button>
                         </div>                  
                     </div>
                 </div>

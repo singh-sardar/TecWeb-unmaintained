@@ -52,7 +52,7 @@
   </div>
   <?php
   if(isset($_POST["title"]) && isset($_FILES['artwork'])){ //l'upload può partire solo se il TITOLO e l'IMMAGINE sono stati selezionati
-    if(!isset($_SESSION["isLogged"])){
+    if(!isset($_SESSION["Username"])){
       echo '<script type="text/javascript">openLoginModal();</script>';
       exit();
     }

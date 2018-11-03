@@ -9,14 +9,14 @@
       <?php
         session_start();
         //Se l'utente è loggato allora può vedere i suoi preferiti
-        if(isset($_SESSION['isLogged']) && ($_SESSION['isLogged'] == "true")){
+        if(isset($_SESSION['Username'])){
           echo '<a href="likedItems.php">Liked Images</a>';
         }
       ?>
     </li>
     <li>
       <?php
-        if(isset($_SESSION['isLogged']) && ($_SESSION['isLogged'] == "true")){
+        if(isset($_SESSION['Username'])){
           echo '<a href="userItems.php">Your Images</a>';
         }
       ?>
@@ -26,14 +26,14 @@
     </li>
     <li class="user">
       <?php //To Sign in or edit profile of User
-        if(isset($_SESSION["isLogged"])&&$_SESSION["isLogged"]=="true")
+        if(isset($_SESSION['Username']))
           echo '<a href="#" onclick="openEditProfileModal()">'.$_SESSION["Username"].'</a>';
         else
           echo '<a href="#" onclick="openSignUpModal()" >Sign Up</a>';
       ?>
     <li class="user">
       <?php
-        if(isset($_SESSION["isLogged"])&&$_SESSION["isLogged"]=="true")
+        if(isset($_SESSION['Username']))
           echo '<a href="#" onclick="doLogOut()" >Log Out</a>';
         else
           echo '<a href="#" onclick="openLoginModal()">Login</a>';
