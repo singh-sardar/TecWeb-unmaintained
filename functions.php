@@ -166,21 +166,7 @@
         $myDb->disconnect();
     }
 
-    function compress($source, $destination, $quality) {
-
-        $info = getimagesize($source);
-    
-        if ($info['mime'] == 'image/jpeg')
-            $image = imagecreatefromjpeg($source);
-    
-        elseif ($info['mime'] == 'image/jpg')
-            $image = imagecreatefromgif($source);
-    
-        elseif ($info['mime'] == 'image/png')
-            $image = imagecreatefrompng($source);
-    
-        imagejpeg($image, $destination, $quality);
-        
-        return $destination;
+    function escapePathTraversal($path){
+        return str_replace("/", "&#x2F;", str_replace(".", "&#x2E;", $path));
     }
 ?>
