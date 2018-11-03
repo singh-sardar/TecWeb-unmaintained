@@ -1,8 +1,8 @@
 <div class="menu" id="Topnav">
   <img src="Images/logo.png" alt="Logo"/>
   <ul>
-    <li class="firstMenuItem"><a href="home.php">Home</a></li>
-    <li><a href="home.php#team">Team</a></li>
+    <li class="firstMenuItem"><a href="index.php">Home</a></li>
+    <li><a href="index.php#team">Team</a></li>
     <li><a href="gallery.php">Gallery</a></li>
     <li><a href="upload.php">Upload</a></li>
     <li>
