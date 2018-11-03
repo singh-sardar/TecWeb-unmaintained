@@ -21,6 +21,7 @@
   require_once "signUpModal.php";
   require_once "editProfileModal.php";
   require_once "DbConnector.php";
+  require_once "functions.php";
   ?>
   <div class="section"><!--upload form-->
     <div class="title"><h1>Register your artwork</h1></div>
@@ -55,9 +56,9 @@
       echo '<script type="text/javascript">openLoginModal();</script>';
       exit();
     }
-  	$title= htmlspecialchars($_POST["title"], ENT_QUOTES, "UTF-8");
-  	$category= htmlspecialchars($_POST["category"], ENT_QUOTES, "UTF-8");
-  	$description= htmlspecialchars($_POST["description"], ENT_QUOTES, "UTF-8");
+  	$title = escapePathTraversal(htmlspecialchars($_POST["title"], ENT_QUOTES, "UTF-8"));
+  	$category = htmlspecialchars($_POST["category"], ENT_QUOTES, "UTF-8");
+  	$description = htmlspecialchars($_POST["description"], ENT_QUOTES, "UTF-8");
   	$filename = $_FILES['artwork']['name'];
   	$filetmp = $_FILES['artwork']['tmp_name'];
     $filesize = $_FILES['artwork']['size'];
