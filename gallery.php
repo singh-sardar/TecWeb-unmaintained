@@ -81,14 +81,14 @@
                     $result = array();
                     if($myDb->connected){
                         if(!isset($galleryCategory) || (isset($galleryCategory) && ($galleryCategory == 'All'))){
-                            $qrStr = "SELECT Artista,Nome FROM opere WHERE Descrizione LIKE '%".$param."%' OR Categoria LIKE '%".$param."%' OR Artista LIKE '%".$param."%'";
+                            $qrStr = "SELECT Artista,Nome FROM opere WHERE Descrizione LIKE '%".$param."%' OR Categoria LIKE '%".$param."%' OR Artista LIKE '%".$param."%' OR Nome LIKE '%".$param."%'";
                             /*
                             $qrStr = "SELECT Nome, Artista, COUNT(Nome) as Likes FROM opere o LEFT JOIN likes on Nome=Opera and Artista=Creatore
                                     WHERE o.Descrizione LIKE '%".$param."%' OR o.Categoria LIKE '%".$param."%' OR o.Artista LIKE '%".$param."%'
                                     GROUP BY o.Nome, o.Artista ORDER BY COUNT(Nome) DESC";
                             */
                         }elseif(isset($galleryCategory) && ($galleryCategory != 'All')){
-                            $qrStr = 'SELECT Artista,Nome FROM opere WHERE Categoria="'.$galleryCategory.'" AND (Descrizione LIKE "%'.$param.'%" OR Artista LIKE "%'.$param.'%")';
+                            $qrStr = 'SELECT Artista,Nome FROM opere WHERE Categoria="'.$galleryCategory.'" AND (Descrizione LIKE "%'.$param.'%" OR Artista LIKE "%'.$param.'%" OR Nome LIKE "%'.$param.'%")';
                             /*
                             $qrStr = 'SELECT Nome, Artista, COUNT(Nome) as Likes FROM opere LEFT JOIN likes on Nome=Opera and Artista=Creatore
                                      WHERE Categoria="'.$_GET['galleryCategory'].'" AND (Descrizione LIKE "%'.$param.'%" OR Artista LIKE "%'.$param.'%")
