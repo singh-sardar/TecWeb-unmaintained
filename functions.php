@@ -22,9 +22,9 @@
         }else if(isset($_SESSION['Username'])){
             $isLiked = boolImageLiked($artista,$_SESSION['Username'],$nomeImmagine);
         }
-        echo '<li>';
+        echo '<li class="liFigures">';
         echo     '<div class="galleryFigureWrapper" id="wrapper_'.$artista.'-'.$nomeImmagine.'">';
-        echo '      <img src="Images/Art/'.$artista.'/'.$nomeImmagine.'.jpeg" id="img_'.$artista.'-'.$nomeImmagine.'" class="display-none" alt="">';
+        echo '      <img src="Images/Art/'.$artista.'/'.$nomeImmagine.'.jpeg" id="img_'.$artista.'-'.$nomeImmagine.'" class="display-none" alt=""/>';
         echo '      <div class="image-div"></div>';
         echo '      <input type="hidden" value="'.$artista.'" name="nameArtist"/>';
         echo '      <input type="hidden" value="'.$nomeImmagine.'" name="nameImage"/>';
@@ -110,12 +110,12 @@
         for ($i = 0; $i < $result->num_rows; $i++) {
             if($i%8 == 0){
                 if($boolChiudi == FALSE){
-                    echo "<div id='galImgDiv".$j."'>";
+                    echo "<li id='galImgPag".$j."' class='liPaginationBlock'><ul>";
                     $j++;
-                    $boolChiudi = TRUE;
+                    $boolChiudi = TRUE; 
                 }else{
-                    echo "</div>";
-                    echo "<div id='galImgDiv".$j."'>";
+                    echo "</ul></li>";
+                    echo "<li id='galImgPag".$j."' class='liPaginationBlock'><ul>";
                     $j++;
                     $boolChiudi = FALSE;
                 }
@@ -123,8 +123,8 @@
             $row = $result->fetch_assoc();
             insertImageInGallery($row['Artista'],$row['Nome'],$boolDeleteButton);
         }
-        if($boolChiudi == TRUE && ($i%($result->num_rows)!= 1)){
-            echo "</div>";
+        if($boolChiudi == TRUE || ($i%($result->num_rows)!= 1)){
+            echo "</ul></li>";
         }
         return $j;
     }

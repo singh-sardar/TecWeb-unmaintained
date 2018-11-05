@@ -320,7 +320,7 @@ function updateLikeCounter(nomeArtista,nomeImmagine){
 
 //onclick function for pagination buttons
 function btnPaginationOnClick(id){
-	var arr = document.querySelectorAll('[id^="galImgDiv"]');
+	var arr = document.querySelectorAll('[id^="galImgPag"]');
 	for(i=0; i< arr.length; i++){ //hide all the divs
 		var item = arr[i];
 		item.classList.remove('display-block');
@@ -329,8 +329,8 @@ function btnPaginationOnClick(id){
 	var divNumber = id.substring("btnPagination".length,id.length);
 	
 	//show only one gallery images container div 
-	document.querySelector('[id="galImgDiv'+divNumber+'"]').classList.remove('display-none');
-	document.querySelector('[id="galImgDiv'+divNumber+'"]').classList.add('display-block');
+	document.querySelector('[id="galImgPag'+divNumber+'"]').classList.remove('display-none');
+	document.querySelector('[id="galImgPag'+divNumber+'"]').classList.add('display-block');
 	//remove active status to all pagination buttons
 	var arr=document.querySelectorAll('[id^="btnPagination"]');
 	for(i=0; i< arr.length; i++){
@@ -352,7 +352,7 @@ function btnPaginationOnClick(id){
 		//document.getElementById("btnPagBack").classList.add("display-none");
 		document.getElementById("btnPagBack").style.display = 'none';
 	}
-	if(divNumber == document.querySelectorAll('[id^="galImgDiv"]').length){
+	if(divNumber == document.querySelectorAll('[id^="galImgPag"]').length){
 		//document.getElementById("btnPagForward").classList.add("btnPaginationDeactive");
 		//document.getElementById("btnPagForward").classList.add("display-none");
 		document.getElementById("btnPagForward").style.display = 'none';
@@ -372,7 +372,7 @@ function btnPagBackOnClick(){
 function btnPagForwardOnClick(){
 	var activeBtnPag = document.querySelector('.btnPaginationActive');
 	var num = Number(activeBtnPag.id.substring("btnPagination".length,activeBtnPag.id.length));
-	if (num < document.querySelectorAll('[id^="galImgDiv"]').length){
+	if (num < document.querySelectorAll('[id^="galImgPag"]').length){
 		btnPaginationOnClick("btnPagination"+(num+1));
 	}
 }

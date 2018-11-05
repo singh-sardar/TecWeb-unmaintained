@@ -574,7 +574,11 @@ div.divCategoryButtons button{
 	margin-top: 2.5em;
 }
 
-.galleryBoard li{
+.galleryBoard li.liPaginationBlock{
+    list-style-type:none;
+}
+
+.galleryBoard li.liFigures{
     list-style-type: none;
     float: left;
     padding-left: 0.5em;
@@ -631,40 +635,40 @@ div.divCategoryButtons button{
     }
 }
 @media only screen and (max-width:767px){
-    .galleryBoard li{
+    .galleryBoard li.liFigures{
         width: 100%;
     }
 }
 @media screen and (min-width:768px){
-    .galleryBoard li{
+    .galleryBoard li.liFigures{
         width: 50%;
     }
-    .galleryBoard li:nth-of-type(2n+1){
+    .galleryBoard li.liFigures:nth-of-type(2n+1){
         clear: left;
     }
 }
 @media screen and (min-width: 1024px){
-    .galleryBoard li{
+    .galleryBoard li.liFigures{
         width: 33.33333%;
     }
-    .galleryBoard li:nth-of-type(2n+1) {
+    .galleryBoard li.liFigures:nth-of-type(2n+1) {
         clear: none;
     }
 
-    .galleryBoard li:nth-of-type(3n+1) {
+    .galleryBoard li.liFigures:nth-of-type(3n+1) {
         clear: left;
     }
 }
 @media screen and (min-width: 1400px){
-    .galleryBoard li{
+    .galleryBoard li.liFigures{
         width: 25%;
     }
 
-    .galleryBoard li:nth-of-type(3n+1) {
+    .galleryBoard li.liFigures:nth-of-type(3n+1) {
         clear: none;
     }
 
-    .galleryBoard li:nth-of-type(4n+1) {
+    .galleryBoard li.liFigures:nth-of-type(4n+1) {
         clear: left;
     }
 }

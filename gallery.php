@@ -30,9 +30,9 @@
                     <?php 
                         if(isset($_GET['gallerySearch'])){
                             $gallerySearch = htmlspecialchars($_GET["gallerySearch"], ENT_QUOTES, "UTF-8");//cleaning the input
-                            echo '<input type="text" placeholder="Cerca per categoria, artista o descrizione .." name="gallerySearch" value="'.$gallerySearch.'">';
+                            echo '<input type="text" placeholder="Cerca per categoria, artista o descrizione .." name="gallerySearch" value="'.$gallerySearch.'"/>';
                         }else{
-                            echo '<input type="text" placeholder="Cerca per categoria, artista o descrizione .." name="gallerySearch">';
+                            echo '<input type="text" placeholder="Cerca per categoria, artista o descrizione .." name="gallerySearch"/>';
                         }
                         
                     ?>
