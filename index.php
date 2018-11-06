@@ -47,7 +47,7 @@
       $artista[$i] = $row["Artista"];
       $likes[$i] = $row["Likes"];
       echo "<div class='home_picture'>";
-      echo "<img src='Images/Art/$artista[$i]/$nome[$i].jpeg' alt='Top rated images'>";
+      echo "<img src='Images/Art/$artista[$i]/$nome[$i].jpeg' alt='Top rated images'/>";
       echo "<h2>$nome[$i]</h2>";
       echo "<p>$artista[$i]</p>";
       echo "<p>Likes: $likes[$i]</p>";
@@ -61,7 +61,7 @@
       Innovation is the key to the future, let the art invade the digital world.
       This website is meant to be collection of digital artworks, everyone can
       register and upload his own masterpieces sharing them with the world and
-      </br>get popularity. Down here you can find some statistics of our site.
+      <br/>get popularity. Down here you can find some statistics of our site.
     </p>
   </div>
   <div class="section"><!--statistics-->
@@ -117,25 +117,25 @@
   <div class="section" id="team"><!--team-->
     <div class="title"><h1>Our Amazing Team</h1></div>
     <div class="teamMember">
-      <img src="Images/Team/davide_liu.jpg" alt='Team member face'>
+      <img src="Images/Team/davide_liu.jpg" alt='Team member face'/>
       <h2>Davide Liu</h2>
 	  <hr/>
       <p>Software Engineer</p>
     </div>
     <div class="teamMember">
-      <img src="Images/Team/harwinder_singh.jpg" alt='Team member face'>
+      <img src="Images/Team/harwinder_singh.jpg" alt='Team member face'/>
       <h2>Harwinder Singh</h2>
 	  <hr/>
       <p>Software Engineer</p>
     </div>
     <div class="teamMember">
-      <img src="Images/Team/davide_liu.jpg" alt='Team member face'>
+      <img src="Images/Team/davide_liu.jpg" alt='Team member face'/>
       <h2>Davide Liu</h2>
 	  <hr/>
       <p>Software Engineer</p>
     </div>
     <div class="teamMember">
-      <img src="Images/Team/davide_liu.jpg" alt='Team member face'>
+      <img src="Images/Team/davide_liu.jpg" alt='Team member face'/>
       <h2>Davide Liu</h2>
 	  <hr/>
       <p>Software Engineer</p>

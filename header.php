@@ -27,10 +27,11 @@
     <li class="user">
       <?php //To Sign in or edit profile of User
         if(isset($_SESSION['Username']))
-          echo '<a href="#" onclick="openEditProfileModal()">'.$_SESSION["Username"].'</a>';
+          echo '<a href="#" onclick="openEditProfileModal()">Edit Profile: '.$_SESSION["Username"].'</a>';
         else
           echo '<a href="#" onclick="openSignUpModal()" >Sign Up</a>';
       ?>
+  </li> 
     <li class="user">
       <?php
         if(isset($_SESSION['Username']))
@@ -40,11 +41,11 @@
       ?>
     </li>
     <li class="hamburgerMenu">
-        <a href="#" onclick="openDrobDownMenu(this)">
+        <div class="hamburgerMenuContainer" onclick="openDrobDownMenu(this)">
           <div class="line1"></div>
           <div class="line2"></div>
           <div class="line3"></div>
-        </a>
+        </div>
     </li>
   </ul>
 </div>

@@ -47,39 +47,48 @@ function eventListnerforLoginModal() {
 		}
 	}
 }
+
+function validateString(str){
+	return !(str==="");
+}
 //function to login using ajax
 function doLogin(event) {
 	event.preventDefault()//prevents to reload the page if login data arent correct
 
-	// creating ajax object
-	var xhttp;
-	if (window.XMLHttpRequest) {
-	// code for modern browsers
-	xhttp = new XMLHttpRequest();
-	} else {
-	// code for IE6, IE5
-	xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	//calback function for the request
-	xhttp.onreadystatechange = function() {
-	if (this.readyState === 4 && this.status === 200) {
-		//if status is ok
-		if(this.responseText==="Success")
-			location.reload();
-		else
-			document.getElementById("InvalidLogin").innerHTML = this.responseText;
-
-	}
-	};
 	//getting the values of the fields
 	var usr=document.getElementById('usr').value;
 	var pwd=document.getElementById('pwd').value;
+    if((validateString(usr)===true)&&(validateString(pwd)===true)){
+      // creating ajax object
+      var xhttp;
+      if (window.XMLHttpRequest) {
+      // code for modern browsers
+      xhttp = new XMLHttpRequest();
+      } else {
+      // code for IE6, IE5
+      xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+      //calback function for the request
+      xhttp.onreadystatechange = function() {
+      if (this.readyState === 4 && this.status === 200) {
+          //if status is ok
+          if(this.responseText==="Success")
+              location.reload();
+          else
+              document.getElementById("InvalidLogin").innerHTML = this.responseText;
 
-	//doing th ajax request
-	xhttp.open("POST", "doLogin.php", true);
-	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhttp.send("usr="+usr+"&pwd="+pwd);
+      }
+      };
 
+
+      //doing th ajax request
+      xhttp.open("POST", "doLogin.php", true);
+      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhttp.send("usr="+usr+"&pwd="+pwd);
+	}else{
+			document.getElementById("InvalidLogin").innerHTML = "Please Insert a Username/Password";
+
+	}
   return false;
 }
 
@@ -116,39 +125,47 @@ function doLogOut(event) {
 //function to Singh Up using ajax
 function doSignUp(event) {
 	event.preventDefault()//prevents to reload the page if login data arent correct
-
-	// creating ajax object
-	var xhttp;
-	if (window.XMLHttpRequest) {
-	// code for modern browsers
-	xhttp = new XMLHttpRequest();
-	} else {
-	// code for IE6, IE5
-	xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	//calback function for the request
-	xhttp.onreadystatechange = function() {
-	if (this.readyState == 4 && this.status == 200) {
-		//if status is ok
-		if(this.responseText==="Success"){
-			location.reload();
-		}else{
-			document.getElementById("SignUpMessage").innerHTML = this.responseText;
-		}
-
-	}
-	};
-	//getting the values of the fields
-	var usr=document.getElementById('usrSighUp').value;
+    //getting the values of the fields
+	var usr=document.getElementById('usrSignUp').value;
 	var pwd=document.getElementById('pwdSignUp').value;
 	var name=document.getElementById('name').value;
 	var surname=document.getElementById('surname').value;
-	//doing th ajax request
-	xhttp.open("POST", "doSignUp.php", true);
-	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhttp.send("usr="+usr+"&pwd="+pwd+"&name="+name+"&surname="+surname);
+	
+    if((validateString(usr)===true)&&(validateString(pwd)===true)&&(validateString(name)===true)&&(validateString(surname)===true)){
+		if(pwd.length>=5){
+            // creating ajax object
+            var xhttp;
+            if (window.XMLHttpRequest) {
+            // code for modern browsers
+            xhttp = new XMLHttpRequest();
+            } else {
+            // code for IE6, IE5
+            xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            //calback function for the request
+            xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                //if status is ok
+                if(this.responseText==="Success"){
+                    location.reload();
+                }else{
+                    document.getElementById("SignUpMessage").innerHTML = this.responseText;
+                }
 
-  return false;
+            }
+            };
+            //doing th ajax request
+            xhttp.open("POST", "doSignUp.php", true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("usr="+usr+"&pwd="+pwd+"&name="+name+"&surname="+surname);
+       	}else{
+			document.getElementById("SignUpMessage").innerHTML = "Password must be at least 5 characters";
+		}
+	}else{
+			document.getElementById("SignUpMessage").innerHTML = "Please fill all the fields";
+
+	}
+  	return false;
 }
 
 
@@ -156,33 +173,42 @@ function doSignUp(event) {
 //function to Edit Profile using ajax
 function doEditProfile(event) {
 	event.preventDefault()//prevents to reload the page if login data arent correct
+   //getting the values of the fields
+    var usr=document.getElementById('usrEdit').value;
+ 	var pwd=document.getElementById('pwdEdit').value;
+  	var name=document.getElementById('nameEdit').value;
+  	var surname=document.getElementById('surnameEdit').value;
+    if((validateString(usr)===true)&&(validateString(pwd)===true)&&(validateString(name)===true)&&(validateString(surname)===true)){
+		if(pwd.length>=5){ 
+            // creating ajax object
+            var xhttp;
+            if (window.XMLHttpRequest) {
+            // code for modern browsers
+            xhttp = new XMLHttpRequest();
+            } else {
+            // code for IE6, IE5
+            xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            //calback function for the request
+            xhttp.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                //if status is ok
+                document.getElementById("EditProfileMessage").innerHTML = this.responseText;
 
-	// creating ajax object
-	var xhttp;
-	if (window.XMLHttpRequest) {
-	// code for modern browsers
-	xhttp = new XMLHttpRequest();
-	} else {
-	// code for IE6, IE5
-	xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	//calback function for the request
-	xhttp.onreadystatechange = function() {
-	if (this.readyState === 4 && this.status === 200) {
-		//if status is ok
-		document.getElementById("EditProfileMessage").innerHTML = this.responseText;
+            }
+            };
+
+            //doing th ajax request
+            xhttp.open("POST", "doEditProfile.php", true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("usr="+usr+"&pwd="+pwd+"&name="+name+"&surname="+surname);
+        }else{
+			document.getElementById("EditProfileMessage").innerHTML = "Password must be at least 5 characters";
+		}
+	}else{
+			document.getElementById("EditProfileMessage").innerHTML = "Please fill all the fields";
 
 	}
-	};
-	//getting the values of the fields
-	var usr=document.getElementById('usrEdit').value;
-	var pwd=document.getElementById('pwdEdit').value;
-	var name=document.getElementById('nameEdit').value;
-	var surname=document.getElementById('surnameEdit').value;
-	//doing th ajax request
-	xhttp.open("POST", "doEditProfile.php", true);
-	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhttp.send("usr="+usr+"&pwd="+pwd+"&name="+name+"&surname="+surname);
 
   return false;
 }
@@ -250,10 +276,9 @@ Function by page gallery.php
 function btnLikeOnClick(obj){
 	// creating ajax object
 	var xhttp;
-	var thisId = obj.id;
-	thisId = thisId.substring(("LikeBtn_").length);
-	var nomeArtista = thisId.substring(0,thisId.indexOf('_'));
-    var nomeImmagine = thisId.substring(thisId.indexOf('_')+1);
+	var idNumber = obj.id.substring(("LikeBtn_").length);
+	var artist = document.querySelector('[id="figureWrapper_'+idNumber+'"] [name="nameArtist"]').value;
+	var immg = document.querySelector('[id="figureWrapper_'+idNumber+'"] [name="nameImage"]').value;
 	if (window.XMLHttpRequest) {
         // code for modern browsers
         xhttp = new XMLHttpRequest();
@@ -278,21 +303,21 @@ function btnLikeOnClick(obj){
 			if((window.location.href).indexOf("likedItems.php")!== -1){//it means the current page is likedItems
 				location.reload();
 			}else if(this.responseText == "1" || this.responseText == "2"){
-				updateLikeCounter(nomeArtista,nomeImmagine);
+				updateLikeCounter(idNumber,artist,immg);
 			}
         }
 	};
 	//doing th ajax request
 	xhttp.open("POST", "giveLike.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("art="+nomeArtista+"&nomeImg="+nomeImmagine);
+    xhttp.send("art="+artist+"&nomeImg="+immg);
 }
 
 //function used to update the like counter of an image
-function updateLikeCounter(nomeArtista,nomeImmagine){
+function updateLikeCounter(idNumber,artist,imageName){
 	// creating ajax object
 	var xhttp;
-	var obj = document.getElementById("Likes_"+nomeArtista+"-"+nomeImmagine);
+	var obj = document.getElementById("Likes_"+idNumber);
 	if (window.XMLHttpRequest) {
         // code for modern browsers
         xhttp = new XMLHttpRequest();
@@ -315,7 +340,7 @@ function updateLikeCounter(nomeArtista,nomeImmagine){
 	//doing th ajax request
 	xhttp.open("POST", "getLikes.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("art="+nomeArtista+"&nomeImg="+nomeImmagine);
+    xhttp.send("art="+artist+"&nomeImg="+imageName);
 }
 
 //onclick function for pagination buttons
@@ -382,9 +407,9 @@ function populateImages(){
 	for(i=0; i< arr.length; i++){
 		var item = arr[i];
 		var id = item.id;
-		var artista = document.querySelector('[id="'+id+'"] [name="nameArtist"]').value;
+		var artist = document.querySelector('[id="'+id+'"] [name="nameArtist"]').value;
 		var immg = document.querySelector('[id="'+id+'"] [name="nameImage"]').value;
-		var imgSrc = document.getElementById("img_"+artista+"-"+immg).src;
-		var divImg = document.querySelector('[id="'+id+'"] .image-div').style.backgroundImage = "url('"+imgSrc+"')";
+		var imgSrc = "Images/Art/"+artist+"/"+immg+".jpeg";
+		document.querySelector('[id="'+id+'"] .image-div').style.backgroundImage = "url('"+imgSrc+"')";
 	}
 }

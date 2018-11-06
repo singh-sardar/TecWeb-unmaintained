@@ -1,20 +1,17 @@
-
-
-
 <!-- The Modal -->
 <div id="LoginModal" class="Modal">
 	<!-- Modal Content -->
-	<form class="modal-content animate" method="post" action="" onsubmit="return doLogin(event)">
+	<form class="modal-content animate" method="post" action="#" onsubmit="return doLogin(event)">
 		<div class="modalHead">
 			<span onclick="closeLoginModal()" class="close" title="Close Modal">&times;</span>
 			<h1>LOGIN FORM</h1>
 		</div>
 		<div class="container">
-			<label for="uname">Username</label>
-			<input id="usr" type="text" placeholder="Enter Username" name="uname" required/>
+			<label for="usr">Username</label>
+			<input id="usr" type="text" placeholder="Enter Username" name="usr" />
 
-			<label for="psw">Password</label>
-			<input  id="pwd" type="password" placeholder="Enter Password" name="psw" required/>
+			<label for="pwd">Password</label>
+			<input  id="pwd" type="password" placeholder="Enter Password" name="pwd"  />
 
 		</div>
 		<div class="container" id="InvalidLogin">

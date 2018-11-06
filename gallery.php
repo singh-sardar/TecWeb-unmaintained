@@ -98,13 +98,13 @@
                         $result = $myDb->doQuery($qrStr);
                     }
                     else 
-                        echo "Errore connessione";
+                        echo "<li class='liPaginationBlock'>Errore connessione</li>";
                     $myDb->disconnect();
                     if($result && ($result->num_rows > 0)){
                         $mostraPagination = ($result->num_rows <= 8) ? false : true;
                         $j = printGalleryItems($result,FALSE);
                     }elseif(!$result || ($result->num_rows == 0)){
-                        echo "<div class='div-center'><p>Nothing to show here ... </p></div>";
+                        echo "<li class='liPaginationBlock'><div class='div-center'><p>Nothing to show here ... </p></div></li>";
                     }
                 }elseif(isset($galleryCategory)){
                     //connecting to db
@@ -127,23 +127,23 @@
                         $result = $myDb->doQuery($qrStr);
                     }
                     else 
-                        echo "Errore connessione";
+                        echo "<li class='liPaginationBlock'>Errore connessione</li>";
                     $myDb->disconnect();
                     if($result && ($result->num_rows > 0)){
                         $mostraPagination = ($result->num_rows <= 8) ? false : true;
                         $j = printGalleryItems($result,FALSE);
                     }elseif(!$result || ($result->num_rows == 0)){
-                        echo "<div class='div-center'><p>Nothing to show here ... </p></div>";
+                        echo "<li class='liPaginationBlock'><div class='div-center'><p>Nothing to show here ... </p></div></li>";
                     }
                 }
             ?>
             
         </ul> 
         <?php
-        echo "<script>populateImages();</script>";
+        echo '<script type="application/javascript">populateImages();</script>';
         if($mostraPagination == TRUE && ($j > 2)){
             printDivPagination($j);
-            echo "<script>btnPaginationOnClick('btnPagination1');</script>";
+            echo '<script type="application/javascript">btnPaginationOnClick("btnPagination1");</script>';
         }
         ?>
     </div>
