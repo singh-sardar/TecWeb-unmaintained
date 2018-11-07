@@ -147,5 +147,8 @@
         }
         ?>
     </div>
+	<div class="footer">
+		<p>Artbit</p>
+  </div>
 </body>
 </html>

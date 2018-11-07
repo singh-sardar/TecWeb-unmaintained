@@ -241,9 +241,9 @@ function btnDeleteOnClick(obj){
 	if(confirm("Do you really want to delete this image?")){
 		// creating ajax object
 		var xhttp;
-		var thisId = obj.id.substring("DelBtn_".length);;
-		var nomeArtista = thisId.substring(0,thisId.indexOf('_'));
-    	var nomeImmagine = thisId.substring(thisId.indexOf('_')+1);
+		var idNumber = obj.id.substring(("DelBtn_").length);
+	        var artist = document.querySelector('[id="figureWrapper_'+idNumber+'"] [name="nameArtist"]').value;
+	        var immg = document.querySelector('[id="figureWrapper_'+idNumber+'"] [name="nameImage"]').value;
 		if (window.XMLHttpRequest) {
 			// code for modern browsers
 			xhttp = new XMLHttpRequest();
@@ -266,7 +266,7 @@ function btnDeleteOnClick(obj){
 		//doing th ajax request
 		xhttp.open("POST", "deleteItem.php", true);
 		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		xhttp.send("art="+nomeArtista+"&nomeImg="+nomeImmagine);
+		xhttp.send("art="+artist+"&nomeImg="+immg);
 	}
 }
 
@@ -412,4 +412,22 @@ function populateImages(){
 		var imgSrc = "Images/Art/"+artist+"/"+immg+".jpeg";
 		document.querySelector('[id="'+id+'"] .image-div').style.backgroundImage = "url('"+imgSrc+"')";
 	}
+}
+
+function doUploadValidation(event){
+	//event.preventDefault()//prevents to reload the page if login data arent correct
+    var title=document.getElementById('title').value;
+ 	var description=document.getElementById('description').value;
+    var returnValue =true;
+    if((title==="")||(description==="")){
+ 		document.getElementById("uploadMessage").innerHTML ="Please Fill all the fields";
+        returnValue=false;
+    }else{
+    	if( document.getElementById("artwork").files.length == 0 ){
+        	document.getElementById("uploadMessage").innerHTML ="Please Select an image";
+        	returnValue=false;
+    	}
+    }
+    
+    return returnValue;
 }

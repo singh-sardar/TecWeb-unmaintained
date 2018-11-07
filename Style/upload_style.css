@@ -1,13 +1,12 @@
-.section form {
-  max-width: 1000px;
+.Uploadsection form {
   padding: 1.0em;
   margin: auto;
 }
 
-.section input[type="text"],
-.section input[type="file"],
-.section textarea,
-.section select {
+.Uploadsection input[type="text"],
+.Uploadsection input[type="file"],
+.Uploadsection textarea,
+.Uploadsection select {
   border: none;
   height: auto;
   margin: 0;
@@ -18,11 +17,11 @@
   margin-bottom: 1.5em;
 }
 
-.section button {
+.Uploadsection button {
   width: 100%;
 }
 
-.section label {
+.Uploadsection label {
   display: block;
   margin-bottom: 0.5em;
 }
@@ -30,6 +29,8 @@
 .error_message {
   text-align: center;
   color: red;
+  padding: 0.5em;
+  font-size: 1.5em;
 }
 
 .success_message {
