@@ -25,21 +25,40 @@
     <li>
       <a class="btnSearch" href="#" onclick="openSearchModal()"><span class="searchIcon"></span></a>
     </li>
-    <li class="user">
+    <li class="user account-dropdown">
       <?php //To Sign in or edit profile of User
-        if(isset($_SESSION['Username']))
-          echo '<a href="#" onclick="openEditProfileModal()">Edit Profile: '.$_SESSION["Username"].'</a>';
-        else
-          echo '<a href="#" onclick="openSignUpModal()" >Sign Up</a>';
+        if(isset($_SESSION['Username'])){
+          echo '<a href="#">'.$_SESSION["Username"].'</a>';
+          echo '<div class="account-dropdown-content">
+                  <a href="#" onclick="openEditProfileModal()">Edit Profile</a>
+                  <a href="#" onclick="doLogOut()">Logout</a>
+                </div>';
+        }
       ?>
-  </li> 
-    <li class="user">
-      <?php
-        if(isset($_SESSION['Username']))
-          echo '<a href="#" onclick="doLogOut()" >Log Out</a>';
-        else
-          echo '<a href="#" onclick="openLoginModal()">Login</a>';
-      ?>
+  </li>
+  <li class="user account-content">
+    <?php //To Sign in or edit profile of User
+      if(isset($_SESSION['Username']))
+        echo '<a href="#" onclick="openEditProfileModal()">Edit Profile: '.$_SESSION["Username"].'</a>';
+    ?>
+  </li>
+  <li class="user">
+    <?php //To Sign in or edit profile of User
+      if(!isset($_SESSION['Username']))
+        echo '<a href="#" onclick="openSignUpModal()" >Sign Up</a>';
+    ?>
+  </li>
+  <li class="user">
+    <?php
+      if(!isset($_SESSION['Username']))
+        echo '<a href="#" onclick="openLoginModal()">Login</a>';
+    ?>
+   </li>
+   <li class="user account-content">
+    <?php
+      if(isset($_SESSION['Username']))
+        echo '<a href="#" onclick="doLogOut()" >Logout</a>';
+    ?>
     </li>
     <li class="hamburgerMenu">
         <div class="hamburgerMenuContainer" onclick="openDrobDownMenu(this)">

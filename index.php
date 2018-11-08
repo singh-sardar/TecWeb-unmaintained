@@ -34,6 +34,15 @@
     </div>
   </div>
   <div class="container1024">
+    <div class="section" id="intro"><!--website Introduction-->
+		<div class="title"><h1>Introduction</h1></div>
+		<p>
+		  Innovation is the key to the future, let the art invade the digital world.
+		  This website is meant to be collection of digital artworks, everyone can
+		  register and upload his own masterpieces sharing them with the world and
+		  <br/>get popularity.
+		</p>
+	  </div>
 	  <div class="section"><!--top rated-->
 		<div class="title"><h1>Top rated</h1></div>
 		<?php
@@ -55,15 +64,6 @@
 		  echo "</div>";
 		}
 		?>
-	  </div>
-	  <div class="section" id="intro"><!--website Introduction-->
-		<div class="title"><h1>Introduction</h1></div>
-		<p>
-		  Innovation is the key to the future, let the art invade the digital world.
-		  This website is meant to be collection of digital artworks, everyone can
-		  register and upload his own masterpieces sharing them with the world and
-		  <br/>get popularity. Down here you can find some statistics of our site.
-		</p>
 	  </div>
 	  <div class="section"><!--statistics-->
 		<div class="statistics">

@@ -7,7 +7,7 @@
     font-size: 1.0em;
 }
 
-/*---------Scritte piÃ¹ importanti----------------------------------------------*/
+/*---------Scritte piu' importanti----------------------------------------------*/
 .font_medium {
     font-size: 1.2em;
 }
@@ -27,7 +27,7 @@ h1 {
   font-weight: normal;
 }
 
-/*---------MenÃ¹ e pulsanti-----------------------------------------------------*/
+/*---------Menu' e pulsanti-----------------------------------------------------*/
 .menu {
 	background-color: #6A5ACD;
 	overflow: hidden;
@@ -49,7 +49,6 @@ h1 {
   float: right;
   /*background-color: #2F4F4F;*/
 }
-
 
 .menu img {
 	float: left;
@@ -73,8 +72,6 @@ h1 {
     color:black!important;
     background-color:white;
 }
-
-
 
 .hamburgerMenu {
   display: none;
@@ -342,8 +339,6 @@ background-color: rgba(241,241,241,1);
 	to {transform: scale(1)}
 }
 /*MEDIA QUERY-----------------------------------------------------*/
-
-
 @media screen and (max-width: 1024px) {
 	/*menu*/
 	.menu .btnSearch{float: none;}
@@ -762,3 +757,26 @@ div.divCategoryButtons button{
     cursor: not-allowed;
 }
 /* *************************************************** GALLERY PAGE ******************************************************************************/
+/* Dropdown content (hidden by default) */
+.account-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #6a5acd;
+  width: 15%;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+/* Show the dropdown menu on hover */
+.account-dropdown:hover .account-dropdown-content {
+  display: block;
+}
+@media screen and (min-width: 1024px) {
+	.menu li.user.account-content{
+	  display: none;
+	}
+}
+@media screen and (max-width: 1024px) {
+	.menu li.user.account-dropdown{
+	  display: none;
+	}
+}
