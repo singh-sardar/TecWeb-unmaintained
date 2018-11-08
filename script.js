@@ -130,7 +130,7 @@ function doSignUp(event) {
 	var pwd=document.getElementById('pwdSignUp').value;
 	var name=document.getElementById('name').value;
 	var surname=document.getElementById('surname').value;
-	
+
     if((validateString(usr)===true)&&(validateString(pwd)===true)&&(validateString(name)===true)&&(validateString(surname)===true)){
 		if(pwd.length>=5){
             // creating ajax object
@@ -179,7 +179,7 @@ function doEditProfile(event) {
   	var name=document.getElementById('nameEdit').value;
   	var surname=document.getElementById('surnameEdit').value;
     if((validateString(usr)===true)&&(validateString(pwd)===true)&&(validateString(name)===true)&&(validateString(surname)===true)){
-		if(pwd.length>=5){ 
+		if(pwd.length>=5){
             // creating ajax object
             var xhttp;
             if (window.XMLHttpRequest) {
@@ -251,7 +251,7 @@ function btnDeleteOnClick(obj){
 			// code for IE6, IE5
 			xhttp = new ActiveXObject("Microsoft.XMLHTTP");
 		}
-		
+
 		//calback function for the request
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
@@ -286,7 +286,7 @@ function btnLikeOnClick(obj){
         // code for IE6, IE5
         xhttp = new ActiveXObject("Microsoft.XMLHTTP");
     }
-    
+
     //calback function for the request
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -325,7 +325,7 @@ function updateLikeCounter(idNumber,artist,imageName){
         // code for IE6, IE5
         xhttp = new ActiveXObject("Microsoft.XMLHTTP");
     }
-    
+
     //calback function for the request
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -352,8 +352,8 @@ function btnPaginationOnClick(id){
 		item.classList.add('display-none');
 	}
 	var divNumber = id.substring("btnPagination".length,id.length);
-	
-	//show only one gallery images container div 
+
+	//show only one gallery images container div
 	document.querySelector('[id="galImgPag'+divNumber+'"]').classList.remove('display-none');
 	document.querySelector('[id="galImgPag'+divNumber+'"]').classList.add('display-block');
 	//remove active status to all pagination buttons
@@ -362,7 +362,7 @@ function btnPaginationOnClick(id){
 		var item = arr[i];
 		item.classList.remove('btnPaginationActive');
 	}
-	
+
 	document.querySelector('[id="btnPagination'+divNumber+'"]').classList.add('btnPaginationActive');
 	/*
 	document.getElementById("btnPagBack").classList.remove("btnPaginationDeactive");
@@ -417,7 +417,7 @@ function populateImages(){
 function doUploadValidation(event){
 	//event.preventDefault()//prevents to reload the page if login data arent correct
     var title=document.getElementById('title').value;
- 	var description=document.getElementById('description').value;
+   	var description=document.getElementById('description').value;
     var returnValue =true;
     if((title==="")||(description==="")){
  		document.getElementById("uploadMessage").innerHTML ="Please Fill all the fields";
@@ -428,6 +428,10 @@ function doUploadValidation(event){
         	returnValue=false;
     	}
     }
-    
+		if(description.length>1000){
+			document.getElementById("uploadMessage").innerHTML ="Description is too long";
+			returnValue=false;
+		}
+
     return returnValue;
 }

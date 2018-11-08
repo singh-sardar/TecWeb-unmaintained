@@ -107,7 +107,7 @@ hr{
 }
 /*---------Descrizione---------------------------------------------------------*/
 .description {
-    background-image: url(../Images/description.jpg);
+    background-image: url(../Images/description.jpeg);
     background-size: cover;
     overflow: hidden;
 }
@@ -138,7 +138,7 @@ hr{
   margin: 0 0.5%;
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 768px) {
   .home_picture{
     width: 59%;
     margin: 0 20%;
@@ -173,7 +173,7 @@ hr{
   margin: 1.2em 0;
 }
 
-@media screen and (max-width: 700px){
+@media screen and (max-width: 768px){
 	.semicolumn{
 		float: none;
 		margin: 1.0em auto;
@@ -193,7 +193,7 @@ hr{
   overflow: hidden;
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 768px) {
   .teamMember {
     width: 46%;
     margin: 0 2% 2% ;
@@ -344,7 +344,7 @@ background-color: rgba(241,241,241,1);
 /*MEDIA QUERY-----------------------------------------------------*/
 
 
-@media screen and (max-width: 855px) {
+@media screen and (max-width: 1024px) {
 	/*menu*/
 	.menu .btnSearch{float: none;}
 	.menu li {display: none;}
@@ -648,7 +648,7 @@ div.divCategoryButtons button{
         width: 100%;
     }
 }
-@media only screen and (max-width:767px){
+@media only screen and (max-width:768px){
     .galleryBoard li.liFigures{
         width: 100%;
     }

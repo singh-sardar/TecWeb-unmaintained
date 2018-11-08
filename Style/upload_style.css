@@ -36,4 +36,6 @@
 .success_message {
   text-align: center;
   color: green;
+  padding: 0.5em;
+  font-size: 1.5em;
 }

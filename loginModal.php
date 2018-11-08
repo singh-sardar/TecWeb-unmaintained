@@ -8,10 +8,10 @@
 		</div>
 		<div class="container">
 			<label for="usr">Username</label>
-			<input id="usr" type="text" placeholder="Enter Username" name="usr" />
+			<input id="usr" type="text" placeholder="Enter Username" name="usr" maxlength="20"/>
 
 			<label for="pwd">Password</label>
-			<input  id="pwd" type="password" placeholder="Enter Password" name="pwd"  />
+			<input  id="pwd" type="password" placeholder="Enter Password" name="pwd" maxlength="30"/>
 
 		</div>
 		<div class="container" id="InvalidLogin">

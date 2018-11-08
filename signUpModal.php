@@ -11,7 +11,7 @@
 			<input id="usrSignUp" type="text" placeholder="Enter Username" name="usrSignUp" maxlength="20" />
 
 			<label for="pwdSignUp">Password</label>
-			<input id="pwdSignUp" type="password" placeholder="Enter Password" name="pwdSignUp"/>
+			<input id="pwdSignUp" type="password" placeholder="Enter Password" name="pwdSignUp" maxlength="30"/>
 
 			<label for="name">Name</label>
 			<input id="name" type="text" placeholder="Enter Name" name="name" />

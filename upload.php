@@ -41,8 +41,8 @@
             <option value="others">Others</option>
           </select>
 
-          <label for="description">Description:</label>
-          <textarea id="description" type="text" name="description" maxlength="300" placeholder="Description"></textarea>
+          <label for="description">Description (max 1000 characters):</label>
+          <textarea id="description" type="text" name="description" placeholder="Description"></textarea>
 
           <label for="artwork">Artwork:</label>
           <input id="artwork" type="file" name="artwork" accept=".png, .jpg, .jpeg" />
@@ -71,7 +71,8 @@
   	//connecting to db
   	$myDb= new DbConnector();
   	$myDb->openDBConnection();
-    mkdir("./Images/Art/$username", 0777, true);
+    if(!file_exists("./Images/Art/$username"))
+      mkdir("./Images/Art/$username", 0777, true);
   	if($filesize>5242880 || $filesize==0)
   	  echo '<p class="error_message">File size is too big (max 5Mb)</p>';
   	else if($myDb->connected){
