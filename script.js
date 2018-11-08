@@ -435,3 +435,8 @@ function doUploadValidation(event){
 
     return returnValue;
 }
+
+function paginationAndPopulateImages(){
+	populateImages();
+	btnPaginationOnClick("btnPagination1");
+}
