@@ -2,7 +2,7 @@
 * {
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
-    margin: 0;
+    margin: auto;
     padding: 0;
     font-size: 1.0em;
 }
@@ -11,7 +11,9 @@
 .font_medium {
     font-size: 1.2em;
 }
-
+.container1024{
+	max-width:1024px;
+}
 /*---------Titoli dei paragrafi------------------------------------------------*/
 .title {
   margin-bottom: 2.0em;
@@ -29,8 +31,12 @@ h1 {
 .menu {
 	background-color: #6A5ACD;
 	overflow: hidden;
+    background-image: linear-gradient(-90deg, #6A5ACD, #008f88,#4fa46d);
+     /*background-image: linear-gradient(-90deg #008f88,#4fa46d);*/
 }
-
+.menu .imageLink{
+	padding:0;
+}
 .menu ul {
     list-style-type: none;
 }
@@ -41,8 +47,9 @@ h1 {
 
 .menu li.user {
   float: right;
-  background-color: #2F4F4F;
+  /*background-color: #2F4F4F;*/
 }
+
 
 .menu img {
 	float: left;
@@ -53,7 +60,7 @@ h1 {
 	margin: 0em 1em;
 }
 
-.menu a, .menu p{
+.menu a, .menu p, .hamburgerMenuContainer{
   color: #FFFFFF;
   display: block;
   padding: 1.0em 1.0em;
@@ -61,13 +68,13 @@ h1 {
   text-align: center;
 }
 
-.menu a:hover,  button:hover{
-    background-color: #191970;
+.menu a:hover,.activeMenuItem a{
+    /*background-color: #191970;*/
+    color:black!important;
+    background-color:white;
 }
 
-.cancelbtn:hover{
-	background-color: #8B0000;
-}
+
 
 .hamburgerMenu {
   display: none;
@@ -118,7 +125,6 @@ hr{
   padding:1em;
   overflow: hidden;
   width: 100%;
-  max-width: 1000px;
   text-align: center
 }
 
@@ -207,6 +213,7 @@ hr{
   padding: 1.0em;
   text-align: center;
   color: #FFFFFF;
+  background-image: linear-gradient(-90deg, #008f88,#4fa46d);
 }
 /*Modals css---------------------------------------------------------------------------------------------------------*/
 /* Full-width input fields */
@@ -226,7 +233,9 @@ button {
 	border: none;
 	cursor: pointer;
 }
-
+button:hover {
+    background-color: rgba(106, 90, 205, 0.7);
+}
 .Modal button{
 	width: 49%;
     float: left;
@@ -246,6 +255,11 @@ button {
 .cancelbtn {
 	background-color: #f44336;
 }
+.cancelbtn:hover{
+	/*background-color: #8B0000;*/
+    background-color: rgba(243, 67, 54, 0.7);
+    color: white;
+}
 
 /*head for the  moadl*/
 .modalHead {
@@ -256,7 +270,7 @@ button {
 }
 /*footer for the  modal*/
 .modalFotter{
-background-color:#f1f1f1;
+background-color: rgba(241,241,241,1);
 }
 
 .container {
@@ -574,7 +588,11 @@ div.divCategoryButtons button{
 	margin-top: 2.5em;
 }
 
-.galleryBoard li{
+.galleryBoard li.liPaginationBlock{
+    list-style-type:none;
+}
+
+.galleryBoard li.liFigures{
     list-style-type: none;
     float: left;
     padding-left: 0.5em;
@@ -631,40 +649,40 @@ div.divCategoryButtons button{
     }
 }
 @media only screen and (max-width:767px){
-    .galleryBoard li{
+    .galleryBoard li.liFigures{
         width: 100%;
     }
 }
 @media screen and (min-width:768px){
-    .galleryBoard li{
+    .galleryBoard li.liFigures{
         width: 50%;
     }
-    .galleryBoard li:nth-of-type(2n+1){
+    .galleryBoard li.liFigures:nth-of-type(2n+1){
         clear: left;
     }
 }
 @media screen and (min-width: 1024px){
-    .galleryBoard li{
+    .galleryBoard li.liFigures{
         width: 33.33333%;
     }
-    .galleryBoard li:nth-of-type(2n+1) {
+    .galleryBoard li.liFigures:nth-of-type(2n+1) {
         clear: none;
     }
 
-    .galleryBoard li:nth-of-type(3n+1) {
+    .galleryBoard li.liFigures:nth-of-type(3n+1) {
         clear: left;
     }
 }
 @media screen and (min-width: 1400px){
-    .galleryBoard li{
+    .galleryBoard li.liFigures{
         width: 25%;
     }
 
-    .galleryBoard li:nth-of-type(3n+1) {
+    .galleryBoard li.liFigures:nth-of-type(3n+1) {
         clear: none;
     }
 
-    .galleryBoard li:nth-of-type(4n+1) {
+    .galleryBoard li.liFigures:nth-of-type(4n+1) {
         clear: left;
     }
 }
@@ -686,7 +704,7 @@ div.divCategoryButtons button{
     border: 1px solid #ccc;
 }
 .gal-border-round{
-    border-radius: 4px;
+    border-radius: 0.3em;
 }
 .div-bar {
     width: 100%;
@@ -696,7 +714,7 @@ div.divCategoryButtons button{
     white-space: normal;
 }
 .div-bar .div-bar-item {
-    padding: 8px 16px;
+    padding: 0.5em 1em;
     float: left;
     width: auto;
     border: none;

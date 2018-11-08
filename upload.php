@@ -13,7 +13,7 @@
   <title>Artbit</title>
 </head>
 
-<body>
+<body onload="eventListnerforLoginModal()">
   <?php
   require_once "header.php";
   require_once "loginModal.php";
@@ -23,33 +23,37 @@
   require_once "DbConnector.php";
   require_once "functions.php";
   ?>
-  <div class="section"><!--upload form-->
-    <div class="title"><h1>Register your artwork</h1></div>
-    <form action="" method="post" enctype="multipart/form-data" id="upload">
+    <div class="Uploadsection container1024"><!--upload form-->
+      <div class="title"><h1>Register your artwork</h1></div>
+      <form action="" method="post" enctype="multipart/form-data" id="upload" onsubmit="return doUploadValidation(event)">
+          <div class="container">
+          <label for="title">Title:</label>
+          <input id="title" type="text" placeholder="Title" name="title" maxlength="20" />
 
-        <label>Title:</label>
-        <input type="text" placeholder="Title" name="title" maxlength="20" required="">
+          <label for="category">Category:</label>
+          <select id="category" name="category">
+            <option value="landscape">Landscape</option>
+            <option value="fantasy">Fantasy</option>
+            <option value="abstract">Abstract</option>
+            <option value="cartoon">Cartoon</option>
+            <option value="portrait">Portrait</option>
+            <option value="nature">Nature</option>
+            <option value="others">Others</option>
+          </select>
 
-        <label>Category:</label>
-        <select name="category">
-          <option value="landscape">Landscape</option>
-          <option value="fantasy">Fantasy</option>
-          <option value="abstract">Abstract</option>
-          <option value="cartoon">Cartoon</option>
-          <option value="portrait">Portrait</option>
-          <option value="nature">Nature</option>
-          <option value="others">Others</option>
-        </select>
+          <label for="description">Description:</label>
+          <textarea id="description" type="text" name="description" maxlength="300" placeholder="Description"></textarea>
 
-        <label>Description:</label>
-        <textarea type="text" name="description" maxlength="300" placeholder="Description"></textarea>
+          <label for="artwork">Artwork:</label>
+          <input id="artwork" type="file" name="artwork" accept=".png, .jpg, .jpeg" />
+          <div  id="uploadMessage" class="error_message">
+              <!--container for unfilled inputs-->
 
-        <label>Artwork:</label>
-        <input type="file" name="artwork" accept=".png, .jpg, .jpeg" required=""/>
-
-        <button type="submit">Upload</button>
-      </form>
-  </div>
+          </div>
+          <button type="submit">Upload</button>
+          </div>
+        </form>
+      </div>
   <?php
   if(isset($_POST["title"]) && isset($_FILES['artwork'])){ //l'upload può partire solo se il TITOLO e l'IMMAGINE sono stati selezionati
     if(!isset($_SESSION["Username"])){
@@ -104,5 +108,8 @@
       imagejpeg($image, $destination, $quality);
   }
   ?>
+    <div class="footer">
+    <p>Artbit</p>
+  </div>
 </body>
 </html>

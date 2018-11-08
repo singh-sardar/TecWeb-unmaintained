@@ -33,113 +33,115 @@
         </p>
     </div>
   </div>
-  <div class="section"><!--top rated-->
-    <div class="title"><h1>Top rated</h1></div>
-    <?php
-    $result = $myDb->doQuery("SELECT Nome, Artista, COUNT(Nome) as Likes FROM opere JOIN likes on Nome=Opera and Artista=Creatore
-                            GROUP BY Nome, Artista ORDER BY COUNT(Nome) DESC LIMIT 5");
-    $nome=array($result->num_rows);
-    $artista=array($result->num_rows);
-    $likes=array($result->num_rows);
-    for ($i = 0; $i < $result->num_rows; $i++) {
-      $row = $result->fetch_assoc();
-      $nome[$i] = $row["Nome"];
-      $artista[$i] = $row["Artista"];
-      $likes[$i] = $row["Likes"];
-      echo "<div class='home_picture'>";
-      echo "<img src='Images/Art/$artista[$i]/$nome[$i].jpeg' alt='Top rated images'>";
-      echo "<h2>$nome[$i]</h2>";
-      echo "<p>$artista[$i]</p>";
-      echo "<p>Likes: $likes[$i]</p>";
-      echo "</div>";
-    }
-    ?>
-  </div>
-  <div class="section" id="intro"><!--website Introduction-->
-    <div class="title"><h1>Introduction</h1></div>
-    <p>
-      Innovation is the key to the future, let the art invade the digital world.
-      This website is meant to be collection of digital artworks, everyone can
-      register and upload his own masterpieces sharing them with the world and
-      </br>get popularity. Down here you can find some statistics of our site.
-    </p>
-  </div>
-  <div class="section"><!--statistics-->
-    <div class="statistics">
-      <div class="title"><h1>Statistics</h1></div>
-      <?php
-      $result = $myDb->doQuery("SELECT COUNT(*) as tot_opere FROM opere");
-      $row = $result->fetch_assoc();
-      $tot_opere = $row["tot_opere"];
-      $result = $myDb->doQuery("SELECT COUNT(Username) as tot_artisti FROM artisti");
-      $row = $result->fetch_assoc();
-      $tot_artisti = $row["tot_artisti"];
-      $result = $myDb->doQuery("SELECT COUNT(*) as tot_likes FROM likes");
-      $row = $result->fetch_assoc();
-      $tot_likes = $row["tot_likes"];
-      ?>
-      <p>Registered artworks: <?php echo $tot_opere ?></p>
-      <p>Registered painters: <?php echo $tot_artisti ?></p>
-      <p>Total likes: <?php echo $tot_likes ?></p>
-    </div>
-    <div class="semicolumn"><!--top artists-->
-      <div class="title"><h1>Most artworks</h1></div>
-      <?php
-      $result = $myDb->doQuery("SELECT Username, COUNT(Username) as tot_arts FROM artisti JOIN opere on Username=Artista
-                               GROUP BY (Username) ORDER BY COUNT(Username) DESC LIMIT 5");
-      $nome=array($result->num_rows);
-      $likes=array($result->num_rows);
-      for ($i = 0; $i < $result->num_rows; $i++) {
-        $row = $result->fetch_assoc();
-        $nome[$i] = $row["Username"];
-        $likes[$i] = $row["tot_arts"];
-        echo "<p>".($i+1).") $nome[$i]: $likes[$i] </p>";
-      }
-      ?>
-    </div>
-    <div class="semicolumn"><!--top artists-->
-      <div class="title"><h1>Most liked</h1></div>
-      <?php
-      $result = $myDb->doQuery("SELECT Username, COUNT(Username) as tot_likes FROM artisti JOIN likes on Username=Creatore
-                               GROUP BY (Username) ORDER BY COUNT(Username) DESC LIMIT 5");
-      $nome=array($result->num_rows);
-      $likes=array($result->num_rows);
-      for ($i = 0; $i < $result->num_rows; $i++) {
-        $row = $result->fetch_assoc();
-        $nome[$i] = $row["Username"];
-        $likes[$i] = $row["tot_likes"];
-        echo "<p>".($i+1).") $nome[$i]: $likes[$i] </p>";
-      }
-      $myDb->disconnect();
-      ?>
-    </div>
-  </div>
-  <div class="section" id="team"><!--team-->
-    <div class="title"><h1>Our Amazing Team</h1></div>
-    <div class="teamMember">
-      <img src="Images/Team/davide_liu.jpg" alt='Team member face'>
-      <h2>Davide Liu</h2>
-	  <hr/>
-      <p>Software Engineer</p>
-    </div>
-    <div class="teamMember">
-      <img src="Images/Team/harwinder_singh.jpg" alt='Team member face'>
-      <h2>Harwinder Singh</h2>
-	  <hr/>
-      <p>Software Engineer</p>
-    </div>
-    <div class="teamMember">
-      <img src="Images/Team/davide_liu.jpg" alt='Team member face'>
-      <h2>Davide Liu</h2>
-	  <hr/>
-      <p>Software Engineer</p>
-    </div>
-    <div class="teamMember">
-      <img src="Images/Team/davide_liu.jpg" alt='Team member face'>
-      <h2>Davide Liu</h2>
-	  <hr/>
-      <p>Software Engineer</p>
-    </div>
+  <div class="container1024">
+	  <div class="section"><!--top rated-->
+		<div class="title"><h1>Top rated</h1></div>
+		<?php
+		$result = $myDb->doQuery("SELECT Nome, Artista, COUNT(Nome) as Likes FROM opere JOIN likes on Nome=Opera and Artista=Creatore
+								GROUP BY Nome, Artista ORDER BY COUNT(Nome) DESC LIMIT 5");
+		$nome=array($result->num_rows);
+		$artista=array($result->num_rows);
+		$likes=array($result->num_rows);
+		for ($i = 0; $i < $result->num_rows; $i++) {
+		  $row = $result->fetch_assoc();
+		  $nome[$i] = $row["Nome"];
+		  $artista[$i] = $row["Artista"];
+		  $likes[$i] = $row["Likes"];
+		  echo "<div class='home_picture'>";
+		  echo "<img src='Images/Art/$artista[$i]/$nome[$i].jpeg' alt='Top rated images'/>";
+		  echo "<h2>$nome[$i]</h2>";
+		  echo "<p>$artista[$i]</p>";
+		  echo "<p>Likes: $likes[$i]</p>";
+		  echo "</div>";
+		}
+		?>
+	  </div>
+	  <div class="section" id="intro"><!--website Introduction-->
+		<div class="title"><h1>Introduction</h1></div>
+		<p>
+		  Innovation is the key to the future, let the art invade the digital world.
+		  This website is meant to be collection of digital artworks, everyone can
+		  register and upload his own masterpieces sharing them with the world and
+		  <br/>get popularity. Down here you can find some statistics of our site.
+		</p>
+	  </div>
+	  <div class="section"><!--statistics-->
+		<div class="statistics">
+		  <div class="title"><h1>Statistics</h1></div>
+		  <?php
+		  $result = $myDb->doQuery("SELECT COUNT(*) as tot_opere FROM opere");
+		  $row = $result->fetch_assoc();
+		  $tot_opere = $row["tot_opere"];
+		  $result = $myDb->doQuery("SELECT COUNT(Username) as tot_artisti FROM artisti");
+		  $row = $result->fetch_assoc();
+		  $tot_artisti = $row["tot_artisti"];
+		  $result = $myDb->doQuery("SELECT COUNT(*) as tot_likes FROM likes");
+		  $row = $result->fetch_assoc();
+		  $tot_likes = $row["tot_likes"];
+		  ?>
+		  <p>Registered artworks: <?php echo $tot_opere ?></p>
+		  <p>Registered painters: <?php echo $tot_artisti ?></p>
+		  <p>Total likes: <?php echo $tot_likes ?></p>
+		</div>
+		<div class="semicolumn"><!--top artists-->
+		  <div class="title"><h1>Most artworks</h1></div>
+		  <?php
+		  $result = $myDb->doQuery("SELECT Username, COUNT(Username) as tot_arts FROM artisti JOIN opere on Username=Artista
+								   GROUP BY (Username) ORDER BY COUNT(Username) DESC LIMIT 5");
+		  $nome=array($result->num_rows);
+		  $likes=array($result->num_rows);
+		  for ($i = 0; $i < $result->num_rows; $i++) {
+			$row = $result->fetch_assoc();
+			$nome[$i] = $row["Username"];
+			$likes[$i] = $row["tot_arts"];
+			echo "<p>".($i+1).") $nome[$i]: $likes[$i] </p>";
+		  }
+		  ?>
+		</div>
+		<div class="semicolumn"><!--top artists-->
+		  <div class="title"><h1>Most liked</h1></div>
+		  <?php
+		  $result = $myDb->doQuery("SELECT Username, COUNT(Username) as tot_likes FROM artisti JOIN likes on Username=Creatore
+								   GROUP BY (Username) ORDER BY COUNT(Username) DESC LIMIT 5");
+		  $nome=array($result->num_rows);
+		  $likes=array($result->num_rows);
+		  for ($i = 0; $i < $result->num_rows; $i++) {
+			$row = $result->fetch_assoc();
+			$nome[$i] = $row["Username"];
+			$likes[$i] = $row["tot_likes"];
+			echo "<p>".($i+1).") $nome[$i]: $likes[$i] </p>";
+		  }
+		  $myDb->disconnect();
+		  ?>
+		</div>
+	  </div>
+	  <div class="section" id="team"><!--team-->
+		<div class="title"><h1>Our Amazing Team</h1></div>
+		<div class="teamMember">
+		  <img src="Images/Team/davide_liu.jpg" alt='Team member face'/>
+		  <h2>Davide Liu</h2>
+		  <hr/>
+		  <p>Software Engineer</p>
+		</div>
+		<div class="teamMember">
+		  <img src="Images/Team/harwinder_singh.jpg" alt='Team member face'/>
+		  <h2>Harwinder Singh</h2>
+		  <hr/>
+		  <p>Software Engineer</p>
+		</div>
+		<div class="teamMember">
+		  <img src="Images/Team/davide_liu.jpg" alt='Team member face'/>
+		  <h2>Davide Liu</h2>
+		  <hr/>
+		  <p>Software Engineer</p>
+		</div>
+		<div class="teamMember">
+		  <img src="Images/Team/davide_liu.jpg" alt='Team member face'/>
+		  <h2>Davide Liu</h2>
+		  <hr/>
+		  <p>Software Engineer</p>
+		</div>
+	  </div>
   </div>
   <div class="footer">
     <p>Artbit</p>

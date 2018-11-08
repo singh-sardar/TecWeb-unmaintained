@@ -16,42 +16,32 @@
         return FALSE;
     }
 
-    function insertImageInGallery($artista,$nomeImmagine, $boolDeleteButton){
+    function insertImageInGallery($artista,$nomeImmagine, $numFig,$boolDeleteButton){
         if ( is_session_started() === FALSE || (!isset($_SESSION['Username']))){
             $isLiked = false;
         }else if(isset($_SESSION['Username'])){
             $isLiked = boolImageLiked($artista,$_SESSION['Username'],$nomeImmagine);
         }
-        echo '<li>';
-        echo     '<div class="galleryFigureWrapper" id="wrapper_'.$artista.'-'.$nomeImmagine.'">';
-        echo '      <img src="Images/Art/'.$artista.'/'.$nomeImmagine.'.jpeg" id="img_'.$artista.'-'.$nomeImmagine.'" class="display-none" alt="">';
+        echo '<li class="liFigures">';
+        echo     '<div class="galleryFigureWrapper" id="figureWrapper_'.$numFig.'">';
         echo '      <div class="image-div"></div>';
         echo '      <input type="hidden" value="'.$artista.'" name="nameArtist"/>';
         echo '      <input type="hidden" value="'.$nomeImmagine.'" name="nameImage"/>';
         echo '      <div class="galleryCaption">';
-        //echo '          <div class="wrapper">';
         echo '              <h2>'.$nomeImmagine.'</h2>';
-        /*
-        if($isLiked == true){
-            echo '              <div class="like-btn like-btn-added" onclick="btnLikeOnClick(this)" id="'.$artista.'_'.$nomeImmagine.'"></div>';
-        }else{
-            echo '              <div class="like-btn" onclick="btnLikeOnClick(this)" id="'.$artista.'_'.$nomeImmagine.'"></div>';
-        }
-        */
-        //echo '          </div>';
         echo '          <div class="wrapper">';
         if($isLiked == true){
-            echo '              <div class="like-btn like-btn-added" onclick="btnLikeOnClick(this)" id="LikeBtn_'.$artista.'_'.$nomeImmagine.'"></div>';
+            echo '              <div class="like-btn like-btn-added" onclick="btnLikeOnClick(this)" id="LikeBtn_'.$numFig.'"></div>';
         }else{
-            echo '              <div class="like-btn" onclick="btnLikeOnClick(this)" id="LikeBtn_'.$artista.'_'.$nomeImmagine.'"></div>';
+            echo '              <div class="like-btn" onclick="btnLikeOnClick(this)" id="LikeBtn_'.$numFig.'"></div>';
         }
         echo '              <div class="width-85">';
-        echo '                  <p>Artista: '.$artista.'</p>';
-        echo '                  <p id="Likes_'.$artista.'-'.$nomeImmagine.'">Likes: '.getLikesByItem($artista,$nomeImmagine).'</p>';
+        echo '                  <p>Artist: '.$artista.'</p>';
+        echo '                  <p id="Likes_'.$numFig.'">Likes: '.getLikesByItem($artista,$nomeImmagine).'</p>';
         echo '              </div>';
         echo '          </div>';
         if($boolDeleteButton == TRUE){
-            echo '<button class="btnDelete" type="submit" id="DelBtn_'.$artista.'_'.$nomeImmagine.'" onclick="btnDeleteOnClick(this)"><span class="searchIcon"></span>Delete</button>';
+            echo '<button class="btnDelete" type="submit" id="DelBtn_'.$numFig.'" onclick="btnDeleteOnClick(this)"><span class="searchIcon"></span>Delete</button>';
         }
         echo '      </div>';
         echo '   </div>';
@@ -110,21 +100,21 @@
         for ($i = 0; $i < $result->num_rows; $i++) {
             if($i%8 == 0){
                 if($boolChiudi == FALSE){
-                    echo "<div id='galImgDiv".$j."'>";
+                    echo "<li id='galImgPag".$j."' class='liPaginationBlock'><ul>";
                     $j++;
-                    $boolChiudi = TRUE;
+                    $boolChiudi = TRUE; 
                 }else{
-                    echo "</div>";
-                    echo "<div id='galImgDiv".$j."'>";
+                    echo "</ul></li>";
+                    echo "<li id='galImgPag".$j."' class='liPaginationBlock'><ul>";
                     $j++;
                     $boolChiudi = FALSE;
                 }
             }
             $row = $result->fetch_assoc();
-            insertImageInGallery($row['Artista'],$row['Nome'],$boolDeleteButton);
+            insertImageInGallery($row['Artista'],$row['Nome'],$i+1,$boolDeleteButton);
         }
-        if($boolChiudi == TRUE && ($i%($result->num_rows)!= 1)){
-            echo "</div>";
+        if($boolChiudi == TRUE || ($i%($result->num_rows)!= 1)){
+            echo "</ul></li>";
         }
         return $j;
     }
