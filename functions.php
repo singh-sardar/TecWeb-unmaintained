@@ -1,6 +1,8 @@
 <?php
     require_once "DbConnector.php";
 
+    $GLOBALS['imagesPerPage'] = 8;
+
     /**
     * @return bool
     */
@@ -98,7 +100,7 @@
         $j=1;
         $boolChiudi = False;
         for ($i = 0; $i < $result->num_rows; $i++) {
-            if($i%8 == 0){
+            if($i%($GLOBALS['imagesPerPage']) == 0){
                 if($boolChiudi == FALSE){
                     echo "<li id='galImgPag".$j."' class='liPaginationBlock'><ul>";
                     $j++;
@@ -154,6 +156,12 @@
         else 
             echo "Connection Error";
         $myDb->disconnect();
+    }
+
+    function printPagination($mostraPagination,$j){
+        if($mostraPagination == TRUE && ($j > 2)){
+            printDivPagination($j);
+        }
     }
 
     function escapePathTraversal($path){

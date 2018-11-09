@@ -13,7 +13,7 @@
     <title>Artbit</title>
 </head>
 
-<body onload="eventListnerforLoginModal()" >
+<body onload="eventListnerforLoginModal(); paginationAndPopulateImages();" >
     <?php
         require_once "header.php";
         require_once "loginModal.php";
@@ -23,7 +23,7 @@
         require_once "DbConnector.php";
         require_once "functions.php";
     ?>
-    <div class="gallery">
+    <div class="gallery container1024">
         <form method="get" action="" name="formArtFilter">
             <div class="artFilter">
                 <div class="inputSearch">
@@ -72,6 +72,8 @@
         <?php $mostraPagination=FALSE; $j=0;?>
         <ul class="clearfix galleryBoard">
             <?php
+                $result;
+                $mostraPagination;
                 if(isset($gallerySearch)){
                     //connecting to db
                     $myDb= new DbConnector();
@@ -100,12 +102,6 @@
                     else 
                         echo "<li class='liPaginationBlock'>Errore connessione</li>";
                     $myDb->disconnect();
-                    if($result && ($result->num_rows > 0)){
-                        $mostraPagination = ($result->num_rows <= 8) ? false : true;
-                        $j = printGalleryItems($result,FALSE);
-                    }elseif(!$result || ($result->num_rows == 0)){
-                        echo "<li class='liPaginationBlock'><div class='div-center'><p>Nothing to show here ... </p></div></li>";
-                    }
                 }elseif(isset($galleryCategory)){
                     //connecting to db
                     $myDb= new DbConnector();
@@ -128,23 +124,20 @@
                     }
                     else 
                         echo "<li class='liPaginationBlock'>Errore connessione</li>";
-                    $myDb->disconnect();
-                    if($result && ($result->num_rows > 0)){
-                        $mostraPagination = ($result->num_rows <= 8) ? false : true;
-                        $j = printGalleryItems($result,FALSE);
-                    }elseif(!$result || ($result->num_rows == 0)){
-                        echo "<li class='liPaginationBlock'><div class='div-center'><p>Nothing to show here ... </p></div></li>";
-                    }
+                    $myDb->disconnect();   
+                }
+
+                if($result && ($result->num_rows > 0)){
+                    $mostraPagination = ($result->num_rows <= $GLOBALS['imagesPerPage']) ? false : true;
+                    $j = printGalleryItems($result,FALSE);
+                }elseif(!$result || ($result->num_rows == 0)){
+                    echo "<li class='liPaginationBlock'><div class='div-center'><p>Nothing to show here ... </p></div></li>";
                 }
             ?>
             
         </ul> 
         <?php
-        echo '<script type="application/javascript">populateImages();</script>';
-        if($mostraPagination == TRUE && ($j > 2)){
-            printDivPagination($j);
-            echo '<script type="application/javascript">btnPaginationOnClick("btnPagination1");</script>';
-        }
+            printPagination($mostraPagination,$j);
         ?>
     </div>
 	<div class="footer">
