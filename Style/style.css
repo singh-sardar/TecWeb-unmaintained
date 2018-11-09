@@ -73,6 +73,10 @@ h1 {
     background-color:white;
 }
 
+.menu a.btnSearch:hover {
+    background-image: url(../Images/magnifying-glass-black.png);
+}
+
 .hamburgerMenu {
   display: none;
 }
