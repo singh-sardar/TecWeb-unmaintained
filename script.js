@@ -419,6 +419,10 @@ function doUploadValidation(event){
     var title=document.getElementById('title').value;
    	var description=document.getElementById('description').value;
     var returnValue =true;
+		if (document.getElementById("success_message") !=null) {
+			document.getElementById("success_message").innerHTML ="";
+    }
+
     if((title==="")||(description==="")){
  		document.getElementById("uploadMessage").innerHTML ="Please Fill all the fields";
         returnValue=false;
