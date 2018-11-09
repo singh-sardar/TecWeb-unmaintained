@@ -399,11 +399,11 @@ background-color: rgba(241,241,241,1);
     padding: 0.5em;
 }
 
-.btnDelete::before{
+.btnDelete::before {
     content: url(../Images/garbage-white.png);
     position: absolute;
-    left: 5em;
-    bottom: 1.1em;
+    left: 25%;
+    bottom: 4%;
 }
 
 .inputSearch input[type=text]{
