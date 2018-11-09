@@ -148,6 +148,7 @@
             $qrStr= "DELETE FROM opere WHERE Artista='".$artista."' AND Nome='".$nomeImmagine."'";
             $result = $myDb->doQuery($qrStr);
             if ($result == TRUE) {
+                deleteFileFromFileSystem($artista,$nomeImmagine);
                 echo 1;
             } else { //Error
                 echo -1;
@@ -156,6 +157,13 @@
         else 
             echo "Connection Error";
         $myDb->disconnect();
+    }
+
+    function deleteFileFromFileSystem($username,$title){
+        $destination_img = "Images/Art/".$username."/".$title.".jpeg";
+        if(file_exists($destination_img)){
+            unlink($destination_img);
+        }
     }
 
     function printPagination($mostraPagination,$j){
