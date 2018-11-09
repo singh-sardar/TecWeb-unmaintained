@@ -12,14 +12,15 @@
   <title>Artbit</title>
 </head>
 
-<body onload="eventListnerforLoginModal()" >
+<body onload="eventListnerforLoginModal(); populateImages();" >
   <?php
 	require_once "header.php";
   require_once "loginModal.php";
   require_once "searchModal.php";
 	require_once "signUpModal.php";
 	require_once "editProfileModal.php";
-  require_once "DbConnector.php";
+	require_once "DbConnector.php";
+	require_once "functions.php";
   $myDb= new DbConnector();
   $myDb->openDBConnection();
   ?>
@@ -43,28 +44,52 @@
 		  <br/>get popularity.
 		</p>
 	  </div>
-	  <div class="section"><!--top rated-->
-		<div class="title"><h1>Top rated</h1></div>
+		
+		<!--top rated-->
 		<?php
-		$result = $myDb->doQuery("SELECT Nome, Artista, COUNT(Nome) as Likes FROM opere JOIN likes on Nome=Opera and Artista=Creatore
-								GROUP BY Nome, Artista ORDER BY COUNT(Nome) DESC LIMIT 5");
-		$nome=array($result->num_rows);
-		$artista=array($result->num_rows);
-		$likes=array($result->num_rows);
-		for ($i = 0; $i < $result->num_rows; $i++) {
-		  $row = $result->fetch_assoc();
-		  $nome[$i] = $row["Nome"];
-		  $artista[$i] = $row["Artista"];
-		  $likes[$i] = $row["Likes"];
-		  echo "<div class='home_picture'>";
-		  echo "<img src='Images/Art/$artista[$i]/$nome[$i].jpeg' alt='Top rated images'/>";
-		  echo "<h2>$nome[$i]</h2>";
-		  echo "<p>$artista[$i]</p>";
-		  echo "<p>Likes: $likes[$i]</p>";
-		  echo "</div>";
-		}
+		/*
+	  <div class="section">
+			<div class="title"><h1>Top rated</h1></div>
+			<?php
+			$result = $myDb->doQuery("SELECT Nome, Artista, COUNT(Nome) as Likes FROM opere JOIN likes on Nome=Opera and Artista=Creatore
+									GROUP BY Nome, Artista ORDER BY COUNT(Nome) DESC LIMIT 4");
+			$nome=array($result->num_rows);
+			$artista=array($result->num_rows);
+			$likes=array($result->num_rows);
+			for ($i = 0; $i < $result->num_rows; $i++) {
+				$row = $result->fetch_assoc();
+				$nome[$i] = $row["Nome"];
+				$artista[$i] = $row["Artista"];
+				$likes[$i] = $row["Likes"];
+				echo "<div class='home_picture'>";
+				echo "<img src='Images/Art/$artista[$i]/$nome[$i].jpeg' alt='Top rated images'/>";
+				echo "<h2>$nome[$i]</h2>";
+				echo "<p>$artista[$i]</p>";
+				echo "<p>Likes: $likes[$i]</p>";
+				echo "</div>";
+			}
+			?>
+		</div>
+		*/
 		?>
-	  </div>
+
+		<!-- Top rated -->
+		<div class="title"><h1>Top rated</h1></div>
+		<div class="gallery">
+			<ul class="clearfix galleryBoard">
+				<?php
+					$result = $myDb->doQuery("SELECT Nome, Artista FROM opere JOIN likes on Nome=Opera and Artista=Creatore
+											GROUP BY Nome, Artista ORDER BY COUNT(Nome) DESC LIMIT 4");
+
+					if($result && ($result->num_rows > 0)){
+						$j = printGalleryItems($result,FALSE);
+					}elseif(!$result || ($result->num_rows == 0)){
+							echo "<li class='liPaginationBlock'><div class='div-center'><p>Nothing to show here ... </p></div></li>";
+					}
+				?>
+			</ul>
+		</div>
+
 	  <div class="section"><!--statistics-->
 		<div class="statistics">
 		  <div class="title"><h1>Statistics</h1></div>
