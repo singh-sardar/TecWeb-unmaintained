@@ -157,6 +157,7 @@ hr{
   border: solid 1px #6A5ACD;
   width: 98%;
   margin: 1.0em 1%;
+  border-radius: 25px;
 }
 
 .semicolumn {
@@ -164,6 +165,7 @@ hr{
   float: left;
   width: 48%;
   margin: auto 1%;
+  border-radius: 25px;
 }
 
 .semicolumn p, .statistics p {
