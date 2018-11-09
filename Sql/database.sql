@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS `artisti` (
   `Nome` varchar(100) CHARACTER SET utf8 NOT NULL,
   `Cognome` varchar(100) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`Username`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `artisti` (`Username`, `Password`, `Nome`, `Cognome`) VALUES
 ('daniele.bianchin', '$2y$10$nWohuRAUx2nk.9IUZc2DuOy1/UMgcWobHFXM526K7TokN0UKQxcHe', 'Daniele', 'Bianchin'),
@@ -23,9 +23,9 @@ CREATE TABLE IF NOT EXISTS `commenti` (
   `Creatore` varchar(30) CHARACTER SET utf8 NOT NULL,
   `Commento` varchar(1000) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`ID`),
-  KEY `Opera` (`Opera`,`Creatore`),
-  KEY `Utente` (`Utente`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  FOREIGN KEY(`Opera`, `Creatore`) REFERENCES `opere` (`Nome`, `Artista`) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY(`Utente`) REFERENCES `artisti` (`Username`) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 INSERT INTO `commenti` (`ID`, `Opera`, `Utente`, `Creatore`, `Commento`) VALUES
 (0, 'Carpe Noctem', 'daniele.bianchin', 'daniele.bianchin', 'Auto-commento');
@@ -35,8 +35,9 @@ CREATE TABLE IF NOT EXISTS `likes` (
   `Utente` varchar(30) CHARACTER SET utf8 NOT NULL,
   `Creatore` varchar(30) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`Opera`,`Creatore`,`Utente`),
-  KEY `Utente` (`Utente`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  FOREIGN KEY(`Opera`, `Creatore`) REFERENCES `opere` (`Nome`, `Artista`) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY(`Utente`) REFERENCES `artisti` (`Username`) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `likes` (`Opera`, `Utente`, `Creatore`) VALUES
 ('Carpe Noctem', 'daniele.bianchin', 'daniele.bianchin'),
@@ -59,8 +60,8 @@ CREATE TABLE IF NOT EXISTS `opere` (
   `Artista` varchar(30) CHARACTER SET utf8 NOT NULL,
   `Categoria` enum('Landscape','Fantasy','Abstract','Cartoon','Portrait','Nature','Others') CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`Nome`,`Artista`),
-  KEY `Artista` (`Artista`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  FOREIGN KEY(`Artista`) REFERENCES `artisti` (`Username`) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `opere` (`Nome`, `Descrizione`, `Data_upload`, `Artista`, `Categoria`) VALUES
 ('Noctis', 'Noctis Lucis Caelum', '2018-10-29 04:10:04', 'Noctis', 'Portrait'),
