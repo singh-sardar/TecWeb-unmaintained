@@ -370,8 +370,8 @@ function btnPaginationOnClick(id){
 	*/
 	//document.getElementById("btnPagBack").classList.remove("display-none");
 	//document.getElementById("btnPagForward").classList.remove("display-none");
-	document.getElementById("btnPagBack").style.display = 'block';
-	document.getElementById("btnPagForward").style.display = 'block';
+	document.getElementById("btnPagBack").style.display = 'inline-block';
+	document.getElementById("btnPagForward").style.display = 'inline-block';
 	if(divNumber == 1){//if it is the first btn of pagination
 		//document.getElementById("btnPagBack").classList.add("btnPaginationDeactive");
 		//document.getElementById("btnPagBack").classList.add("display-none");

@@ -38,8 +38,8 @@
             echo '              <div class="like-btn" onclick="btnLikeOnClick(this)" id="LikeBtn_'.$numFig.'"></div>';
         }
         echo '              <div class="width-85">';
-        echo '                  <p>Artist: '.$artista.'</p>';
-        echo '                  <p id="Likes_'.$numFig.'">Likes: '.getLikesByItem($artista,$nomeImmagine).'</p>';
+        echo '                  <p><span class="font-size-large">Artist:</span> '.$artista.'</p>';
+        echo '                  <p id="Likes_'.$numFig.'"><span class="font-size-large">Likes: </span>'.getLikesByItem($artista,$nomeImmagine).'</p>';
         echo '              </div>';
         echo '          </div>';
         if($boolDeleteButton == TRUE){
