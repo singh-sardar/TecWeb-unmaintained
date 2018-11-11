@@ -21,9 +21,19 @@
   text-align: center;
   display: block;
 }
+.subtitle {
+  margin-bottom: 1.0em;
+  margin-top: 1.0em;
+  text-align: center;
+  display: block;
+}
 
 h1 {
   font-size: 1.5em;
+  font-weight: normal;
+}
+h2 {
+  font-size: 1.3em;
   font-weight: normal;
 }
 
@@ -162,6 +172,8 @@ hr{
   width: 98%;
   margin: 1.0em 1%;
   border-radius: 25px;
+  background-image: linear-gradient(-90deg, #6A5ACD, #008f88,#4fa46d);
+  color: white;
 }
 
 .semicolumn {
@@ -170,10 +182,8 @@ hr{
   width: 48%;
   margin: auto 1%;
   border-radius: 25px;
-}
-
-.semicolumn p, .statistics p {
-  margin: 1.2em 0;
+  background-image: linear-gradient(-90deg, #6A5ACD, #008f88,#4fa46d);
+  color: white;
 }
 
 @media screen and (max-width: 768px){
@@ -797,4 +807,29 @@ div.divCategoryButtons button{
 	.menu li.user.account-dropdown{
 	  display: none;
 	}
+}
+/*---------------------------------TABLE------------------------------------------------------------*/
+table {
+  border-collapse: collapse;
+  width: 100%;
+  border-radius: 0px 0px 25px 25px;
+  overflow: hidden;
+  color: black;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+.statistics td {
+    text-align: center;;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+tr:nth-child(odd) {
+    background-color: white;
 }

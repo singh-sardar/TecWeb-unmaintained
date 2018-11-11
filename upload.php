@@ -116,7 +116,7 @@
           </select>
 
           <label for="description">Description (max 1000 characters):</label>
-          <textarea id="description" type="text" name="description" placeholder="Description"></textarea>
+          <textarea id="description" placeholder="Description" name="description" rows="2" cols="1"></textarea>
 
           <label for="artwork">Artwork:</label>
           <input id="artwork" type="file" name="artwork" accept=".png, .jpg, .jpeg" />
