@@ -44,7 +44,7 @@
 		  <br/>get popularity.
 		</p>
 	  </div>
-		
+
 		<!--top rated-->
 		<?php
 		/*
@@ -92,7 +92,7 @@
 
 	  <div class="section"><!--statistics-->
 		<div class="statistics">
-		  <div class="title"><h1>Statistics</h1></div>
+		  <div class="subtitle"><h2>Statistics</h2></div>
 		  <?php
 		  $result = $myDb->doQuery("SELECT COUNT(*) as tot_opere FROM opere");
 		  $row = $result->fetch_assoc();
@@ -104,38 +104,58 @@
 		  $row = $result->fetch_assoc();
 		  $tot_likes = $row["tot_likes"];
 		  ?>
-		  <p>Registered artworks: <?php echo $tot_opere ?></p>
-		  <p>Registered painters: <?php echo $tot_artisti ?></p>
-		  <p>Total likes: <?php echo $tot_likes ?></p>
+      <table>
+		  <tr><td><p>Registered artworks: <?php echo $tot_opere ?></tr></td>
+		  <tr><td><p>Registered painters: <?php echo $tot_artisti ?></tr></td>
+		  <tr><td><p>Total likes: <?php echo $tot_likes ?></tr></td>
+      </table>
 		</div>
 		<div class="semicolumn"><!--top artists-->
-		  <div class="title"><h1>Most artworks</h1></div>
+		  <div class="subtitle"><h2>Most Artworks</h2></div>
 		  <?php
 		  $result = $myDb->doQuery("SELECT Username, COUNT(Username) as tot_arts FROM artisti JOIN opere on Username=Artista
 								   GROUP BY (Username) ORDER BY COUNT(Username) DESC LIMIT 5");
 		  $nome=array($result->num_rows);
-		  $likes=array($result->num_rows);
+		  $score=array($result->num_rows);
+      echo "<table>
+              <tr>
+                <th>Rank</th>
+                <th>Username</th>
+                <th>Artworks</th>
+              </tr>";
 		  for ($i = 0; $i < $result->num_rows; $i++) {
-			$row = $result->fetch_assoc();
-			$nome[$i] = $row["Username"];
-			$likes[$i] = $row["tot_arts"];
-			echo "<p>".($i+1).") $nome[$i]: $likes[$i] </p>";
+  			$row = $result->fetch_assoc();
+  			$nome[$i] = $row["Username"];
+  			$score[$i] = $row["tot_arts"];
+  			echo "<tr><td>".($i+1).")</td>
+              <td>$nome[$i]</td>
+              <td>$score[$i]</td></tr>";
 		  }
+      echo "</table>";
 		  ?>
 		</div>
 		<div class="semicolumn"><!--top artists-->
-		  <div class="title"><h1>Most liked</h1></div>
+		  <div class="subtitle"><h2>Most Liked</h2></div>
 		  <?php
 		  $result = $myDb->doQuery("SELECT Username, COUNT(Username) as tot_likes FROM artisti JOIN likes on Username=Creatore
 								   GROUP BY (Username) ORDER BY COUNT(Username) DESC LIMIT 5");
 		  $nome=array($result->num_rows);
-		  $likes=array($result->num_rows);
+		  $score=array($result->num_rows);
+      echo "<table>
+              <tr>
+                <th>Rank</th>
+                <th>Username</th>
+                <th>Likes</th>
+              </tr>";
 		  for ($i = 0; $i < $result->num_rows; $i++) {
-			$row = $result->fetch_assoc();
-			$nome[$i] = $row["Username"];
-			$likes[$i] = $row["tot_likes"];
-			echo "<p>".($i+1).") $nome[$i]: $likes[$i] </p>";
-		  }
+  			$row = $result->fetch_assoc();
+  			$nome[$i] = $row["Username"];
+  			$score[$i] = $row["tot_likes"];
+        echo "<tr><td>".($i+1).")</td>
+              <td>$nome[$i]</td>
+              <td>$score[$i]</td></tr>";
+        }
+      echo "</table>";
 		  $myDb->disconnect();
 		  ?>
 		</div>
