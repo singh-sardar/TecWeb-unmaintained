@@ -1,7 +1,7 @@
 <!-- The Modal -->
 <div id="EditProfileModal" class="Modal">
 	<!-- Modal Content -->
-	<form class="modal-content animate" method="post" action="#" onsubmit="return doEditProfile(event)">
+	<form class="modal-content animate container1024" method="post" action="#" onsubmit="return doEditProfile(event)">
 		<div class="modalHead">
 			<span onclick="closeEditProfileModal()" class="close" title="Close Modal">&times;</span>
 			<h1>Edit Profile</h1>
