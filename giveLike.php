@@ -3,9 +3,9 @@
     require_once "DbConnector.php";
 
     if ( is_session_started() === FALSE ) session_start();
+    $resArr = array();
     if(!isset($_SESSION["Username"])){
-        echo 0; //utente non loggato
-
+        $resArr['Result'] = 0; //utente non loggato
     }else{
         $artista= htmlspecialchars($_POST["art"], ENT_QUOTES, "UTF-8");//cleaning the input
         $nomeImmagine= htmlspecialchars($_POST["nomeImg"], ENT_QUOTES, "UTF-8");
@@ -22,18 +22,20 @@
                 if($result->num_rows==0){//significa che il like non è ancora presente per l'opera
                     $result = $myDb->doQuery('INSERT INTO likes (Opera, Utente, Creatore) VALUES ("'.$nomeImmagine.'", "'.$_SESSION['Username'].'", "'.$artista.'");');//excecute query
                     if($result)
-                        echo 1;    
+                    $resArr['Result'] = 1;    
                 }else if($result->num_rows==1){
                     $result = $myDb->doQuery('DELETE FROM likes WHERE Opera="'.$nomeImmagine.'" AND Utente="'.$_SESSION['Username'].'" AND Creatore="'.$artista.'";');//excecute query
                     if($result)
-                        echo 2;
+                        $resArr['Result'] = 2;
                 }
             }else{
-                echo 3;
+                $resArr['Result'] = 3;
             }
         }
         else 
-            echo "Connection Error";
+            $resArr['Result'] = "Connection Error";
         $myDb->disconnect();
     }
+
+    echo json_encode($resArr);
 ?>

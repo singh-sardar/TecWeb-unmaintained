@@ -75,7 +75,7 @@
 
 		<!-- Top rated -->
 		<div class="title"><h1>Top rated</h1></div>
-		<div class="gallery">
+		<div class="gallery galNotThree">
 			<ul class="clearfix galleryBoard">
 				<?php
 					$result = $myDb->doQuery("SELECT Nome, Artista FROM opere JOIN likes on Nome=Opera and Artista=Creatore

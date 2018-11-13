@@ -6,5 +6,5 @@
     $nomeImmagine= htmlspecialchars($_POST["nomeImg"], ENT_QUOTES, "UTF-8");
     
     //Calling function from file functions.php
-    echo getLikesByItem($artista, $nomeImmagine);
+    echo json_encode(getLikesByItem($artista, $nomeImmagine));
 ?>

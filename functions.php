@@ -22,7 +22,7 @@
         if ( is_session_started() === FALSE || (!isset($_SESSION['Username']))){
             $isLiked = false;
         }else if(isset($_SESSION['Username'])){
-            $isLiked = boolImageLiked($artista,$_SESSION['Username'],$nomeImmagine);
+            $isLiked = boolImageLiked($artista,$_SESSION['Username'],$nomeImmagine)['Result'];
         }
         echo '<li class="liFigures">';
         echo     '<div class="galleryFigureWrapper" id="figureWrapper_'.$numFig.'">';
@@ -38,8 +38,8 @@
             echo '              <div class="like-btn" onclick="btnLikeOnClick(this)" id="LikeBtn_'.$numFig.'"></div>';
         }
         echo '              <div class="width-85">';
-        echo '                  <p><span class="font-size-large">Artist:</span> '.$artista.'</p>';
-        echo '                  <p id="Likes_'.$numFig.'"><span class="font-size-large">Likes: </span>'.getLikesByItem($artista,$nomeImmagine).'</p>';
+        echo '                  <p>Artist: '.$artista.'</p>';
+        echo '                  <p id="Likes_'.$numFig.'">Likes: '.getLikesByItem($artista,$nomeImmagine)['Result'].'</p>';
         echo '              </div>';
         echo '          </div>';
         if($boolDeleteButton == TRUE){
@@ -55,21 +55,23 @@
     function boolImageLiked($artista,$username,$nomeImmagine){
         $myDb= new DbConnector();
         $myDb->openDBConnection();
-        
+        $resArr=array();
         if($myDb->connected){
             $result = $myDb->doQuery('SELECT Utente FROM likes WHERE opera="'.$nomeImmagine.'" AND Utente="'.$username.'" AND Creatore="'.$artista.'";');
             if($result){
                 if($result->num_rows==0){//significa che il like non è ancora presente per l'opera
-                    return false;        
+                    $resArr['Result'] = false;        
                 }else if($result->num_rows==1){//significa che il like è presente
-                    return true;
+                    $resArr['Result'] = true;
                 }
             }else{
-                echo "Errore";
+                $resArr['Result'] = "Errore";
             }
         }
         else 
-            echo "Connection Error";
+            $resArr['Result'] = "Connection Error";
+
+        return $resArr;
         $myDb->disconnect();
     }
 
@@ -125,18 +127,21 @@
         $myDb= new DbConnector();
         $myDb->openDBConnection();
         
+        $resArr = array();
         if($myDb->connected){
             $qrStr= "SELECT COUNT(Opera) as Likes FROM likes WHERE Creatore='".$artista."' AND Opera='".$nomeImmagine."'";
             $result = $myDb->doQuery($qrStr);
             if($result && $result->num_rows == 1){
                 if($result && $result->num_rows == 1){
                     $row = $result->fetch_assoc();
-                    return $row['Likes'];
+                    $resArr['Result'] = $row['Likes'];
                 }
             }
         }
         else 
-            echo "Connection Error";
+            $resArr['Result'] = "Connection Error";
+
+        return $resArr;
         $myDb->disconnect();
     }
 
@@ -144,25 +149,30 @@
         $myDb= new DbConnector();
         $myDb->openDBConnection();
 
+        $resArr = array();
         if($myDb->connected){
             $qrStr= "DELETE FROM opere WHERE Artista='".$artista."' AND Nome='".$nomeImmagine."'";
             $result = $myDb->doQuery($qrStr);
             if ($result == TRUE) {
                 deleteFileFromFileSystem($artista,$nomeImmagine);
-                echo 1;
+                $resArr['Result'] = 1;
+                //echo 1;
             } else { //Error
-                echo -1;
+                $resArr['Result'] = -1;
+                //echo -1;
             }
         }
         else 
-            echo "Connection Error";
+            $resArr['Result'] = "Connection Error";
+
+        return $resArr;
         $myDb->disconnect();
     }
 
     function deleteFileFromFileSystem($username,$title){
         $destination_img = "Images/Art/".$username."/".$title.".jpeg";
         if(file_exists($destination_img)){
-            unlink($destination_img);
+            @unlink($destination_img);
         }
     }
 

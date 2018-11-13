@@ -26,24 +26,30 @@
         <?php $mostraPagination=FALSE; $j=0;?>
         <ul class="clearfix galleryBoard">
             <?php
-                if(isset($_SESSION["Username"])){
+                if(isset($_SESSION['Username'])){
                     //connecting to db
                     $myDb= new DbConnector();
                     $myDb->openDBConnection();
                     $result = array();
+                    $qrStr = "";
                     if($myDb->connected){
-                        $qrStr = "SELECT Nome,Artista FROM opere WHERE Artista='".$_SESSION['Username']."'";
+                        if($_SESSION['Username'] === 'admin'){
+                            $qrStr = "SELECT Nome,Artista FROM opere";
+                        }else{
+                            $qrStr = "SELECT Nome,Artista FROM opere WHERE Artista='".$_SESSION['Username']."'";
+                        }
                         $result = $myDb->doQuery($qrStr);
-                    }
-                    else 
-                        echo "<li class='liPaginationBlock'>Errore connessione</li>";
-                    $myDb->disconnect();
 
-                    if($result && ($result->num_rows > 0)){
-                        $mostraPagination = ($result->num_rows <= $GLOBALS['imagesPerPage']) ? false : true;
-                        $j = printGalleryItems($result,TRUE);
-                    }elseif(!$result || ($result->num_rows == 0)){
-                        echo "<li class='liPaginationBlock'><div class='div-center'><p>Nothing to show here ... </p></div></li>";
+                        $myDb->disconnect();
+
+                        if($result && ($result->num_rows > 0)){
+                            $mostraPagination = ($result->num_rows <= $GLOBALS['imagesPerPage']) ? false : true;
+                            $j = printGalleryItems($result,TRUE);
+                        }elseif(!$result || ($result->num_rows == 0)){
+                            echo "<li class='liPaginationBlock'><div class='div-center'><p>Nothing to show here ... </p></div></li>";
+                        }
+                    }else{
+                        echo "<li class='liPaginationBlock'>Errore connessione</li>";
                     }
                 }
             ?>

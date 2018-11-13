@@ -256,9 +256,10 @@ function btnDeleteOnClick(obj){
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
 				//if status is ok
-				if(this.responseText == "1"){//Item deleted with success
+				$arrRes = JSON.parse(this.responseText);
+				if($arrRes['Result'] == 1){//Item deleted with success
 					location.reload();
-				}else if(this.responseText == "-1" || this.responseText == "Connection Error"){//Error
+				}else if($arrRes['Result'] == -1 || $arrRes['Result'] == "Connection Error"){//Error
 					alert('Error');
 				}
 			}
@@ -290,19 +291,20 @@ function btnLikeOnClick(obj){
     //calback function for the request
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            //if status is ok
-            if(this.responseText=="0"){//finestra di login
+			//if status is ok
+			var arrRes = JSON.parse(this.responseText);
+            if(arrRes['Result']==0){//finestra di login
                 openLoginModal();
-            }else if(this.responseText == "1"){//like inserito
+            }else if(arrRes['Result'] == 1){//like inserito
                 obj.classList.add("like-btn-added");
-            }else if(this.responseText == "2"){//like rimosso
+            }else if(arrRes['Result'] == 2){//like rimosso
                 obj.classList.remove("like-btn-added");
             }else{//errore
                 alert("Errore");
 			}
-			if((window.location.href).indexOf("likedItems.php")!== -1){//it means the current page is likedItems
+			if((window.location.href).indexOf("likedItems.php")!== -1){
 				location.reload();
-			}else if(this.responseText == "1" || this.responseText == "2"){
+			}else if(arrRes['Result'] == 1 || arrRes['Result'] == 2){
 				updateLikeCounter(idNumber,artist,immg);
 			}
         }
@@ -329,11 +331,12 @@ function updateLikeCounter(idNumber,artist,imageName){
     //calback function for the request
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            //if status is ok
-            if(this.responseText=="Connection Error"){
+			//if status is ok
+			var arrRes = JSON.parse(this.responseText);
+            if(arrRes['Result']=="Connection Error"){
                 obj.innerHTML = "Likes: 0";
             }else{
-				obj.innerHTML = "Likes: "+this.responseText;
+				obj.innerHTML = "Likes: "+arrRes['Result'];
 			}
         }
 	};
@@ -354,8 +357,11 @@ function btnPaginationOnClick(id){
 	var divNumber = id.substring("btnPagination".length,id.length);
 
 	//show only one gallery images container div
-	document.querySelector('[id="galImgPag'+divNumber+'"]').classList.remove('display-none');
-	document.querySelector('[id="galImgPag'+divNumber+'"]').classList.add('display-block');
+	var tmp = document.querySelector('[id="galImgPag'+divNumber+'"]');
+	if(tmp !== null){
+		document.querySelector('[id="galImgPag'+divNumber+'"]').classList.remove('display-none');
+		document.querySelector('[id="galImgPag'+divNumber+'"]').classList.add('display-block');
+	}
 	//remove active status to all pagination buttons
 	var arr=document.querySelectorAll('[id^="btnPagination"]');
 	for(i=0; i< arr.length; i++){
@@ -363,24 +369,24 @@ function btnPaginationOnClick(id){
 		item.classList.remove('btnPaginationActive');
 	}
 
-	document.querySelector('[id="btnPagination'+divNumber+'"]').classList.add('btnPaginationActive');
-	/*
-	document.getElementById("btnPagBack").classList.remove("btnPaginationDeactive");
-	document.getElementById("btnPagForward").classList.remove("btnPaginationDeactive");
-	*/
+	tmp = document.querySelector('[id="btnPagination'+divNumber+'"]');
+	if(tmp !== null){
+		tmp.classList.add('btnPaginationActive');
+	}
+	
 	//document.getElementById("btnPagBack").classList.remove("display-none");
 	//document.getElementById("btnPagForward").classList.remove("display-none");
-	document.getElementById("btnPagBack").style.display = 'inline-block';
-	document.getElementById("btnPagForward").style.display = 'inline-block';
-	if(divNumber == 1){//if it is the first btn of pagination
-		//document.getElementById("btnPagBack").classList.add("btnPaginationDeactive");
-		//document.getElementById("btnPagBack").classList.add("display-none");
-		document.getElementById("btnPagBack").style.display = 'none';
+	var btnBack = document.getElementById("btnPagBack");
+	var btnForward = document.getElementById("btnPagForward");
+	if(btnBack !== null)
+		btnBack.style.display = 'inline-block';
+	if(btnForward !== null)
+		btnForward.style.display = 'inline-block';
+	if(divNumber == 1 && (btnBack !== null)){//if it is the first btn of pagination
+		btnBack.style.display = 'none';
 	}
-	if(divNumber == document.querySelectorAll('[id^="galImgPag"]').length){
-		//document.getElementById("btnPagForward").classList.add("btnPaginationDeactive");
-		//document.getElementById("btnPagForward").classList.add("display-none");
-		document.getElementById("btnPagForward").style.display = 'none';
+	if(divNumber == document.querySelectorAll('[id^="galImgPag"]').length && (btnForward !== null)){
+		btnForward.style.display = 'none';
 	}
 }
 
@@ -419,8 +425,8 @@ function doUploadValidation(event){
     var title=document.getElementById('title').value;
    	var description=document.getElementById('description').value;
     var returnValue =true;
-		if (document.getElementById("success_message") !=null) {
-			document.getElementById("success_message").innerHTML ="";
+	if (document.getElementById("success_message") !=null) {
+		document.getElementById("success_message").innerHTML ="";
     }
 
     if((title==="")||(description==="")){
@@ -432,10 +438,10 @@ function doUploadValidation(event){
         	returnValue=false;
     	}
     }
-		if(description.length>1000){
-			document.getElementById("uploadMessage").innerHTML ="Description is too long";
-			returnValue=false;
-		}
+	if(description.length>1000){
+		document.getElementById("uploadMessage").innerHTML ="Description is too long";
+		returnValue=false;
+	}
 
     return returnValue;
 }
