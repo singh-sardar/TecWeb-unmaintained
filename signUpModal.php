@@ -1,7 +1,7 @@
 <!-- The Modal -->
 <div id="SignUpModal" class="Modal">
 	<!-- Modal Content -->
-	<form class="modal-content animate" method="post" action="#" onsubmit="return doSignUp(event)">
+	<form class="modal-content animate container1024" method="post" action="#" onsubmit="return doSignUp(event)">
 		<div class="modalHead">
 			<span onclick="closeSignUpModal()" class="close" title="Close Modal">&times;</span>
 			<h1>SIGN UP FORM</h1>
