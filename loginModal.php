@@ -1,7 +1,7 @@
 <!-- The Modal -->
 <div id="LoginModal" class="Modal">
 	<!-- Modal Content -->
-	<form class="modal-content animate" method="post" action="#" onsubmit="return doLogin(event)">
+	<form class="modal-content animate container1024" method="post" action="#" onsubmit="return doLogin(event)">
 		<div class="modalHead">
 			<span onclick="closeLoginModal()" class="close" title="Close Modal">&times;</span>
 			<h1>LOGIN FORM</h1>
