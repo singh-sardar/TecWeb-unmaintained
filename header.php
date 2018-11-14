@@ -23,7 +23,7 @@
       ?>
     </li>
     <li>
-      <a class="btnSearch" href="#" onclick="openSearchModal()"><span class="searchIcon"></span></a>
+      <a class="btnSearch" href="#" onclick="openModal('SearchModal')"><span class="searchIcon"></span></a>
     </li>
     <li class="user account-dropdown">
       <?php //To Sign in or edit profile of User
@@ -39,7 +39,7 @@
   <li class="user account-content">
     <?php //To Sign in or edit profile of User
       if(isset($_SESSION['Username']))
-        echo '<a href="#" onclick="openEditProfileModal()">Edit Profile: '.$_SESSION["Username"].'</a>';
+      echo '<a href="#" onclick="openEditProfileModal()">Edit Profile: '.$_SESSION["Username"].'</a>';
     ?>
   </li>
   <li class="user">

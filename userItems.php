@@ -20,8 +20,12 @@
         require_once "editProfileModal.php";
         require_once "DbConnector.php";
         require_once "functions.php";
+        require_once "likedByModal.php";
         require_once "searchModal.php";
     ?>
+    <div id="imgLoader" class="image-loader display-none">
+        <img src="/Images/eclipse.svg">
+    </div>
     <div class="gallery container1024">
         <?php $mostraPagination=FALSE; $j=0;?>
         <ul class="clearfix galleryBoard">

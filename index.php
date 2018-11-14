@@ -16,7 +16,8 @@
   <?php
 	require_once "header.php";
   require_once "loginModal.php";
-  require_once "searchModal.php";
+	require_once "searchModal.php";
+	require_once "likedByModal.php";
 	require_once "signUpModal.php";
 	require_once "editProfileModal.php";
 	require_once "DbConnector.php";
@@ -24,7 +25,9 @@
   $myDb= new DbConnector();
   $myDb->openDBConnection();
   ?>
-
+	<div id="imgLoader" class="image-loader display-none">
+			<img src="/Images/eclipse.svg">
+	</div>
   <div class="description"><!--general description-->
       <div class="overlay font_medium">
         <p>

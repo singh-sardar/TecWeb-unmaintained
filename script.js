@@ -1,18 +1,3 @@
-//function to close the login modal with button
-function closeLoginModal() {
-	document.getElementById('LoginModal').style.display='none';
-}
-
-//function to close the singh in modal with button
-function closeSignUpModal() {
-	document.getElementById('SignUpModal').style.display='none';
-}
-
-//function to close the edit profile Modal with button
-function closeEditProfileModal() {
-	document.getElementById('EditProfileModal').style.display='none';
-}
-
 //function to open the login modal
 function openLoginModal() {
 	document.getElementById('LoginModal').style.display='block';
@@ -30,21 +15,33 @@ function openEditProfileModal() {
 
 //function to close the  modal clicking outside
 function eventListnerforLoginModal() {
+	var arrModal = ['LoginModal','SignUpModal','EditProfileModal','SearchModal','LikedByModal'];
 
 	// When the user clicks anywhere outside of the modal, close it
 	window.onclick = function(event) {
+		for(i=0; i < arrModal.length; i++){
+			if (event.target === document.getElementById(arrModal[i]))
+				closeModal(arrModal[i]);
+		}
+		/*
 		if (event.target === document.getElementById('LoginModal')) {
-			document.getElementById('LoginModal').style.display = "none";
+			closeModal('LoginModal');
 		}
 		if (event.target === document.getElementById('SignUpModal')) {
-			document.getElementById('SignUpModal').style.display = "none";
+			closeModal('SignUpModal');
 		}
 		if (event.target === document.getElementById('EditProfileModal')) {
-			document.getElementById('EditProfileModal').style.display = "none";
+			closeModal('EditProfileModal');
 		}
 		if (event.target === document.getElementById('SearchModal')) {
-			document.getElementById('SearchModal').style.display = "none";
+			closeModal('SearchModal');
+			//document.getElementById('SearchModal').style.display = "none";
 		}
+		if (event.target === document.getElementById('LikedByModal')) {
+			closeModal('LikedByModal');
+			//document.getElementById('LikedByModal').style.display = "none";
+		}
+		*/
 	}
 }
 
@@ -225,13 +222,11 @@ function openDrobDownMenu(btn) {
 
 }
 
-function openSearchModal(){
-	document.getElementById('SearchModal').style.display='block';
+function openModal(idModal){
+	document.getElementById(idModal).style.display='block';
 }
-
-//function to close the login modal with button
-function closeSearchModal() {
-	document.getElementById('SearchModal').style.display='none';
+function closeModal(idModal){
+	document.getElementById(idModal).style.display='none';
 }
 
 /*
@@ -271,6 +266,46 @@ function btnDeleteOnClick(obj){
 	}
 }
 
+function btnLikedByOnClick(obj){
+	// creating ajax object
+	var xhttp;
+	var idNumber = obj.id.substring(("LikedByBtn_").length);
+		var artist = document.querySelector('[id="figureWrapper_'+idNumber+'"] [name="nameArtist"]').value;
+		var immg = document.querySelector('[id="figureWrapper_'+idNumber+'"] [name="nameImage"]').value;
+	if (window.XMLHttpRequest) {
+		// code for modern browsers
+		xhttp = new XMLHttpRequest();
+	} else {
+		// code for IE6, IE5
+		xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+
+	//calback function for the request
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			//if status is ok
+			arrRes = JSON.parse(this.responseText);
+			if(arrRes['Result'] == 1){//Users found
+				str = "";
+				arrUsers = arrRes['Users'];
+				for(var i=0; i < arrUsers.length; ++i){
+					str += '<div class="comment"><a href="gallery.php?gallerySearch=' + arrUsers[i]+'">'+arrUsers[i]+'</a></div>'; 
+				}
+				document.getElementById('imgLoader').classList.toggle('display-none');
+				document.querySelector('#LikedByModal .commentSection').innerHTML = str;
+				openModal('LikedByModal');
+			}else if(arrRes['Result'] == -1 || arrRes['Result'] == "Connection Error"){//Error
+				alert('Error');
+			}
+		}
+	};
+	//doing th ajax request
+	document.getElementById('imgLoader').classList.toggle('display-none');
+	xhttp.open("POST", "likedBy.php", true);
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send("art="+artist+"&nomeImg="+immg);
+}
+
 /*
 Function by page gallery.php
 */
@@ -294,7 +329,7 @@ function btnLikeOnClick(obj){
 			//if status is ok
 			var arrRes = JSON.parse(this.responseText);
             if(arrRes['Result']==0){//finestra di login
-                openLoginModal();
+				openModal('LoginModal');
             }else if(arrRes['Result'] == 1){//like inserito
                 obj.classList.add("like-btn-added");
             }else if(arrRes['Result'] == 2){//like rimosso

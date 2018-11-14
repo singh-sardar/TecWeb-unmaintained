@@ -32,18 +32,33 @@
         echo '      <div class="galleryCaption">';
         echo '              <h2>'.$nomeImmagine.'</h2>';
         echo '          <div class="wrapper">';
+        echo '              <div class="width-15">';
         if($isLiked == true){
             echo '              <div class="like-btn like-btn-added" onclick="btnLikeOnClick(this)" id="LikeBtn_'.$numFig.'"></div>';
         }else{
             echo '              <div class="like-btn" onclick="btnLikeOnClick(this)" id="LikeBtn_'.$numFig.'"></div>';
         }
+        echo '              </div>';
         echo '              <div class="width-85">';
-        echo '                  <p>Artist: '.$artista.'</p>';
+        echo '                  <p>Artist: <a href="gallery.php?gallerySearch='.$artista.'">'.$artista.'</a></p>';
         echo '                  <p id="Likes_'.$numFig.'">Likes: '.getLikesByItem($artista,$nomeImmagine)['Result'].'</p>';
+        
         echo '              </div>';
         echo '          </div>';
+        if(getLikesByItem($artista,$nomeImmagine)['Result'] > 0){
+            echo '          <div class="wrapper">';
+            echo '              <div class="width-45">';
+            echo '                  <button id="LikedByBtn_'.$numFig.'" onclick="btnLikedByOnClick(this)">Liked by</button>';
+            echo '              </div>';
+            echo '              <div class="width-55">';
+            echo '                  <a href="viewArtwork.php?Title='.$nomeImmagine.'&Artist='.$artista.'"><button class="btnDiscover" type="submit" id="DelBtn_'.$numFig.'">Details</button></a>';
+            echo '              </div>';
+            echo '          </div>';
+        }else{
+            echo '                  <a href="viewArtwork.php?Title='.$nomeImmagine.'&Artist='.$artista.'"><button class="btnDiscover" type="submit" id="DelBtn_'.$numFig.'">Details</button></a>';
+        }
         if($boolDeleteButton == TRUE){
-            echo '<button class="btnDelete" type="submit" id="DelBtn_'.$numFig.'" onclick="btnDeleteOnClick(this)"><span class="searchIcon"></span>Delete</button>';
+            echo '<button class="btnDelete" type="submit" id="DelBtn_'.$numFig.'" onclick="btnDeleteOnClick(this)">Delete</button>';
         }
         echo '      </div>';
         echo '   </div>';

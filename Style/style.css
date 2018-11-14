@@ -412,11 +412,30 @@ background-color: rgba(241,241,241,1);
     padding: 0.5em;
 }
 
+.gallery button a{
+    text-decoration: none;
+    color: white;
+}
+
+.galleryCaption button{
+    width: 100%;
+    margin-bottom: 2%;
+}
 .btnDelete::before {
     content: url(../Images/garbage-white.png);
     position: absolute;
     left: 25%;
     bottom: 4%;
+}
+
+.btnDiscover::before{
+    content: url(../Images/external-link.png);
+    position: absolute;
+    left: 25%;
+    /*bottom: 4%;*/
+}
+.galleryCaption .width-55 .btnDiscover::before{
+    left: 48%;
 }
 
 .inputSearch input[type=text]{
@@ -500,7 +519,7 @@ div.divCategoryButtons button{
 /* -------- Stile per il pulsante di ricerca libera (End)--------- */
 
 .gallery{
-    width: 90%;
+    /*width: 90%;*/
     /*max-width: 1200px;*/
     margin: 4vh auto;
 }
@@ -512,13 +531,15 @@ div.divCategoryButtons button{
     position: relative;
     overflow: auto;
 }
-
+/*
 .galleryCaption .btnDelete{
     width: 100%;
 }
+*/
 
 .galleryBoard .galleryCaption{
     padding: 0.5em;
+    overflow: auto;
 }
 
 .galleryBoard img{
@@ -546,14 +567,47 @@ div.divCategoryButtons button{
 }
 
 .galleryCaption .wrapper{
-    height: 3.2em;
     margin-top: 0.5em;
 }
 
 .wrapper .width-85{
     width: 85%;
     float: left;
-    padding-left: 3%;
+    padding-left: 0.5em;
+}
+.wrapper .width-45{
+    padding-right: 0.5em;
+}
+.image-loader{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.65);
+    Z-INDEX: 99999;
+    TOP: 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -ms-Flexbox;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.width-15{
+    width: 15%;
+    float: left;
+}
+.width-45{
+    width: 45%;
+}
+.width-55{
+    width: 55%;
+}
+
+.galleryCaption .width-45, .galleryCaption .width-55{
+    float: left;
 }
 
 .font-size-large{
@@ -567,17 +621,17 @@ div.divCategoryButtons button{
     bottom: 4.5em;
     right: 0.2em;
     */
-    width: 15%;
     float: left;
     height: 2.0em;
     z-index: 1;
     background: url(../Images/like.svg) no-repeat;
-    background-size: 100% 100%;
+    background-size: auto;
+    background-position-x: 3%;
 }
 
 .like-btn-added{
     background: url(../Images/like-inserted.svg) no-repeat;
-    background-size: 100% 100%;
+    background-position-x: 3%;
 }
 
 .artFilter{
@@ -667,6 +721,12 @@ div.divCategoryButtons button{
     .wrapper div{
         width: 100%;
     }
+    .galleryCaption .wrapper .width-45{
+        padding: 0;
+    }
+    .galleryCaption .width-55 .btnDiscover::before{
+        left: 25%;
+    }
 }
 @media only screen and (max-width:670px){
     .galleryBoard li.liFigures{
@@ -682,6 +742,9 @@ div.divCategoryButtons button{
     }
 }
 @media screen and (min-width: 1024px){
+    .gallery{
+        width: 90%;
+    }
     .galleryBoard li.liFigures{
         width: 33.33333%;
     }
@@ -709,7 +772,7 @@ div.divCategoryButtons button{
     .galleryBoard li.liFigures, .galNotThree .galleryBoard li.liFigures{
         width: 25%;
     }
-
+    .gallery{width: 100%;}
     .galleryBoard li.liFigures:nth-of-type(3n+1) , .galNotThree .galleryBoard li.liFigures:nth-of-type(3n+1){
         clear: none;
     }
@@ -852,4 +915,19 @@ tr:nth-child(even) {
 
 tr:nth-child(odd) {
     background-color: white;
+}
+
+.commentSection {
+	background-color: #8080801a;
+    padding: 1em;
+    max-height: 35em;
+}
+
+.comment{
+	word-wrap: break-word;
+    background-color: #8080801a;
+	border-radius: 2px;
+	padding: 0.4em;
+    margin: 0.4em;
+
 }

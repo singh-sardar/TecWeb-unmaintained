@@ -18,11 +18,15 @@
         require_once "header.php";
         require_once "loginModal.php";
         require_once "searchModal.php";
+        require_once "likedByModal.php";
         require_once "signUpModal.php";
         require_once "editProfileModal.php";
         require_once "DbConnector.php";
         require_once "functions.php";
     ?>
+    <div id="imgLoader" class="image-loader display-none">
+        <img src="/Images/eclipse.svg">
+    </div>
     <div class="gallery container1024">
         <form method="get" action="" name="formArtFilter">
             <div class="artFilter">

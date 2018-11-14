@@ -3,7 +3,7 @@
 	<!-- Modal Content -->
 	<form class="modal-content animate container1024" method="post" action="#" onsubmit="return doSignUp(event)">
 		<div class="modalHead">
-			<span onclick="closeSignUpModal()" class="close" title="Close Modal">&times;</span>
+			<span onclick="closeModal('SignUpModal')" class="close" title="Close Modal">&times;</span>
 			<h1>SIGN UP FORM</h1>
 		</div>
 		<div class="container">
@@ -27,7 +27,7 @@
 
 		<div class="container modalFotter" >
 			<button type="submit">Register</button>
-			<button type="button" onclick="closeSignUpModal()" class="cancelbtn">Cancel</button>
+			<button type="button" onclick="closeModal('SignUpModal')" class="cancelbtn">Cancel</button>
 		</div>
 
 	</form>

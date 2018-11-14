@@ -95,7 +95,7 @@ margin-bottom: 2%;
    {
     $qrStr = 'SELECT Artista, Nome, Descrizione FROM opere WHERE Artista = $Artist AND Nome = $Title';
     $result = $myDb->doQuery($qrStr);
-    if(isset($result) && ($result->num_rows === 1))
+    if($result && ($result->num_rows === 1))
     {
       $row = $result->fetch_assoc();
       $Title = $row['Artista'];
