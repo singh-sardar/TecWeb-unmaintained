@@ -3,9 +3,9 @@
   <a class="imageLink" href="index.php"><img src="Images/logo.png" alt="Logo"/></a>
   <ul>
     <li class="firstMenuItem <?php if(basename($_SERVER['PHP_SELF'])=="index.php")echo "activeMenuItem";?>"><a href="index.php">Home</a></li>
-    <li><a href="index.php#team">Team</a></li>
     <li <?php if(basename($_SERVER['PHP_SELF'])=="gallery.php")echo 'class="activeMenuItem"';?> ><a href="gallery.php">Gallery</a></li>
     <li <?php if(basename($_SERVER['PHP_SELF'])=="upload.php")echo 'class="activeMenuItem"';?> ><a href="upload.php">Upload</a></li>
+    <li><a href="index.php#team">Team</a></li>
     <li <?php if(basename($_SERVER['PHP_SELF'])=="likedItems.php")echo 'class="activeMenuItem"';?> >
       <?php
         session_start();
