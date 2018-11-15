@@ -80,7 +80,7 @@
         </form>
 
         <?php $mostraPagination=FALSE; $j=0;?>
-        <ul class="clearfix galleryBoard">
+        <div class="clearfix galleryBoard">
             <?php
                 $result;
                 $orderBy = isset($_GET['orderBy']) ? $_GET['orderBy'] : 'none';
@@ -117,7 +117,7 @@
                         $result = $myDb->doQuery($qrStr);
                     }
                     else
-                        echo "<li class='liPaginationBlock'>Errore connessione</li>";
+                        echo "<div class='liPaginationBlock'>Errore connessione</div>";
                     $myDb->disconnect();
                 }elseif(isset($galleryCategory)){
                     //connecting to db
@@ -148,7 +148,7 @@
                         $result = $myDb->doQuery($qrStr);
                     }
                     else
-                        echo "<li class='liPaginationBlock'>Errore connessione</li>";
+                        echo "<div class='liPaginationBlock'>Errore connessione</div>";
                     $myDb->disconnect();
                 }
 
@@ -156,11 +156,11 @@
                     $mostraPagination = ($result->num_rows <= $GLOBALS['imagesPerPage']) ? false : true;
                     $j = printGalleryItems($result,FALSE);
                 }elseif(!$result || ($result->num_rows == 0)){
-                    echo "<li class='liPaginationBlock'><div class='div-center'><p>Nothing to show here ... </p></div></li>";
+                    echo "<div class='liPaginationBlock'><div class='div-center'><p>Nothing to show here ... </p></div></div>";
                 }
             ?>
 
-        </ul>
+        </div>
         <?php
             printPagination($mostraPagination,$j);
         ?>

@@ -425,7 +425,7 @@ background-color: rgba(241,241,241,1);
     content: url(../Images/garbage-white.png);
     position: absolute;
     left: 25%;
-    bottom: 4%;
+    bottom: 5%;
 }
 /*
 .btnDiscover::before{

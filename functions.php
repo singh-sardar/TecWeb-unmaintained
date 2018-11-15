@@ -107,12 +107,12 @@
         for ($i = 0; $i < $result->num_rows; $i++) {
             if($i%($GLOBALS['imagesPerPage']) == 0){
                 if($boolChiudi == FALSE){
-                    echo "<li id='galImgPag".$j."' class='liPaginationBlock'><ul>";
+                    echo "<div id='galImgPag".$j."' class='liPaginationBlock'>";
                     $j++;
                     $boolChiudi = TRUE; 
                 }else{
-                    echo "</ul></li>";
-                    echo "<li id='galImgPag".$j."' class='liPaginationBlock'><ul>";
+                    echo "</div>";
+                    echo "<div id='galImgPag".$j."' class='liPaginationBlock'>";
                     $j++;
                     $boolChiudi = FALSE;
                 }
@@ -121,7 +121,7 @@
             insertImageInGallery($row['Artista'],$row['Nome'],$i+1,$boolDeleteButton);
         }
         if($boolChiudi == TRUE || ($i%($result->num_rows)!= 1)){
-            echo "</ul></li>";
+            echo "</div>";
         }
         return $j;
     }
