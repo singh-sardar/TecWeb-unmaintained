@@ -13,8 +13,9 @@
     <style>
   .imageAndComments img {
       max-width: 70%;
-      float: left;
       max-height: 35em;
+      margin-bottom: 2em;
+
   }
 
   .imageAndComments {
@@ -25,7 +26,7 @@
   .commentSection {
     background-color: #8080801a;
     /*max-width: 27%*/
-    overflow-y: auto; 
+    overflow-y: auto;
       margin-left: 0;
       padding: 1em;
       height: 35em;
@@ -33,12 +34,12 @@
       max-width: 20em;
       border-radius: 2px;
   }
-  
+
   textarea[name=input-comment]
   {
   resize: none;
   }
-  
+
   .comment{
     word-wrap: break-word;
     background-color: #8080801a;
@@ -72,19 +73,20 @@
   }
 
   @media screen and (max-width: 1024px) {
-  
-  .margin-auto{display:block}
-  
+
+  .marginAuto{display:block;}
+
   .commentSection {
     max-width: 100%;
-    overflow-y: auto; 
+    overflow-y: auto;
     margin-left: 0%;
     padding: 1em;
     border-radius: 2px;
     clear: both;
   }
     .imageAndComments img {
-     max-width: 100%;
+      display: flex;
+    max-width: 100%;
      max-height: 35em;
   }
   }
@@ -99,8 +101,7 @@
     require_once "signUpModal.php";
     require_once "editProfileModal.php";
     require_once "DbConnector.php";
-    
-    session_start();
+
     $Title = $_GET['Title'];
     $Artist = $_GET['Artist'];
     $Description = '';
