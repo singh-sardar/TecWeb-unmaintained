@@ -159,7 +159,6 @@
                     echo "<div class='liPaginationBlock'><div class='div-center'><p>Nothing to show here ... </p></div></div>";
                 }
             ?>
-
         </div>
         <?php
             printPagination($mostraPagination,$j);

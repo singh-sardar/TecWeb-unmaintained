@@ -40,7 +40,7 @@
         }
         echo '              </div>';
         echo '              <div class="width-85">';
-        echo '                  <p>Artist: <a class="customLink" href="gallery.php?gallerySearch='.$artista.'">'.$artista.'</a></p>';
+        echo '                  <a class="customLink" href="gallery.php?gallerySearch='.$artista.'">Artist: '.$artista.'</a>';
         echo '                  <p class="customLink" id="Likes_'.$numFig.'" onclick="btnLikedByOnClick(this)">Likes: '.getLikesByItem($artista,$nomeImmagine)['Result'].'</p>';       
         echo '              </div>';
         echo '          </div>';
@@ -114,7 +114,6 @@
                     echo "</div>";
                     echo "<div id='galImgPag".$j."' class='liPaginationBlock'>";
                     $j++;
-                    $boolChiudi = FALSE;
                 }
             }
             $row = $result->fetch_assoc();
