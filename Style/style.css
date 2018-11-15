@@ -645,7 +645,8 @@ div.divCategoryButtons button{
 }
 
 .customLink{
-	color: rgb(0, 0, 238);
+    color: rgb(0, 0, 238);
+    text-decoration: none;
 }
 .customLink:hover{
 	text-decoration: underline;
