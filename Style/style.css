@@ -560,6 +560,7 @@ div.divCategoryButtons button{
 
 .wrapper{
     width: 100%;
+    margin-bottom: 3em;
 }
 
 .galleryCaption .wrapper{
@@ -592,7 +593,7 @@ div.divCategoryButtons button{
 }
 
 .width-15{
-    width: 15%;
+    width: 2.0em;
     float: left;
 }
 .width-45{
@@ -648,7 +649,7 @@ div.divCategoryButtons button{
 }
 .customLink:hover{
 	text-decoration: underline;
-        cursor: pointer;
+  cursor: pointer;
 }
 .customLink:visited{
         color: rgb(85, 26, 139);
@@ -722,11 +723,8 @@ div.divCategoryButtons button{
 }
 */
 @media screen and (max-width: 400px){
-    .wrapper{
-        padding-bottom: 4em;
-    }
     .wrapper div{
-        width: 100%;
+        width: 2.0em;
     }
     .galleryCaption .wrapper .width-45{
         padding: 0;
