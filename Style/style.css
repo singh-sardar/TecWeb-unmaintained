@@ -766,7 +766,7 @@ div.divCategoryButtons button{
     .galNotThree .galleryBoard li.liFigures:nth-of-type(3n+1) {
         clear: none;
     }
-    
+
 }
 @media screen and (min-width: 1400px){
     .galleryBoard li.liFigures, .galNotThree .galleryBoard li.liFigures{
@@ -917,6 +917,7 @@ tr:nth-child(odd) {
     background-color: white;
 }
 
+/*-------------------------------COMMENT---------------------------------------*/
 .commentSection {
 	background-color: #8080801a;
     padding: 1em;
@@ -930,4 +931,44 @@ tr:nth-child(odd) {
 	padding: 0.4em;
     margin: 0.4em;
 
+}
+
+/*------------------------------------UPLOAD-----------------------------------*/
+.Uploadsection form {
+  padding: 1.0em;
+  margin: auto;
+}
+
+.Uploadsection input[type="text"],
+.Uploadsection input[type="file"],
+.Uploadsection textarea,
+.Uploadsection select {
+  border: none;
+  height: auto;
+  margin: 0;
+  padding: 1.0em;
+  width: 100%;
+  background-color: #e8eeef;
+  color: #8a97a0;
+  margin-bottom: 1.5em;
+}
+
+.Uploadsection button {
+  width: 100%;
+}
+
+.Uploadsection label {
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+.upload_message {
+  text-align: center;
+  color: red;
+  padding: 0.5em;
+  font-size: 1.5em;
+}
+
+.success_message {
+  color: green;
 }
