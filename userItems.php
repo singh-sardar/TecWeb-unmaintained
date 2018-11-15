@@ -26,7 +26,7 @@
     <div id="imgLoader" class="image-loader display-none">
         <img src="/Images/eclipse.svg">
     </div>
-    <div class="gallery container1024">
+    <div class="gallery container1024" id="content">
         <?php $mostraPagination=FALSE; $j=0;?>
         <ul class="clearfix galleryBoard">
             <?php
@@ -57,8 +57,8 @@
                     }
                 }
             ?>
-
-        </ul>
+            
+        </ul> 
         <?php
             printPagination($mostraPagination,$j);
         ?>

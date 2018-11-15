@@ -24,7 +24,7 @@
         }else if(isset($_SESSION['Username'])){
             $isLiked = boolImageLiked($artista,$_SESSION['Username'],$nomeImmagine)['Result'];
         }
-        echo '<li class="liFigures">';
+        echo '<div class="liFigures">';
         echo     '<div class="galleryFigureWrapper" id="figureWrapper_'.$numFig.'">';
         echo '      <div class="image-div"></div>';
         echo '      <input type="hidden" value="'.$artista.'" name="nameArtist"/>';
@@ -41,10 +41,10 @@
         echo '              </div>';
         echo '              <div class="width-85">';
         echo '                  <p>Artist: <a href="gallery.php?gallerySearch='.$artista.'">'.$artista.'</a></p>';
-        echo '                  <p id="Likes_'.$numFig.'">Likes: '.getLikesByItem($artista,$nomeImmagine)['Result'].'</p>';
-        
+        echo '                  <p class="customLink" id="Likes_'.$numFig.'" onclick="btnLikedByOnClick(this)">Likes: '.getLikesByItem($artista,$nomeImmagine)['Result'].'</p>';       
         echo '              </div>';
         echo '          </div>';
+        /*
         if(getLikesByItem($artista,$nomeImmagine)['Result'] > 0){
             echo '          <div class="wrapper">';
             echo '              <div class="width-45">';
@@ -57,12 +57,14 @@
         }else{
             echo '                  <a href="viewArtwork.php?Title='.$nomeImmagine.'&Artist='.$artista.'"><button class="btnDiscover" type="submit" id="DelBtn_'.$numFig.'">Details</button></a>';
         }
+        */
+        echo '                  <a href="viewArtwork.php?Title='.$nomeImmagine.'&Artist='.$artista.'"><button class="btnDiscover" type="submit" id="DelBtn_'.$numFig.'">Details</button></a>';
         if($boolDeleteButton == TRUE){
             echo '<button class="btnDelete" type="submit" id="DelBtn_'.$numFig.'" onclick="btnDeleteOnClick(this)">Delete</button>';
         }
         echo '      </div>';
         echo '   </div>';
-        echo '</li>';
+        echo '</div>';
         echo "\r\n";
     }
 

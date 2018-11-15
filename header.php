@@ -1,3 +1,6 @@
+<div id="skipmenu">
+  <a href="#content">Go to content</a>
+</div>
 <div class="menu" id="Topnav">
 <div class="container1024">
   <a class="imageLink" href="index.php"><img src="Images/logo.png" alt="Logo"/></a>

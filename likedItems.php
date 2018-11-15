@@ -26,7 +26,7 @@
     <div id="imgLoader" class="image-loader display-none">
         <img src="/Images/eclipse.svg">
     </div>
-    <div class="gallery container1024">
+    <div class="gallery container1024" id="content">
         <?php $mostraPagination=FALSE; $j=0;?>
         <ul class="clearfix galleryBoard">
             <?php
@@ -41,7 +41,7 @@
                                     GROUP BY o.Nome, o.Artista ORDER BY COUNT(Nome) DESC";
                         $result = $myDb->doQuery($qrStr);
                     }
-                    else
+                    else 
                         echo "<li class='liPaginationBlock'>Errore connessione</li>";
                     $myDb->disconnect();
 
@@ -53,8 +53,8 @@
                     }
                 }
             ?>
-
-        </ul>
+            
+        </ul> 
         <?php
             printPagination($mostraPagination,$j);
         ?>

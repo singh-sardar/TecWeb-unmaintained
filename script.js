@@ -229,6 +229,10 @@ function closeModal(idModal){
 	document.getElementById(idModal).style.display='none';
 }
 
+function orderByGalleryChanged(){
+	document.getElementsByName('formArtFilter')[0].submit();
+}
+
 /*
 Delete function
 */
@@ -269,7 +273,7 @@ function btnDeleteOnClick(obj){
 function btnLikedByOnClick(obj){
 	// creating ajax object
 	var xhttp;
-	var idNumber = obj.id.substring(("LikedByBtn_").length);
+	var idNumber = obj.id.substring(("Likes_").length);
 		var artist = document.querySelector('[id="figureWrapper_'+idNumber+'"] [name="nameArtist"]').value;
 		var immg = document.querySelector('[id="figureWrapper_'+idNumber+'"] [name="nameImage"]').value;
 	if (window.XMLHttpRequest) {

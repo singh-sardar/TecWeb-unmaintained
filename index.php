@@ -15,7 +15,7 @@
 <body onload="eventListnerforLoginModal(); populateImages();" >
   <?php
 	require_once "header.php";
-  require_once "loginModal.php";
+    require_once "loginModal.php";
 	require_once "searchModal.php";
 	require_once "likedByModal.php";
 	require_once "signUpModal.php";
@@ -37,7 +37,7 @@
         </p>
     </div>
   </div>
-  <div class="container1024">
+  <div class="container1024" id="content">
     <div class="section" id="intro"><!--website Introduction-->
 		<div class="title"><h1>Introduction</h1></div>
 		<p>

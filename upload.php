@@ -23,55 +23,56 @@
   require_once "DbConnector.php";
   require_once "functions.php";
 ?>
-    <div class="Uploadsection container1024"><!--upload form-->
+    <div class="Uploadsection container1024" id="content"><!--upload form-->
       <div class="title"><h1>Register your artwork</h1></div>
-
 
       <div  id="uploadMessage" class="upload_message">
           <!--container for unfilled inputs-->
-          <?php
+                    <?php
           error_reporting(0);
           if(isset($_POST["title"]) && isset($_FILES['artwork'])){ //l'upload può partire solo se il TITOLO e l'IMMAGINE sono stati selezionati
             if(!isset($_SESSION["Username"])){
               echo '<script type="text/javascript">openLoginModal();</script>';
-              exit();
+              //exit();
             }
-            $title = escapePathTraversal(htmlspecialchars($_POST["title"], ENT_QUOTES, "UTF-8"));
-            $category = htmlspecialchars($_POST["category"], ENT_QUOTES, "UTF-8");
-            $description = htmlspecialchars($_POST["description"], ENT_QUOTES, "UTF-8");
-            $filename = $_FILES['artwork']['name'];
-            $filetmp = $_FILES['artwork']['tmp_name'];
-            $filesize = $_FILES['artwork']['size'];
-            $username = $_SESSION["Username"];
-            $time = date('Y-m-d h:i:s');
-            //connecting to db
-            $myDb= new DbConnector();
-            $myDb->openDBConnection();
-            if(!file_exists("./Images/Art/$username"))
-              mkdir("./Images/Art/$username", 0777, true);
-            if($filesize>5242880 || $filesize==0)
-              echo '<p>File size is too big (max 5Mb)</p>';
-            else if($myDb->connected){
-              //check if title already exists
-              $result = $myDb->doQuery("select Nome from opere where Nome='".$title."' and Artista='".$username."'");
-              if($result->num_rows>0)
-                echo '<p>You have already uploaded an artwork with this name</p>';
-              else{
-                //store compressed image
-                $destination_img = "Images/Art/".$username."/".$title.".jpeg";
-                if(compress($filetmp, $destination_img, 80)===true){
-                  //update database
-                  $result = $myDb->doQuery("insert into opere values ('$title','$description','$time','$username','$category')");
-                  echo '<p id="success_message" class="success_message">Update successfully</p>';
+            if(isset($_SESSION["Username"])){
+              $title = escapePathTraversal(htmlspecialchars($_POST["title"], ENT_QUOTES, "UTF-8"));
+              $category = htmlspecialchars($_POST["category"], ENT_QUOTES, "UTF-8");
+              $description = htmlspecialchars($_POST["description"], ENT_QUOTES, "UTF-8");
+              $filename = $_FILES['artwork']['name'];
+              $filetmp = $_FILES['artwork']['tmp_name'];
+              $filesize = $_FILES['artwork']['size'];
+              $username = $_SESSION["Username"];
+              $time = date('Y-m-d h:i:s');
+              //connecting to db
+              $myDb= new DbConnector();
+              $myDb->openDBConnection();
+              if(!file_exists("./Images/Art/$username"))
+                mkdir("./Images/Art/$username", 0777, true);
+              if($filesize>5242880 || $filesize==0)
+                echo '<p>File size is too big (max 5Mb)</p>';
+              else if($myDb->connected){
+                //check if title already exists
+                $result = $myDb->doQuery("select Nome from opere where Nome='".$title."' and Artista='".$username."'");
+                if($result->num_rows>0)
+                  echo '<p>You have already uploaded an artwork with this name</p>';
+                else{
+                  //store compressed image
+                  $destination_img = "Images/Art/".$username."/".$title.".jpeg";
+                  if(compress($filetmp, $destination_img, 80)===true){
+                    //update database
+                    $result = $myDb->doQuery("insert into opere values ('$title','$description','$time','$username','$category')");
+                    echo '<p id="success_message" class="success_message">Update successfully</p>';
+                  }
+                  else {
+                    echo '<p>Selected file is not an image</p>';
+                  }
                 }
-                else {
-                  echo '<p>Selected file is not an image</p>';
-                }
+                $myDb->disconnect();
               }
-              $myDb->disconnect();
+              else
+                echo '<p>Connection error</p>';
             }
-            else
-              echo '<p>Connection error</p>';
           }
           function compress($source, $destination, $quality) {
 
@@ -96,7 +97,7 @@
               imagejpeg($image, $destination, $quality);
               return true;
           }
-          ?>
+        ?>
       </div>
       <form action="" method="post" enctype="multipart/form-data" id="upload" onsubmit="return doUploadValidation(event)">
           <div class="container">
@@ -123,7 +124,7 @@
           <button type="submit">Upload</button>
           </div>
         </form>
-    </div>
+      </div>
     <?php require_once "footer.html"?>
 </body>
 </html>
