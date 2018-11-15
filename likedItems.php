@@ -41,7 +41,7 @@
                                     GROUP BY o.Nome, o.Artista ORDER BY COUNT(Nome) DESC";
                         $result = $myDb->doQuery($qrStr);
                     }
-                    else 
+                    else
                         echo "<li class='liPaginationBlock'>Errore connessione</li>";
                     $myDb->disconnect();
 
@@ -53,11 +53,12 @@
                     }
                 }
             ?>
-            
-        </ul> 
+
+        </ul>
         <?php
             printPagination($mostraPagination,$j);
         ?>
     </div>
+    <?php require_once "footer.html"?>
 </body>
 </html>

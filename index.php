@@ -192,8 +192,6 @@
 		</div>
 	  </div>
   </div>
-  <div class="footer">
-    <p>Artbit</p>
-  </div>
+  <?php require_once "footer.html"?>
 </body>
 </html>

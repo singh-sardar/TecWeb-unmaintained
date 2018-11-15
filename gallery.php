@@ -31,29 +31,29 @@
         <form method="get" action="" name="formArtFilter">
             <div class="artFilter">
                 <div class="inputSearch">
-                    <?php 
+                    <?php
                         if(isset($_GET['gallerySearch'])){
                             $gallerySearch = htmlspecialchars($_GET["gallerySearch"], ENT_QUOTES, "UTF-8");//cleaning the input
                             echo '<input type="text" placeholder="Cerca per categoria, artista o descrizione .." name="gallerySearch" value="'.$gallerySearch.'"/>';
                         }else{
                             echo '<input type="text" placeholder="Cerca per categoria, artista o descrizione .." name="gallerySearch"/>';
                         }
-                        
+
                     ?>
                     <button class="btnSearch" type="submit"><span class="searchIcon"></span></button>
                 </div>
                 <div class="divCategoryFilter">
                     <p>Categories</p>
-                    
-                    <?php 
+
+                    <?php
                         if(!isset($_SESSION['galleryCategory'])){
                             $_SESSION['galleryCategory'] = $galleryCategory = 'All';
                         }
                         if(!isset($_GET['galleryCategory'])){
                             $galleryCategory= $_SESSION['galleryCategory'];
-                        }else{ 
+                        }else{
                             $galleryCategory = htmlspecialchars($_GET["galleryCategory"], ENT_QUOTES, "UTF-8");//cleaning the input
-                            $_SESSION['galleryCategory'] = $galleryCategory; 
+                            $_SESSION['galleryCategory'] = $galleryCategory;
                         }
                     ?>
                     <div class="div-center">
@@ -66,13 +66,13 @@
                             <button type="submit" name="galleryCategory" value="Portrait" <?php if(isset($galleryCategory) && $galleryCategory=='Portrait'){echo "class='active'";} ?>>Portrait</button>
                             <button type="submit" name="galleryCategory" value="Nature" <?php if(isset($galleryCategory) && $galleryCategory=='Nature'){echo "class='active'";} ?>>Nature</button>
                             <button type="submit" name="galleryCategory" value="Others" <?php if(isset($galleryCategory) && $galleryCategory=='Others'){echo "class='active'";} ?>>Others</button>
-                        </div>                  
+                        </div>
                     </div>
                 </div>
 
             </div>
         </form>
-        
+
         <?php $mostraPagination=FALSE; $j=0;?>
         <ul class="clearfix galleryBoard">
             <?php
@@ -103,7 +103,7 @@
                         }
                         $result = $myDb->doQuery($qrStr);
                     }
-                    else 
+                    else
                         echo "<li class='liPaginationBlock'>Errore connessione</li>";
                     $myDb->disconnect();
                 }elseif(isset($galleryCategory)){
@@ -126,9 +126,9 @@
                         }
                         $result = $myDb->doQuery($qrStr);
                     }
-                    else 
+                    else
                         echo "<li class='liPaginationBlock'>Errore connessione</li>";
-                    $myDb->disconnect();   
+                    $myDb->disconnect();
                 }
 
                 if($result && ($result->num_rows > 0)){
@@ -138,14 +138,12 @@
                     echo "<li class='liPaginationBlock'><div class='div-center'><p>Nothing to show here ... </p></div></li>";
                 }
             ?>
-            
-        </ul> 
+
+        </ul>
         <?php
             printPagination($mostraPagination,$j);
         ?>
     </div>
-	<div class="footer">
-		<p>Artbit</p>
-  </div>
+	<?php require_once "footer.html"?>
 </body>
 </html>

@@ -57,11 +57,12 @@
                     }
                 }
             ?>
-            
-        </ul> 
+
+        </ul>
         <?php
             printPagination($mostraPagination,$j);
         ?>
     </div>
+    <?php require_once "footer.html"?>
 </body>
 </html>

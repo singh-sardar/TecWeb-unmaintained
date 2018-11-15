@@ -123,9 +123,7 @@
           <button type="submit">Upload</button>
           </div>
         </form>
-      </div>
-    <div class="footer">
-    <p>Artbit</p>
-  </div>
+    </div>
+    <?php require_once "footer.html"?>
 </body>
 </html>
