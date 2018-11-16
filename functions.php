@@ -26,7 +26,7 @@
         }
         echo '<div class="liFigures">';
         echo     '<div class="galleryFigureWrapper" id="figureWrapper_'.$numFig.'">';
-        echo '      <div class="image-div"></div>';
+        echo '      <div class="image-div" style="background-image: url(Images/Art/'.rawurlencode($artista).'/'.rawurlencode($nomeImmagine).'.jpeg)"></div>';
         echo '      <input type="hidden" value="'.$artista.'" name="nameArtist"/>';
         echo '      <input type="hidden" value="'.$nomeImmagine.'" name="nameImage"/>';
         echo '      <div class="galleryCaption">';

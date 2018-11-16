@@ -106,8 +106,7 @@ function doLogOut(event) {
 	if (this.readyState === 4 && this.status == 200) {
 		//if status is ok
 		if(this.responseText=="success"){
-			location.reload();//reload page if logged out
-
+			document.location.href="/"; //go to home page
 		}
 
 	}
@@ -447,18 +446,6 @@ function btnPagForwardOnClick(){
 	}
 }
 
-function populateImages(){
-	var arr = document.querySelectorAll('.galleryFigureWrapper');
-	for(i=0; i< arr.length; i++){
-		var item = arr[i];
-		var id = item.id;
-		var artist = document.querySelector('[id="'+id+'"] [name="nameArtist"]').value;
-		var immg = document.querySelector('[id="'+id+'"] [name="nameImage"]').value;
-		var imgSrc = "Images/Art/"+artist+"/"+immg+".jpeg";
-		document.querySelector('[id="'+id+'"] .image-div').style.backgroundImage = "url('"+imgSrc+"')";
-	}
-}
-
 function doUploadValidation(event){
 	//event.preventDefault()//prevents to reload the page if login data arent correct
     var title=document.getElementById('title').value;
@@ -485,7 +472,6 @@ function doUploadValidation(event){
     return returnValue;
 }
 
-function paginationAndPopulateImages(){
-	populateImages();
+function initializePagination(){
 	btnPaginationOnClick("btnPagination1");
 }

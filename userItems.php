@@ -12,7 +12,7 @@
     <title>Artbit</title>
 </head>
 
-<body onload="eventListnerforLoginModal(); paginationAndPopulateImages();" >
+<body onload="eventListnerforLoginModal(); initializePagination();" >
     <?php
         require_once "header.php";
         require_once "loginModal.php";
