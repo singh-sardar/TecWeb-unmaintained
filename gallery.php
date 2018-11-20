@@ -9,6 +9,7 @@
     <meta name="author" content="Daniele Bianchin, Pardeep Singh, Davide Liu, Harwinder Singh"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="Style/style.css" media="handheld, screen"/>
+    <link rel="stylesheet" href="Style/print-style.css" type="text/css" media="print" />
     <script type="text/javascript" src="script.js" ></script>
     <title>Artbit</title>
 </head>
@@ -111,7 +112,7 @@
                                      GROUP BY Nome, Artista ORDER BY COUNT(likes.Opera) DESC';
                             }
                             if($orderBy == 'latestAdded'){
-                            	$qrStr = 'SELECT Artista,Nome FROM opere WHERE Categoria="'.$galleryCategory.'" AND (Descrizione LIKE "%'.$param.'%" OR Artista LIKE "%'.$param.'%" OR Nome LIKE "%'.$param.'%") ORDER BY Data_upload DESC';
+                                $qrStr = 'SELECT Artista,Nome FROM opere WHERE Categoria="'.$galleryCategory.'" AND (Descrizione LIKE "%'.$param.'%" OR Artista LIKE "%'.$param.'%" OR Nome LIKE "%'.$param.'%") ORDER BY Data_upload DESC';
                             }
                         }
                         $result = $myDb->doQuery($qrStr);
@@ -151,7 +152,6 @@
                         echo "<div class='liPaginationBlock'>Errore connessione</div>";
                     $myDb->disconnect();
                 }
-
                 if($result && ($result->num_rows > 0)){
                     $mostraPagination = ($result->num_rows <= $GLOBALS['imagesPerPage']) ? false : true;
                     $j = printGalleryItems($result,FALSE);

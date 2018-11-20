@@ -26,7 +26,8 @@
         }
         echo '<div class="liFigures">';
         echo     '<div class="galleryFigureWrapper" id="figureWrapper_'.$numFig.'">';
-        echo '      <div class="image-div" style="background-image: url(Images/Art/'.rawurlencode($artista).'/'.rawurlencode($nomeImmagine).'.jpeg)"></div>';
+        //echo '      <div class="image-div" style="background-image: url(Images/Art/'.rawurlencode($artista).'/'.rawurlencode($nomeImmagine).'.jpeg)"></div>';
+        echo '      <div class="background-color-90929294"><img src="Images/Art/'.rawurlencode($artista).'/'.rawurlencode($nomeImmagine).'.jpeg"/></div>';
         echo '      <input type="hidden" value="'.$artista.'" name="nameArtist"/>';
         echo '      <input type="hidden" value="'.$nomeImmagine.'" name="nameImage"/>';
         echo '      <div class="galleryCaption">';
@@ -83,7 +84,7 @@
     // - $i: number of buttons to be displayed
     function printDivPagination($i){
         echo '<div class="div-center">';
-        echo '   <div class="div-bar gal-pag-border gal-border-round">';
+        echo '   <div class="div-bar gal-pag-border gal-border-round" name="pagination">';
         echo '      <a href="#" class="div-bar-item gal-pag-button" id="btnPagBack" onclick="btnPagBackOnClick()">&laquo;</a>';
         for($j=1; $j < $i; $j++){
             echo '  <a href="#" class="div-bar-item gal-pag-button" id="btnPagination'.$j.'" onclick="btnPaginationOnClick(this.id)">'.$j.'</a>';

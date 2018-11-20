@@ -1,0 +1,194 @@
+
+.gallery{
+    /*width: 90%;*/
+    /*max-width: 1200px;*/
+    margin: 4vh auto;
+}
+
+.galleryBoard .galleryFigureWrapper{
+    background: whitesmoke;
+    margin: 0 0 3em;
+    box-shadow: 0em 0.1em 0.5em rgba(0,0,0,0.2);
+    position: relative;
+    overflow: hidden;
+}
+/*
+.galleryCaption .btnDelete{
+    width: 100%;
+}
+*/
+
+.galleryBoard .galleryCaption{
+    padding: 0.5em;
+    overflow: hidden;
+}
+
+.clearfix:after{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.wrapper{
+    width: 100%;
+    margin-bottom: 3em;
+}
+
+.galleryCaption .wrapper{
+    margin-top: 0.5em;
+}
+
+.wrapper .width-85{
+    width: 85%;
+    float: none;
+    padding-left: 0.5em;
+}
+.wrapper .width-45{
+    padding-right: 0.5em;
+}
+
+.width-15{
+    width: 2.0em;
+    float: none;
+}
+.width-45{
+    width: 45%;
+}
+.width-55{
+    width: 55%;
+}
+
+.galleryCaption .width-45, .galleryCaption .width-55{
+    float: none;
+}
+
+.font-size-large{
+    font-size: large;
+}
+
+.like-btn{
+    cursor: pointer;
+    width: 2.2em;
+    /*position: absolute;
+    bottom: 4.5em;
+    right: 0.2em;
+    */
+    float: none !important;
+    height: 2.0em;
+    z-index: 1;
+    background: url(../Images/like.svg) no-repeat;
+    background-size: auto;
+    background-position-x: 3%;
+}
+
+.like-btn-added{
+    background: url(../Images/like-inserted.svg) no-repeat;
+    background-position-x: 3%;
+}
+
+.artFilter{
+    padding: 1em 0 0 0;
+    margin: 1em 1em 2em;
+    border-top: 0.01em solid #ddd;
+    border-bottom: 0.01em solid #ddd;
+    overflow: auto;
+}
+
+.image-div{
+    background-size: cover;
+    height: 20em;
+}
+
+.customLink{
+    color: rgb(0, 0, 238);
+    text-decoration: none;
+}
+.customLink:hover{
+	text-decoration: underline;
+  cursor: pointer;
+}
+.customLink:visited{
+    color: rgb(85, 26, 139);
+}
+
+.gallery .galleryBoard .galleryCaption h2{
+    text-align: center;
+    font-size: 1em;
+    font-weight: 600;
+	/*
+	float: left;
+    width: 85%;
+	max-width: 100%;
+	*/
+}
+
+.galleryBoard .liFigures{
+    float: none !important;
+    display: inline-block;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    box-sizing: border-box;
+    page-break-inside:avoid !important;
+}
+
+.galleryBoard img{
+    height: 20em;
+}
+
+div[name="pagination"]{
+    text-align: center;
+}
+
+#imgLoader{
+    display: none;
+}
+
+.background-color-90929294{
+    background-color: #90929294;
+}
+
+.display-none{
+    display: none !important;
+}
+
+.liFigures, .galleryFigureWrapper, .gallery{
+    position: relative !important;
+    page-break-inside: avoid !important;
+}
+
+@media print{
+    .Modal{
+        display: none;
+    }
+    
+    .liFigures, .galleryFigureWrapper{
+        position: relative;
+        page-break-inside: avoid !important;
+    }
+    .gallery{
+        width: 90%;
+    }
+    .galleryBoard .liFigures{
+        width: 33.33333%;
+    }
+    .galleryBoard .liFigures:nth-of-type(2n+1) {
+        clear: none;
+    }
+
+    .galleryBoard .liFigures:nth-of-type(3n+1) {
+        clear: left;
+    }
+
+    .galNotThree .galleryBoard .liFigures{
+        width: 50%;
+    }
+    .galNotThree .galleryBoard .liFigures:nth-of-type(2n+1){
+        clear: left;
+    }
+
+    .galNotThree .galleryBoard .liFigures:nth-of-type(3n+1) {
+        clear: none;
+    }
+
+}
+
