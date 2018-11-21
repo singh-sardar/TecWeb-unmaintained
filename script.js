@@ -1,18 +1,3 @@
-//function to open the login modal
-function openLoginModal() {
-	document.getElementById('LoginModal').style.display='block';
-}
-
-//function to open the sign in Modal
-function openSignUpModal() {
-	document.getElementById('SignUpModal').style.display='block';
-}
-
-//function to open the edit profile Modal
-function openEditProfileModal() {
-	document.getElementById('EditProfileModal').style.display='block';
-}
-
 //function to close the  modal clicking outside
 function eventListnerforLoginModal() {
 	var arrModal = ['LoginModal','SignUpModal','EditProfileModal','SearchModal','LikedByModal'];
@@ -67,17 +52,18 @@ function doLogin(event) {
       }
       //calback function for the request
       xhttp.onreadystatechange = function() {
-      if (this.readyState === 4 && this.status === 200) {
+      	if (this.readyState === 4 && this.status === 200) {
           //if status is ok
           if(this.responseText==="Success")
               location.reload();
           else
-              document.getElementById("InvalidLogin").innerHTML = this.responseText;
-
-      }
+			  document.getElementById("InvalidLogin").innerHTML = this.responseText;
+			  
+			  closeModal('imgLoader');	
+      	}
       };
 
-
+	  openModal('imgLoader');
       //doing th ajax request
       xhttp.open("POST", "doLogin.php", true);
       xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -108,9 +94,10 @@ function doLogOut(event) {
 		if(this.responseText=="success"){
 			document.location.href="/"; //go to home page
 		}
-
+		closeModal('imgLoader');
 	}
 	};
+	openModal('imgLoader');
 	//doing th ajax request
 	xhttp.open("POST", "doLogOut.php", true);
 	xhttp.send();
@@ -147,9 +134,10 @@ function doSignUp(event) {
                 }else{
                     document.getElementById("SignUpMessage").innerHTML = this.responseText;
                 }
-
+				closeModal('imgLoader');
             }
-            };
+			};
+			openModal('imgLoader');
             //doing th ajax request
             xhttp.open("POST", "doSignUp.php", true);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -190,10 +178,10 @@ function doEditProfile(event) {
             if (this.readyState === 4 && this.status === 200) {
                 //if status is ok
                 document.getElementById("EditProfileMessage").innerHTML = this.responseText;
-
+				closeModal('imgLoader');
             }
             };
-
+			openModal('imgLoader');
             //doing th ajax request
             xhttp.open("POST", "doEditProfile.php", true);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -222,10 +210,16 @@ function openDrobDownMenu(btn) {
 }
 
 function openModal(idModal){
-	document.getElementById(idModal).style.display='block';
+	if(idModal == "imgLoader")
+		document.getElementById(idModal).style.display = "flex";
+	else
+		document.getElementById(idModal).classList.add('display-block');
 }
 function closeModal(idModal){
-	document.getElementById(idModal).style.display='none';
+	if(idModal == "imgLoader")
+		document.getElementById(idModal).style.display = "none";
+	else
+		document.getElementById(idModal).classList.remove('display-block');
 }
 
 function orderByGalleryChanged(){
@@ -261,7 +255,9 @@ function btnDeleteOnClick(obj){
 					alert('Error');
 				}
 			}
+			closeModal('imgLoader');
 		};
+		openModal('imgLoader');
 		//doing th ajax request
 		xhttp.open("POST", "deleteItem.php", true);
 		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -294,16 +290,17 @@ function btnLikedByOnClick(obj){
 				for(var i=0; i < arrUsers.length; ++i){
 					str += '<div class="comment"><a href="gallery.php?gallerySearch=' + arrUsers[i]+'">'+arrUsers[i]+'</a></div>'; 
 				}
-				document.getElementById('imgLoader').classList.toggle('display-none');
 				document.querySelector('#LikedByModal .commentSection').innerHTML = str;
 				openModal('LikedByModal');
 			}else if(arrRes['Result'] == -1 || arrRes['Result'] == "Connection Error"){//Error
 				alert('Error');
 			}
+			closeModal('imgLoader');
 		}
 	};
 	//doing th ajax request
-	document.getElementById('imgLoader').classList.toggle('display-none');
+	//document.getElementById('imgLoader').classList.toggle('display-none');
+	openModal('imgLoader');
 	xhttp.open("POST", "likedBy.php", true);
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send("art="+artist+"&nomeImg="+immg);
@@ -345,8 +342,10 @@ function btnLikeOnClick(obj){
 			}else if(arrRes['Result'] == 1 || arrRes['Result'] == 2){
 				updateLikeCounter(idNumber,artist,immg);
 			}
+			closeModal('imgLoader');
         }
 	};
+	openModal('imgLoader');
 	//doing th ajax request
 	xhttp.open("POST", "giveLike.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -376,8 +375,10 @@ function updateLikeCounter(idNumber,artist,imageName){
             }else{
 				obj.innerHTML = "Likes: "+arrRes['Result'];
 			}
+			closeModal('imgLoader');
         }
 	};
+	openModal('imgLoader');
 	//doing th ajax request
 	xhttp.open("POST", "getLikes.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

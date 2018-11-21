@@ -25,9 +25,6 @@
         require_once "DbConnector.php";
         require_once "functions.php";
     ?>
-    <div id="imgLoader" class="image-loader display-none">
-        <img src="/Images/eclipse.svg">
-    </div>
     <div class="gallery container1024" id="content">
         <form method="get" action="" name="formArtFilter">
             <div class="artFilter">
@@ -90,29 +87,27 @@
                     //connecting to db
                     $myDb= new DbConnector();
                     $myDb->openDBConnection();
-                    //$param = htmlspecialchars($gallerySearch, ENT_QUOTES, "UTF-8");//cleaning the input
-                    $param = $gallerySearch;
                     $result = array();
                     if($myDb->connected){
                         if(!isset($galleryCategory) || (isset($galleryCategory) && ($galleryCategory == 'All'))){
-                            $qrStr = "SELECT Artista,Nome FROM opere WHERE Descrizione LIKE '%".$param."%' OR Categoria LIKE '%".$param."%' OR Artista LIKE '%".$param."%' OR Nome LIKE '%".$param."%'";
+                            $qrStr = "SELECT Artista,Nome FROM opere WHERE Descrizione LIKE '%".$gallerySearch."%' OR Categoria LIKE '%".$gallerySearch."%' OR Artista LIKE '%".strtolower($gallerySearch)."%' OR Nome LIKE '%".$gallerySearch."%'";
                             if($orderBy == 'likes'){
                             	$qrStr = "SELECT Nome, Artista, COUNT(likes.Opera) as Likes FROM opere o LEFT JOIN likes on Nome=Opera and Artista=Creatore
-                                    WHERE o.Descrizione LIKE '%".$param."%' OR o.Categoria LIKE '%".$param."%' OR o.Artista LIKE '%".$param."%'
+                                    WHERE o.Descrizione LIKE '%".$gallerySearch."%' OR o.Categoria LIKE '%".$gallerySearch."%' OR o.Artista LIKE '%".$gallerySearch."%' OR Nome LIKE '%".$gallerySearch."%'
                                     GROUP BY o.Nome, o.Artista ORDER BY COUNT(likes.Opera) DESC";
                             }
                             if($orderBy == 'latestAdded'){
-                            	$qrStr = "SELECT Artista,Nome FROM opere WHERE Descrizione LIKE '%".$param."%' OR Categoria LIKE '%".$param."%' OR Artista LIKE '%".$param."%' OR Nome LIKE '%".$param."%' ORDER BY Data_upload DESC";
+                            	$qrStr = "SELECT Artista,Nome FROM opere WHERE Descrizione LIKE '%".$gallerySearch."%' OR Categoria LIKE '%".$gallerySearch."%' OR Artista LIKE '%".strtolower($gallerySearch)."%' OR Nome LIKE '%".$gallerySearch."%' ORDER BY Data_upload DESC";
                             }
                         }elseif(isset($galleryCategory) && ($galleryCategory != 'All')){
-                            $qrStr = 'SELECT Artista,Nome FROM opere WHERE Categoria="'.$galleryCategory.'" AND (Descrizione LIKE "%'.$param.'%" OR Artista LIKE "%'.$param.'%" OR Nome LIKE "%'.$param.'%")';
+                            $qrStr = 'SELECT Artista,Nome FROM opere WHERE Categoria="'.$galleryCategory.'" AND (Descrizione LIKE "%'.$gallerySearch.'%" OR Artista LIKE "%'.strtolower($gallerySearch).'%" OR Nome LIKE "%'.$gallerySearch.'%")';
                             if($orderBy == 'likes'){
                             	$qrStr = 'SELECT Nome, Artista, COUNT(likes.Opera) as Likes FROM opere LEFT JOIN likes on Nome=Opera and Artista=Creatore
-                                     WHERE Categoria="'.$_GET['galleryCategory'].'" AND (Descrizione LIKE "%'.$param.'%" OR Artista LIKE "%'.$param.'%")
+                                     WHERE Categoria="'.$galleryCategory.'" AND (Descrizione LIKE "%'.$gallerySearch.'%" OR Artista LIKE "%'.$gallerySearch.'%" OR Nome LIKE "%'.$gallerySearch.'%")
                                      GROUP BY Nome, Artista ORDER BY COUNT(likes.Opera) DESC';
                             }
                             if($orderBy == 'latestAdded'){
-                                $qrStr = 'SELECT Artista,Nome FROM opere WHERE Categoria="'.$galleryCategory.'" AND (Descrizione LIKE "%'.$param.'%" OR Artista LIKE "%'.$param.'%" OR Nome LIKE "%'.$param.'%") ORDER BY Data_upload DESC';
+                                $qrStr = 'SELECT Artista,Nome FROM opere WHERE Categoria="'.$galleryCategory.'" AND (Descrizione LIKE "%'.$gallerySearch.'%" OR Artista LIKE "%'.strtolower($gallerySearch).'%" OR Nome LIKE "%'.$gallerySearch.'%") ORDER BY Data_upload DESC';
                             }
                         }
                         $result = $myDb->doQuery($qrStr);
@@ -124,11 +119,9 @@
                     //connecting to db
                     $myDb= new DbConnector();
                     $myDb->openDBConnection();
-                    //$param = htmlspecialchars($galleryCategory, ENT_QUOTES, "UTF-8");//cleaning the input
-                    $param = $galleryCategory;
                     $result = array();
                     if($myDb->connected){
-                        if($param == 'All'){
+                        if($galleryCategory == 'All'){
                             $qrStr = "SELECT Artista,Nome FROM opere;";
                             if($orderBy == 'likes'){
                                 $qrStr = "SELECT Nome, Artista, COUNT(likes.Opera) as Likes FROM opere LEFT JOIN likes on Nome=Opera and Artista=Creatore GROUP BY Nome, Artista ORDER BY COUNT(likes.Opera) DESC";
@@ -137,15 +130,16 @@
                                 $qrStr = "SELECT Artista,Nome FROM opere ORDER BY Data_upload DESC;";
                             }
                         }else{
-                            $qrStr = "SELECT Artista,Nome FROM opere WHERE Categoria='".$param."'";
+                            $qrStr = "SELECT Artista,Nome FROM opere WHERE Categoria='".$galleryCategory."'";
                             if($orderBy == 'likes'){
                                 $qrStr = "SELECT Nome, Artista, COUNT(likes.Opera) as Likes FROM opere JOIN likes on Nome=Opera and Artista=Creatore
-                                     WHERE Categoria='".$param."' GROUP BY Nome, Artista ORDER BY COUNT(likes.Opera) DESC";
+                                     WHERE Categoria='".$galleryCategory."' GROUP BY Nome, Artista ORDER BY COUNT(likes.Opera) DESC";
                             }
                             if($orderBy == 'latestAdded'){
-                                $qrStr = "SELECT Artista,Nome FROM opere WHERE Categoria='".$param."' ORDER BY Data_upload DESC;";
+                                $qrStr = "SELECT Artista,Nome FROM opere WHERE Categoria='".$galleryCategory."' ORDER BY Data_upload DESC;";
                             }
                         }
+                        
                         $result = $myDb->doQuery($qrStr);
                     }
                     else

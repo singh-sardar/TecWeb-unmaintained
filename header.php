@@ -33,7 +33,7 @@
         if(isset($_SESSION['Username'])){
           echo '<a href="#">'.$_SESSION["Username"].'</a>';
           echo '<div class="account-dropdown-content">
-                  <a href="#" onclick="openEditProfileModal()">Edit Profile</a>
+                  <a href="#" onclick="openModal(\'EditProfileModal\')">Edit Profile</a>
                   <a href="#" onclick="doLogOut()">Logout</a>
                 </div>';
         }
@@ -42,19 +42,22 @@
   <li class="user account-content">
     <?php //To Sign in or edit profile of User
       if(isset($_SESSION['Username']))
-      echo '<a href="#" onclick="openEditProfileModal()">Edit Profile: '.$_SESSION["Username"].'</a>';
+        //echo '<a href="#" onclick="openEditProfileModal()">Edit Profile: '.$_SESSION["Username"].'</a>';
+        echo '<a href="#" onclick="openModal(\'EditProfileModal\')">Edit Profile: '.$_SESSION["Username"].'</a>';
     ?>
   </li>
   <li class="user">
     <?php //To Sign in or edit profile of User
       if(!isset($_SESSION['Username']))
-        echo '<a href="#" onclick="openSignUpModal()" >Sign Up</a>';
+        //echo '<a href="#" onclick="openSignUpModal()" >Sign Up</a>';
+        echo '<a href="#" onclick="openModal(\'SignUpModal\')">Sign Up</a>';
     ?>
   </li>
   <li class="user">
     <?php
       if(!isset($_SESSION['Username']))
-        echo '<a href="#" onclick="openLoginModal()">Login</a>';
+        //echo '<a href="#" onclick="openLoginModal()">Login</a>';
+        echo '<a href="#" onclick="openModal(\'LoginModal\')">Login</a>';
     ?>
    </li>
    <li class="user account-content">

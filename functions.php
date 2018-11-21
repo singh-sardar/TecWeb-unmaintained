@@ -27,7 +27,7 @@
         echo '<div class="liFigures">';
         echo     '<div class="galleryFigureWrapper" id="figureWrapper_'.$numFig.'">';
         //echo '      <div class="image-div" style="background-image: url(Images/Art/'.rawurlencode($artista).'/'.rawurlencode($nomeImmagine).'.jpeg)"></div>';
-        echo '      <div class="background-color-90929294"><img src="Images/Art/'.rawurlencode($artista).'/'.rawurlencode($nomeImmagine).'.jpeg"/></div>';
+        echo '      <div class="background-color-90929294" name="bg-img"><img src="Images/Art/'.rawurlencode($artista).'/'.rawurlencode($nomeImmagine).'.jpeg"/></div>';
         echo '      <input type="hidden" value="'.$artista.'" name="nameArtist"/>';
         echo '      <input type="hidden" value="'.$nomeImmagine.'" name="nameImage"/>';
         echo '      <div class="galleryCaption">';
@@ -61,7 +61,7 @@
         $myDb->openDBConnection();
         $resArr=array();
         if($myDb->connected){
-            $result = $myDb->doQuery('SELECT Utente FROM likes WHERE opera="'.$nomeImmagine.'" AND Utente="'.$username.'" AND Creatore="'.$artista.'";');
+            $result = $myDb->doQuery('SELECT Utente FROM likes WHERE opera="'.$nomeImmagine.'" AND Utente="'.strtolower($username).'" AND Creatore="'.$artista.'";');
             if($result){
                 if($result->num_rows==0){//significa che il like non è ancora presente per l'opera
                     $resArr['Result'] = false;        

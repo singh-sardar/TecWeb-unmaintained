@@ -431,14 +431,7 @@ background-color: rgba(241,241,241,1);
     left: 25%;
     bottom: 5%;
 }
-/*
-.btnDiscover::before{
-    content: url(../Images/external-link.png);
-    position: absolute;
-    left: 25%;
-    /*bottom: 4%;*/
-}
-*/
+
 .galleryCaption .width-55 .btnDiscover::before{
     left: 48%;
 }
@@ -582,6 +575,7 @@ div.divCategoryButtons button{
     background: rgba(0,0,0,0.65);
     Z-INDEX: 99999;
     TOP: 0;
+    left: 0;
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
@@ -605,10 +599,6 @@ div.divCategoryButtons button{
 
 .galleryCaption .width-45, .galleryCaption .width-55{
     float: left;
-}
-
-.font-size-large{
-    font-size: large;
 }
 
 .like-btn{
@@ -639,11 +629,6 @@ div.divCategoryButtons button{
     overflow: auto;
 }
 
-.image-div{
-    background-size: cover;
-    height: 20em;
-}
-
 .customLink{
     color: rgb(0, 0, 238);
     text-decoration: none;
@@ -660,11 +645,6 @@ div.divCategoryButtons button{
     text-align: center;
     font-size: 1em;
     font-weight: 600;
-	/*
-	float: left;
-    width: 85%;
-	max-width: 100%;
-	*/
 }
 
 .margin-top-2-5-em{
