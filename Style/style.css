@@ -961,9 +961,12 @@ tr:nth-child(odd) {
 }
 
 /*************************SKIP MENU*************************************************/
-#skipmenu {
+#skipmenu{
     height: 0;
-    text-indent: 100%;
-    white-space: nowrap;
+    /*text-indent: 100%;
+    white-space: nowrap;*/
     overflow: hidden;
+}
+#skipmenu:focus-within {
+  height: 100%;
 }
