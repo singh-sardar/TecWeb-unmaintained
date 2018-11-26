@@ -8,117 +8,22 @@
       <meta name="author" content="Daniele Bianchin, Pardeep Singh, Davide Liu, Harwinder Singh"/>
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       <link rel="stylesheet" href="Style/style.css"/>
+      <link rel="stylesheet" href="viewStyle.css"/>
       <script type="text/javascript" src="script.js" ></script>
       <script type="text/javascript" src="imagezoom.js" ></script>
+      <script type="text/javascript" src="ajaxComment.js" ></script>
       <title>Artbit</title>
-      <style>
-      * {box-sizing: border-box;}   
-
-      .img-magnifier-container {
-        position: relative;
-      }   
-
-      .img-magnifier-glass {
-        position: absolute;
-        border: 3px solid #000;
-        cursor: none;
-        /*Set the size of the magnifier glass:*/
-        width: 7em;
-        height: 7em
-      }
-
-    .imageAndComments img {
-        max-width: 70%;
-        max-height: 35em;
-        margin-bottom: 2em;
-
-    }
-
-    .imageAndComments {
-        overflow: hidden;
-        padding: 1em;
-        overflow: auto;
-    }
-
-    .commentSection {
-      background-color: #8080801a;
-      /*max-width: 27%*/
-      overflow-y: auto;
-        margin-left: 0;
-        padding: 1em;
-        height: 35em;
-        min-width: 10em;
-        max-width: 20em;
-        border-radius: 2px;
-    }
-
-    textarea[name=input-comment]
-    {
-    resize: vertical;
-    }
-
-    .comment{
-      word-wrap: break-word;
-      background-color: #8080801a;
-      border-radius: 2px;
-      padding: 0.4em;
-      margin: 0.4em;
-      }
-
-    .marginAuto{
-      margin:auto;
-      display: flex;
-
-    }
-
-    .artworkTitle{
-      text-align:center;
-      margin-top: 2em;
-    }
-
-    .descrizioneTesto{
-      padding: 2em;
-      background-color: #8080804d;
-      word-wrap: break-word;
-      margin-bottom: 2%;
-      border-radius: 2px;
-    }
-
-    .commentator
-    {
-      font-weight: bold;
-    }
-
-    @media screen and (max-width: 1024px) {
-
-    .marginAuto{display:block;}
-
-    .commentSection {
-      max-width: 100%;
-      overflow-y: auto;
-      margin-left: 0%;
-      padding: 1em;
-      border-radius: 2px;
-      clear: both;
-    }
-      .imageAndComments img {
-      display: flex;
-      max-width: 100%;
-      max-height: 35em;
-    }
-    }
-      </style>
     </head>
-
-    <body onload="eventListnerforLoginModal()" >
-      <?php
+    <body onload="eventListnerforLoginModal()">
+    
+    <?php
       require_once "header.php";
       require_once "loginModal.php";
       require_once "searchModal.php";
       require_once "signUpModal.php";
       require_once "editProfileModal.php";
       require_once "DbConnector.php";
-
+      
       $Title = $_GET['Title'];
       $Artist = $_GET['Artist'];
       $Description = '';
@@ -139,39 +44,46 @@
           $Description = $row['Descrizione'];
         }
         else
-        {
            echo "<script> window.location.replace('404.php') </script>";
-        }
        }
        else
-       {
          echo "<script> window.location.replace('index.php') </script>";
-       }
       }
       else
-      {
         echo '<script>alert(\'Database problem!\');</script>';
-      }
-      ?>
-        <div class="container1024">
-           <h1 class="artworkTitle">
-              <?php echo $Title; ?>
-          </h1>
-
-          <div class="imageAndComments">
-            <div class="img-magnifier-glass"></div>
-          <div class="marginAuto img-magnifier-container">
-            <img id="myimage" src=<?php echo "'Images/Art/".$Artist."/".$Title.".jpeg'";?> onmouseleave="HideGlass()" onmouseenter="ShowGlass()" />
-            <div class="commentSection">
-            <?php
+    ?>
+    <h1 id="artworkTitle"><?php echo $Title; ?></h1>
+    <div id="imageAndCommentSection">
+    	<div id="imageContainer">
+        	<div class="img-magnifier-glass" id="glass"></div>
+    		<img id="myimage" src=<?php echo "'Images/Art/".$Artist."/".$Title.".jpeg'";?>  onload="magnify('myimage', 3)" alt=<?php echo '"'.$Title.'"' ?> >
+        </div>
+    	<div id="description-comment-wrapper">
+        <div id="description-comments">
+        <div class="commentator">Description</div>
+        <div id="main-description"><?php echo $Description; ?></div>
+        <div ><?php echo ' <div class="commentator">by <a href="gallery.php?gallerySearch='.$Artist.'">'.$Artist.'</a></div>' ?></div>
+        </div>
+        <div id="commentSection">
+        <div class="comment">
+        <div class="commentator">
+        <?php
+        	if($myDb->connected && isset($_SESSION['Username']))
+            	echo $_SESSION['Username'];
+            else
+            	echo "Login to comment."
+         ?>
+         </div>
+         <?php
+         	$en = !isset($_SESSION['Username']) ? "disabled=\"disabled\"" : "";
+         ?>
+         <textarea name="input-comment" id="texxt" <?php echo  $en?>> </textarea>
+    	<?php
+        	echo '<input type="button" value="comment" id="comment-btn" onclick="doComment(\''.$Title.'\',\''.$Artist.'\')" '.$en.'></div>';
+        ?>
+        <?php
             if($myDb->connected)
             {
-              if(isset($_SESSION['Username']))
-              {
-                echo '<div class="comment">';
-                echo '<div class="commentator">'.$_SESSION['Username'].'</div>';
-                echo '<textarea cols="22" rows="3" name="input-comment"> </textarea></div>';
-              }
               $qrStr = 'SELECT Commento, Utente FROM commenti WHERE Opera ="'.$Title.'"';
               $result = $myDb->doQuery($qrStr);
               if(isset($result) && ($result->num_rows > 0))
@@ -179,27 +91,17 @@
                 while($row = $result->fetch_assoc())
                 {
                   echo '<div class="comment">';
-                  echo '  <div class="commentator">'.$row['Utente']."</div>";
+                  echo '  <div class="commentator"><a href="gallery.php?gallerySearch='.$row['Utente'].'">'.$row['Utente'].'</a></div>';
                   echo $row['Commento']."</div>";
                 }
               }
             }
-            ?>
-            </div>
-            </div>
-          </div>
-           <div class="descrizioneTesto">
-            <div class="commentator">Description</div>
-              <?php echo $Description; ?>
-           </div>
-        </div>
+          ?>
+      </div>
+      </div>
+      </div>
     <div class="footer">
         <p>Artbit</p>
-    <script>
-      /*Execute the magnify function:*/
-      magnify("myimage", 3);
-      /*Specify the id of the image, and the strength of the magnifier glass:*/ 
-    </script>
+    </div>
     </div>
     </body>
-</html>
