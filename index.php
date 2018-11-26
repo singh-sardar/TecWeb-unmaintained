@@ -16,7 +16,7 @@
 <body onload="eventListnerforLoginModal(); initializePagination();" >
   <?php
 	require_once "header.php";
-    require_once "loginModal.php";
+  require_once "loginModal.php";
 	require_once "searchModal.php";
 	require_once "likedByModal.php";
 	require_once "signUpModal.php";

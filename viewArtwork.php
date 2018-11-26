@@ -15,7 +15,7 @@
       <title>Artbit</title>
     </head>
     <body onload="eventListnerforLoginModal()">
-    
+
     <?php
       require_once "header.php";
       require_once "loginModal.php";
@@ -23,10 +23,9 @@
       require_once "signUpModal.php";
       require_once "editProfileModal.php";
       require_once "DbConnector.php";
-      
+
       $Title = $_GET['Title'];
       $Artist = $_GET['Artist'];
-      $Description = '';
 
       $myDb= new DbConnector();
       $myDb->openDBConnection();
@@ -34,7 +33,7 @@
       {
        if(isset($Title) && isset($Artist))
        {
-        $qrStr = 'SELECT Artista, Nome, Descrizione FROM opere WHERE Artista ="'.$Artist.'"'.' AND Nome ="'.$Title.'"';
+        $qrStr = 'SELECT Artista, Nome, Descrizione, Categoria, Data_upload FROM opere WHERE Artista ="'.$Artist.'"'.' AND Nome ="'.$Title.'"';
         $result = $myDb->doQuery($qrStr);
         if(isset($result) && ($result->num_rows === 1))
         {
@@ -42,27 +41,44 @@
           $Title = $row['Nome'];
           $Artist = $row['Artista'];
           $Description = $row['Descrizione'];
+          $Category = $row['Categoria'];
+          $Date = $row['Data_upload'];
+          $qrStr = 'SELECT Opera FROM likes WHERE Opera="'.$Title.'"'.' AND Creatore="'.$Artist.'"';
+          $Likes = $myDb->doQuery($qrStr)->num_rows;
+          $qrStr = 'SELECT Opera FROM commenti WHERE Opera="'.$Title.'"'.' AND Creatore="'.$Artist.'"';
+          $Comments = $myDb->doQuery($qrStr)->num_rows;
+          $qrStr = 'SELECT Nome, Cognome FROM artisti WHERE Username="'.$Artist.'"';
+          $result = $myDb->doQuery($qrStr);
+          $row = $result->fetch_assoc();
+          $ArtistName = $row['Nome'] . $row['Cognome'];
         }
         else
            echo "<script> window.location.replace('404.php') </script>";
        }
        else
-         echo "<script> window.location.replace('index.php') </script>";
+         echo "<script> window.location.replace('404.php') </script>";
       }
       else
         echo '<script>alert(\'Database problem!\');</script>';
     ?>
     <h1 id="artworkTitle"><?php echo $Title; ?></h1>
     <div id="imageAndCommentSection">
+    <!--Lense-->
     	<div id="imageContainer">
-        	<div class="img-magnifier-glass" id="glass"></div>
+        <div class="img-magnifier-glass" id="glass"></div>
     		<img id="myimage" src=<?php echo "'Images/Art/".$Artist."/".$Title.".jpeg'";?>  onload="magnify('myimage', 3)" alt=<?php echo '"'.$Title.'"' ?> >
-        </div>
+      </div>
+    <!--Description-->
     	<div id="description-comment-wrapper">
         <div id="description-comments">
-        <div class="commentator">Description</div>
-        <div id="main-description"><?php echo $Description; ?></div>
-        <div ><?php echo ' <div class="commentator">by <a href="gallery.php?gallerySearch='.$Artist.'">'.$Artist.'</a></div>' ?></div>
+          <div class="commentator">Description</div>
+          <div id="main-description"><?php echo $Description; ?></div>
+          <div><?php echo ' <div class="commentator">By: <a href="gallery.php?gallerySearch='.$Artist.'">'.$Artist.'</a></div>' ?></div>
+          <div><div class="commentator">Artist: <?php echo $ArtistName; ?></div></div>
+          <div><div class="commentator">Uploaded on: <?php echo $Date; ?></div></div>
+          <div><div class="commentator">Category: <?php echo $Category; ?></div></div>
+          <div><div class="commentator">Likes: <?php echo $Likes; ?></div></div>
+          <div><div class="commentator">Comments: <?php echo $Comments; ?></div></div>
         </div>
         <div id="commentSection">
         <div class="comment">
@@ -100,8 +116,7 @@
       </div>
       </div>
       </div>
-    <div class="footer">
-        <p>Artbit</p>
+    <?php require_once "footer.html"?>
     </div>
     </div>
     </body>
