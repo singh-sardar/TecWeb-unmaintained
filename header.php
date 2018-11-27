@@ -1,30 +1,40 @@
 <div id="skipmenu">
-  <a href="#content">Go to content</a>
+  <a href="#content" onfocus="skipFocused()" onfocusout="skipUnfocused()">Go to content</a>
 </div>
 <div class="menu" id="Topnav">
 <div class="container1024">
   <a class="imageLink" href="index.php"><img src="Images/logo.png" alt="Logo"/></a>
   <ul>
-    <li class="firstMenuItem <?php if(basename($_SERVER['PHP_SELF'])=="index.php")echo "activeMenuItem";?>"><a href="index.php">Home</a></li>
-    <li <?php if(basename($_SERVER['PHP_SELF'])=="gallery.php")echo 'class="activeMenuItem"';?> ><a href="gallery.php">Gallery</a></li>
-    <li <?php if(basename($_SERVER['PHP_SELF'])=="upload.php")echo 'class="activeMenuItem"';?> ><a href="upload.php">Upload</a></li>
-    <li><a href="index.php#team">Team</a></li>
-    <li <?php if(basename($_SERVER['PHP_SELF'])=="likedItems.php")echo 'class="activeMenuItem"';?> >
+    <?php
+      session_start();
+      $page = basename($_SERVER['PHP_SELF']);
+    ?>
+    <li class="firstMenuItem <?php if(($page)=="index.php")echo "activeMenuItem";?>"><?php if(($page)!="index.php")echo '<a href="index.php">Home</a>'; else echo '<div class="notClickable">Home</div>';?></li>
+    <li class="<?php if(($page)=="gallery.php")echo "activeMenuItem";?>"><?php if(($page)!="gallery.php")echo '<a href="gallery.php">Gallery</a>'; else echo '<div class="notClickable">Gallery</div>';?></li>
+    <li class="<?php if(($page)=="upload.php")echo "activeMenuItem";?>"><?php if(($page)!="upload.php")echo '<a href="upload.php">Upload</a>'; else echo '<div class="notClickable">Upload</div>';?></li>
+    <li class="<?php if(($page)=="likedItems.php")echo "activeMenuItem";?>">
       <?php
-        session_start();
         //Se l'utente è loggato allora può vedere i suoi preferiti
         if(isset($_SESSION['Username'])){
-          echo '<a href="likedItems.php">Liked Images</a>';
+          if(($page)!="likedItems.php")
+            echo '<a href="likedItems.php">Liked Images</a>';
+          else
+            echo '<div class="notClickable">Liked Images</div>';
         }
       ?>
     </li>
-    <li <?php if(basename($_SERVER['PHP_SELF'])=="userItems.php")echo 'class="activeMenuItem"';?> >
+    <li class="<?php if(($page)=="userItems.php")echo "activeMenuItem";?>">
       <?php
+        //Se l'utente è loggato allora può vedere i suoi preferiti
         if(isset($_SESSION['Username'])){
-          echo '<a href="userItems.php">Your Images</a>';
+          if(($page)!="userItems.php")
+            echo '<a href="userItems.php">Your Images</a>';
+          else
+            echo '<div class="notClickable">Your Images</div>';
         }
       ?>
     </li>
+    <li><a href="index.php#team">Team</a></li>
     <li>
       <a class="btnSearch" href="#" onclick="openModal('SearchModal')"><span class="searchIcon"></span></a>
     </li>

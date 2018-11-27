@@ -30,6 +30,29 @@ function eventListnerforLoginModal() {
 	}
 }
 
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById("scrollToTop").style.display = "block";
+    } else {
+        document.getElementById("scrollToTop").style.display = "none";
+    }
+}
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
+
+function skipFocused(){
+	document.getElementById('skipmenu').style.height = "100%";
+}
+
+function skipUnfocused(){
+	document.getElementById('skipmenu').style.height = 0;
+}
+
 function validateString(str){
 	return !(str==="");
 }
@@ -58,8 +81,8 @@ function doLogin(event) {
               location.reload();
           else
 			  document.getElementById("InvalidLogin").innerHTML = this.responseText;
-			  
-			  closeModal('imgLoader');	
+
+			  closeModal('imgLoader');
       	}
       };
 
@@ -288,7 +311,7 @@ function btnLikedByOnClick(obj){
 				str = "";
 				arrUsers = arrRes['Users'];
 				for(var i=0; i < arrUsers.length; ++i){
-					str += '<div class="comment"><a href="gallery.php?gallerySearch=' + arrUsers[i]+'">'+arrUsers[i]+'</a></div>'; 
+					str += '<div class="comment"><a href="gallery.php?gallerySearch=' + arrUsers[i]+'">'+arrUsers[i]+'</a></div>';
 				}
 				document.querySelector('#LikedByModal .commentSection').innerHTML = str;
 				openModal('LikedByModal');
@@ -412,7 +435,7 @@ function btnPaginationOnClick(id){
 	if(tmp !== null){
 		tmp.classList.add('btnPaginationActive');
 	}
-	
+
 	//document.getElementById("btnPagBack").classList.remove("display-none");
 	//document.getElementById("btnPagForward").classList.remove("display-none");
 	var btnBack = document.getElementById("btnPagBack");
