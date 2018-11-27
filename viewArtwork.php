@@ -64,12 +64,12 @@
     <h1 id="artworkTitle"><?php echo $Title; ?></h1>
     <div id="imageAndCommentSection">
     <!--Lense-->
-    	<div id="imageContainer">
+      <div id="imageContainer">
         <div class="img-magnifier-glass" id="glass"></div>
-    		<img id="myimage" src=<?php echo "'Images/Art/".$Artist."/".$Title.".jpeg'";?>  onload="magnify('myimage', 3)" alt=<?php echo '"'.$Title.'"' ?> >
+        <img id="myimage" src=<?php echo "'Images/Art/".$Artist."/".$Title.".jpeg'";?>  onload="magnify('myimage', 3)" alt=<?php echo '"'.$Title.'"' ?> >
       </div>
     <!--Description-->
-    	<div id="description-comment-wrapper">
+      <div id="description-comment-wrapper">
         <div id="description-comments">
           <div class="commentator">Description</div>
           <div id="main-description"><?php echo $Description; ?></div>
@@ -84,18 +84,18 @@
         <div class="comment">
         <div class="commentator">
         <?php
-        	if($myDb->connected && isset($_SESSION['Username']))
-            	echo $_SESSION['Username'];
+          if($myDb->connected && isset($_SESSION['Username']))
+              echo $_SESSION['Username'];
             else
-            	echo "Login to comment."
+              echo "Login to comment."
          ?>
          </div>
          <?php
-         	$en = !isset($_SESSION['Username']) ? "disabled=\"disabled\"" : "";
+          $en = !isset($_SESSION['Username']) ? "disabled=\"disabled\"" : "";
          ?>
          <textarea name="input-comment" id="texxt" <?php echo  $en?>> </textarea>
-    	<?php
-        	echo '<input type="button" value="comment" id="comment-btn" onclick="doComment(\''.$Title.'\',\''.$Artist.'\')" '.$en.'></div>';
+      <?php
+          echo '<input type="button" value="comment" id="comment-btn" onclick="doComment(\''.$Title.'\',\''.$Artist.'\')" '.$en.'></div>';
         ?>
         <?php
             if($myDb->connected)
@@ -117,6 +117,5 @@
       </div>
       </div>
     <?php require_once "footer.html"?>
-    </div>
     </div>
     </body>
