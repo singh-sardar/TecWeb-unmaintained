@@ -177,13 +177,13 @@
 		  <p>Software Engineer</p>
 		</div>
 		<div class="teamMember">
-		  <img src="Images/Team/davide_liu.jpg" alt='Team member face'/>
+		  <img src="Images/Team/pardeep_singh.jpg" alt='Team member face'/>
 		  <h2>Pardeep Singh</h2>
 		  <hr/>
 		  <p>Full Stack Developer</p>
 		</div>
 		<div class="teamMember">
-		  <img src="Images/Team/davide_liu.jpg" alt='Team member face'/>
+		  <img src="Images/Team/daniele_bianchin.jpg" alt='Team member face'/>
 		  <h2>Daniele Bianchin</h2>
 		  <hr/>
 		  <p>Cybersecurity Expert</p>
