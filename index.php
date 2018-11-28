@@ -168,7 +168,7 @@
 		  <img src="Images/Team/davide_liu.jpg" alt='Team member face'/>
 		  <h2>Davide Liu</h2>
 		  <hr/>
-		  <p>Software Engineer</p>
+		  <p>Webmaster</p>
 		</div>
 		<div class="teamMember">
 		  <img src="Images/Team/harwinder_singh.jpg" alt='Team member face'/>
@@ -178,15 +178,15 @@
 		</div>
 		<div class="teamMember">
 		  <img src="Images/Team/davide_liu.jpg" alt='Team member face'/>
-		  <h2>Davide Liu</h2>
+		  <h2>Pardeep Singh</h2>
 		  <hr/>
-		  <p>Software Engineer</p>
+		  <p>Full Stack Developer</p>
 		</div>
 		<div class="teamMember">
 		  <img src="Images/Team/davide_liu.jpg" alt='Team member face'/>
-		  <h2>Davide Liu</h2>
+		  <h2>Daniele Bianchin</h2>
 		  <hr/>
-		  <p>Software Engineer</p>
+		  <p>Cybersecurity Expert</p>
 		</div>
 	  </div>
   </div>

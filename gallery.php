@@ -70,7 +70,7 @@
                     <select id="orderBy" name="orderBy" onchange="orderByGalleryChanged()">
                       <option value="none"> --- </option>
                       <option value="likes" <?php if(isset($_GET['orderBy']) && $_GET['orderBy']=='likes'){echo "selected='selected'";} ?>>Likes</option>
-                      <option value="latestAdded" <?php if(isset($_GET['orderBy']) && $_GET['orderBy']=='latestAdded'){echo "selected='selected'";} ?>>Latest Added</option>
+                      <option value="latestAdded" <?php if((isset($_GET['orderBy']) && $_GET['orderBy']=='latestAdded') || (!isset($_GET['orderBy']))){echo "selected='selected'";} ?>>Latest Added</option>
                     </select>
                 </div>
 
@@ -139,7 +139,7 @@
                                 $qrStr = "SELECT Artista,Nome FROM opere WHERE Categoria='".$galleryCategory."' ORDER BY Data_upload DESC;";
                             }
                         }
-                        
+
                         $result = $myDb->doQuery($qrStr);
                     }
                     else
