@@ -14,7 +14,7 @@
       <script type="text/javascript" src="ajaxComment.js" ></script>
       <title>Artbit</title>
     </head>
-    <body onload="eventListnerforLoginModal()">
+    <body onload="eventListnerforLoginModal()" onresize="magnify('myimage', 3)">
 
     <?php
       require_once "header.php";
