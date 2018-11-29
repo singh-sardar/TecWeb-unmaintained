@@ -25,51 +25,58 @@
 }
 
 #imageContainer {
-	border: 2px solid #636363;
 	float: left;
-	padding-top: 0.5em;
-	padding-bottom: 0.5em;
-	background-color: #e8eaed;
-	border-radius: 0.5em;
-	max-width: 55%;
+    padding: auto;
+	background-color: #f7f7f7;
+    width: 100%;
+    height: 37em;
+    max-height: 37em;
+	width: 70%;
+    display: table-cell;
+}
+
+#description-comments {
+float: left;
+display: table-cell;
+background-color: #f7f7f7;
+padding: 0.5em;
+height: 35em;
+width: 30%;
+height: 37em;
+max-height: 37em;
 }
 
 #imageAndCommentSection {
-overflow: hidden;
+display: table;
+/*overflow: hidden;*/
 padding: 0em;
-margin-left: 25%;
-margin-right: 25%;
-max-height: 50em;
+width: 100%;
+height: 100%;
+max-height: 35em;
 }
 
 #myimage {
+margin: auto;
+display: block;
 max-height: 100%;
 max-width: 100%;
 }
 
 #commentSection {
-display: block;
-height: 100%;
-/*max-height: 35em;*/
-}
-
-#description-comments {
-border: 2px solid #636363;
-background-color: #d8d8d8;
+margin-top: 0.2em;
+overflow-y: auto;
+padding-top: 0.2em;
+background-color: #f7f7f7;
 border-radius: 0.5em;
-padding: 0.5em;
+display: block;
+/*height: 35em;*/
+max-height: 35em;
 }
 
 #main-description
 {
 font-style: italic;
 margin-bottom: 0.5em;
-}
-
-#description-comment-wrapper
-{
-	margin-left: 57%;
-    border-radius: 0.5em;
 }
 
 .commentator
@@ -81,7 +88,8 @@ margin-bottom: 0.5em;
  
 .comment
 {
-	border: 2px solid #636363;
+	background-color: #eaeaea;
+	/*border: 2px solid #636363;*/
  	border-radius: 0.5em;
  	padding: 0.5em;
 }
@@ -102,37 +110,25 @@ textarea[name=input-comment]
 		margin: 0;
 	}
     
-    #description-comment-wrapper
-    {
-    max-height: 100%;
-        max-width: 100%;
-    	width: 100%;
-    	float: center;
-        margin: 0;
-        display: block;
-        margin-top: 75%;
-    }
-    
     #description-comments
     {
-    max-height: 100%;
+    	max-height: 100%;
         max-width: 100%;
     	width: 100%;
-    	float:center;
+        height: auto;
         display: block;
         margin: 0;
+        margin-top: 1%;
     }
     
     #imageContainer
     {
     	display:block;
         margin:0;
-    	/*margin-left: 24%;*/
-    	float:center;
-        height: 100%;
-    	width: 100%;
         max-width: 100%;
         max-height: 100%;
+        width: 100%;
+        height: auto;
     }
     
     #myimage
@@ -142,4 +138,8 @@ textarea[name=input-comment]
     	height: 100%;
     	width: 100%;
 	}
+    
+    #commentSection {
+    margin: 0;
+    }
 }

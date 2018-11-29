@@ -23,6 +23,7 @@
       require_once "signUpModal.php";
       require_once "editProfileModal.php";
       require_once "DbConnector.php";
+      require_once "functions.php";
 
       $Title = $_GET['Title'];
       $Artist = $_GET['Artist'];
@@ -51,6 +52,12 @@
           $result = $myDb->doQuery($qrStr);
           $row = $result->fetch_assoc();
           $ArtistName = $row['Nome'] . $row['Cognome'];
+          
+          if ( is_session_started() === FALSE || (!isset($_SESSION['Username']))){
+            $isLiked = false;
+          }else if(isset($_SESSION['Username'])){
+            $isLiked = boolImageLiked($ArtistName,$_SESSION['Username'],$Title)['Result'];
+          }
         }
         else
            echo "<script> window.location.replace('404.php') </script>";
@@ -62,14 +69,13 @@
         echo '<script>alert(\'Database problem!\');</script>';
     ?>
     <h1 id="artworkTitle"><?php echo $Title; ?></h1>
-    <div id="imageAndCommentSection">
+    <div id="imageAndCommentSection" class="container1024">
     <!--Lense-->
       <div id="imageContainer">
         <div class="img-magnifier-glass" id="glass"></div>
-        <img id="myimage" src=<?php echo "'Images/Art/".$Artist."/".$Title.".jpeg'";?>  onload="magnify('myimage', 3)" alt=<?php echo '"'.$Title.'"' ?> >
+        <img id="myimage" src=<?php echo "'Images/Art/".$Artist."/".$Title.".jpeg'";?>  onLoad="magnify('myimage', 3)" alt=<?php echo '"'.$Title.'"' ?> >
       </div>
     <!--Description-->
-      <div id="description-comment-wrapper">
         <div id="description-comments">
           <div class="commentator">Description</div>
           <div id="main-description"><?php echo $Description; ?></div>
@@ -77,10 +83,18 @@
           <div><div class="commentator">Artist: <?php echo $ArtistName; ?></div></div>
           <div><div class="commentator">Uploaded on: <?php echo $Date; ?></div></div>
           <div><div class="commentator">Category: <?php echo $Category; ?></div></div>
+          <?php
+            if($isLiked == true){
+              echo '<div class="like-btn like-btn-added" onclick="btnLikeOnClick(this)" id="LikeBtn_'.$numFig.'"></div>';
+            }else{
+              echo '<div class="like-btn" onclick="btnLikeOnClick(this)" id="LikeBtn_'.$numFig.'"></div>';
+            }
+          ?>
           <div><div class="commentator">Likes: <?php echo $Likes; ?></div></div>
           <div><div class="commentator">Comments: <?php echo $Comments; ?></div></div>
         </div>
-        <div id="commentSection">
+        </div>
+        <div id="commentSection" class="container1024">
         <div class="comment">
         <div class="commentator">
         <?php
@@ -113,8 +127,6 @@
               }
             }
           ?>
-      </div>
-      </div>
       </div>
     <?php require_once "footer.html"?>
     </div>
