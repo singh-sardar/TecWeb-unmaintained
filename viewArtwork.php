@@ -24,6 +24,7 @@
       require_once "editProfileModal.php";
       require_once "DbConnector.php";
       require_once "functions.php";
+      require_once "likedByModal.php";
 
       $Title = $_GET['Title'];
       $Artist = $_GET['Artist'];
@@ -52,11 +53,12 @@
           $result = $myDb->doQuery($qrStr);
           $row = $result->fetch_assoc();
           $ArtistName = $row['Nome'] . $row['Cognome'];
-          
+          $isLiked = false;
+
           if ( is_session_started() === FALSE || (!isset($_SESSION['Username']))){
             $isLiked = false;
           }else if(isset($_SESSION['Username'])){
-            $isLiked = boolImageLiked($ArtistName,$_SESSION['Username'],$Title)['Result'];
+            $isLiked = boolImageLiked($Artist,$_SESSION['Username'],$Title)['Result'];
           }
         }
         else
@@ -73,7 +75,7 @@
     <!--Lense-->
       <div id="imageContainer">
         <div class="img-magnifier-glass" id="glass"></div>
-        <img id="myimage" src=<?php echo "'Images/Art/".$Artist."/".$Title.".jpeg'";?>  onLoad="magnify('myimage', 3)" alt=<?php echo '"'.$Title.'"' ?> >
+        <img id="myimage" src=<?php echo "'Images/Art/".rawurlencode($Artist)."/".rawurlencode($Title).".jpeg'";?>  onLoad="magnify('myimage', 3)" alt=<?php echo '"'.$Title.'"' ?> >
       </div>
     <!--Description-->
         <div id="description-comments">
@@ -84,13 +86,20 @@
           <div><div class="commentator">Uploaded on: <?php echo $Date; ?></div></div>
           <div><div class="commentator">Category: <?php echo $Category; ?></div></div>
           <?php
+            echo '<input type="hidden" value="'.$Artist.'" name="nameArtist"/>';
+            echo '<input type="hidden" value="'.$Title.'" name="nameImage"/>';
+            echo '<div class="wrapper">';
+            echo '  <div class="width-15">';
             if($isLiked == true){
-              echo '<div class="like-btn like-btn-added" onclick="btnLikeOnClick(this)" id="LikeBtn_'.$numFig.'"></div>';
+              echo '<div class="like-btn like-btn-added" onclick="btnLikeOnClick(this)" id="LikeBtn_1"></div>';
             }else{
-              echo '<div class="like-btn" onclick="btnLikeOnClick(this)" id="LikeBtn_'.$numFig.'"></div>';
+              echo '<div class="like-btn" onclick="btnLikeOnClick(this)" id="LikeBtn_1"></div>';
             }
+            echo '  </div>';
+            echo '  <div class="width-85">';
+            echo '<p class="customLink commentator" id="Likes_1" onclick="btnLikedByOnClick(this)">Likes: '.getLikesByItem($Artist,$Title)['Result'].'</p>';
+            echo '  </div></div>';
           ?>
-          <div><div class="commentator">Likes: <?php echo $Likes; ?></div></div>
           <div><div class="commentator">Comments: <?php echo $Comments; ?></div></div>
         </div>
         </div>

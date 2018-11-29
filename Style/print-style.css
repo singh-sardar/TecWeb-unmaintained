@@ -533,12 +533,12 @@ div.divCategoryButtons button{
     box-shadow: 0em 0.1em 0.5em rgba(0,0,0,0.2);
     position: relative;
     overflow: hidden;
+    display: block;
 }
-/*
-.galleryCaption .btnDelete{
-    width: 100%;
+
+.gallery .liFigures{
+    page-break-inside: avoid;
 }
-*/
 
 .galleryBoard .galleryCaption{
     padding: 0.5em;

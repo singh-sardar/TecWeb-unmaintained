@@ -292,8 +292,15 @@ function btnLikedByOnClick(obj){
 	// creating ajax object
 	var xhttp;
 	var idNumber = obj.id.substring(("Likes_").length);
-		var artist = document.querySelector('[id="figureWrapper_'+idNumber+'"] [name="nameArtist"]').value;
-		var immg = document.querySelector('[id="figureWrapper_'+idNumber+'"] [name="nameImage"]').value;
+	var artist;
+	var immg;
+	if((window.location.href).indexOf("viewArtwork.php")!== -1){
+		artist = document.querySelector('[id="description-comments"] [name="nameArtist"]').value;
+		immg = document.querySelector('[id="description-comments"] [name="nameImage"]').value;
+	}else{
+		artist = document.querySelector('[id="figureWrapper_'+idNumber+'"] [name="nameArtist"]').value;
+		immg = document.querySelector('[id="figureWrapper_'+idNumber+'"] [name="nameImage"]').value;
+	}
 	if (window.XMLHttpRequest) {
 		// code for modern browsers
 		xhttp = new XMLHttpRequest();
@@ -336,8 +343,15 @@ function btnLikeOnClick(obj){
 	// creating ajax object
 	var xhttp;
 	var idNumber = obj.id.substring(("LikeBtn_").length);
-	var artist = document.querySelector('[id="figureWrapper_'+idNumber+'"] [name="nameArtist"]').value;
-	var immg = document.querySelector('[id="figureWrapper_'+idNumber+'"] [name="nameImage"]').value;
+	var artist;
+	var immg;
+	if((window.location.href).indexOf("viewArtwork.php")!== -1){
+		artist = document.querySelector('[id="description-comments"] [name="nameArtist"]').value;
+		immg = document.querySelector('[id="description-comments"] [name="nameImage"]').value;
+	}else{
+		artist = document.querySelector('[id="figureWrapper_'+idNumber+'"] [name="nameArtist"]').value;
+		immg = document.querySelector('[id="figureWrapper_'+idNumber+'"] [name="nameImage"]').value;
+	}
 	if (window.XMLHttpRequest) {
         // code for modern browsers
         xhttp = new XMLHttpRequest();
