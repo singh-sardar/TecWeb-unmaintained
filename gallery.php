@@ -70,7 +70,7 @@
                     <select id="orderBy" name="orderBy" onchange="orderByGalleryChanged()">
                       <option value="none"> --- </option>
                       <option value="likes" <?php if(isset($_GET['orderBy']) && $_GET['orderBy']=='likes'){echo "selected='selected'";} ?>>Likes</option>
-                      <option value="latestAdded" <?php if((isset($_GET['orderBy']) && $_GET['orderBy']=='latestAdded') || (!isset($_GET['orderBy']))){echo "selected='selected'";} ?>>Latest Added</option>
+                      <option value="latestAdded" <?php if((isset($_GET['orderBy']) && $_GET['orderBy']=='latestAdded') || (!isset($_GET['orderBy']))){echo "selected='selected'"; $_GET['orderBy'] = 'latestAdded';} ?>>Latest Added</option>
                     </select>
                 </div>
 
