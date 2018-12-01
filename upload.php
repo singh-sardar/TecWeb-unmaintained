@@ -32,7 +32,7 @@
           error_reporting(0);
           if(isset($_POST["title"]) && isset($_FILES['artwork'])){ //l'upload può partire solo se il TITOLO e l'IMMAGINE sono stati selezionati
             if(!isset($_SESSION["Username"])){
-              echo '<script type="text/javascript">openLoginModal();</script>';
+              echo '<script type="text/javascript">openModal(\'LoginModal\')</script>';
               //exit();
             }
             if(isset($_SESSION["Username"])){
