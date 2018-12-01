@@ -12,7 +12,7 @@
   <title>Artbit</title>
 </head>
 
-<body onload="eventListnerforLoginModal()">
+<body onload="eventListnerforLoginModal(); scrollFunction();">
 
   <?php
   require_once "header.php";

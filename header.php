@@ -3,7 +3,7 @@
 </div>
 <div class="menu" id="Topnav">
 <div class="container1024">
-  <a class="imageLink" href="index.php"><img onload="scrollFunction()" src="Images/logo.png" alt="Logo"/></a>
+  <a class="imageLink" href="index.php"><img src="Images/logo.png" alt="Logo"/></a>
   <ul>
     <?php
       session_start();

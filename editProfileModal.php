@@ -8,7 +8,7 @@
 		</div>
 		<div class="container">
 			<label for="usrEdit">Username</label>
-			<input id="usrEdit" type="text" placeholder="Enter Username" name="usrEdit" <?php echo 'value="'.$_SESSION["Username"].'" '; ?>readonly="readonly"/>
+			<input id="usrEdit" type="text" placeholder="Enter Username" name="usrEdit" <?php echo ' value="'.$_SESSION["Username"].'"'; ?>readonly="readonly"/>
 
 			<label for="pwdEdit">Password</label>
 			<input id="pwdEdit" type="password" placeholder="Enter Password" name="pwdEdit" />

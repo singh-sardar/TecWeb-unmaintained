@@ -26,7 +26,7 @@
         }
         echo '<div class="liFigures">';
         echo     '<div class="galleryFigureWrapper" id="figureWrapper_'.$numFig.'">';
-        echo '      <div class="background-color-90929294" name="bg-img"><a href="viewArtwork.php?Title='.$nomeImmagine.'&Artist='.$artista.'"><img src="Images/Art/'.rawurlencode($artista).'/'.rawurlencode($nomeImmagine).'.jpeg"/></a></div>';
+        echo '      <div class="background-color-90929294"><a href="viewArtwork.php?Title='.$nomeImmagine.'&amp;Artist='.$artista.'"><img alt="'.$nomeImmagine.'" src="Images/Art/'.rawurlencode($artista).'/'.rawurlencode($nomeImmagine).'.jpeg"/></a></div>';
         echo '      <input type="hidden" value="'.$artista.'" name="nameArtist"/>';
         echo '      <input type="hidden" value="'.$nomeImmagine.'" name="nameImage"/>';
         echo '      <div class="galleryCaption">';
@@ -44,7 +44,7 @@
         echo '                  <p class="customLink" id="Likes_'.$numFig.'" onclick="btnLikedByOnClick(this)">Likes: '.getLikesByItem($artista,$nomeImmagine)['Result'].'</p>';       
         echo '              </div>';
         echo '          </div>';
-        echo '                  <a href="viewArtwork.php?Title='.$nomeImmagine.'&Artist='.$artista.'"><button class="btnDiscover" type="submit" id="DelBtn_'.$numFig.'">Details</button></a>';
+        echo '                  <a href="viewArtwork.php?Title='.$nomeImmagine.'&amp;Artist='.$artista.'"><button class="btnDiscover" type="submit" id="DelBtn_'.$numFig.'">Details</button></a>';
         if($boolDeleteButton == TRUE){
             echo '<button class="btnDelete" type="submit" id="DelBtn_'.$numFig.'" onclick="btnDeleteOnClick(this)">Delete</button>';
         }
@@ -83,7 +83,7 @@
     // - $i: number of buttons to be displayed
     function printDivPagination($i){
         echo '<div class="div-center">';
-        echo '   <div class="div-bar gal-pag-border gal-border-round" name="pagination">';
+        echo '   <div class="div-bar gal-pag-border gal-border-round">';
         echo '      <a href="#" class="div-bar-item gal-pag-button" id="btnPagBack" onclick="btnPagBackOnClick()">&laquo;</a>';
         for($j=1; $j < $i; $j++){
             echo '  <a href="#" class="div-bar-item gal-pag-button" id="btnPagination'.$j.'" onclick="btnPaginationOnClick(this.id)">'.$j.'</a>';
