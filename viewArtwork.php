@@ -14,129 +14,133 @@
       <script type="text/javascript" src="ajaxComment.js" ></script>
       <title>Artbit</title>
     </head>
-    <body onload="eventListnerforLoginModal(); scrollFunction();" onresize="magnify('myimage', 3)">
+    <body onload="eventListnerforLoginModal(); magnify(); /*setResizeListner();*/" >
+      <?php
+        require_once "header.php";
+        require_once "loginModal.php";
+        require_once "searchModal.php";
+        require_once "signUpModal.php";
+        require_once "editProfileModal.php";
+        require_once "DbConnector.php";
+        require_once "functions.php";
+        require_once "likedByModal.php";
 
-    <?php
-      require_once "header.php";
-      require_once "loginModal.php";
-      require_once "searchModal.php";
-      require_once "signUpModal.php";
-      require_once "editProfileModal.php";
-      require_once "DbConnector.php";
-      require_once "functions.php";
-      require_once "likedByModal.php";
+        $Title = $_GET['Title'];
+        $Artist = $_GET['Artist'];
 
-      $Title = $_GET['Title'];
-      $Artist = $_GET['Artist'];
-
-      $myDb= new DbConnector();
-      $myDb->openDBConnection();
-      if($myDb->connected)
-      {
-       if(isset($Title) && isset($Artist))
-       {
-        $qrStr = 'SELECT Artista, Nome, Descrizione, Categoria, Data_upload FROM opere WHERE Artista ="'.$Artist.'"'.' AND Nome ="'.$Title.'"';
-        $result = $myDb->doQuery($qrStr);
-        if(isset($result) && ($result->num_rows === 1))
+        $myDb= new DbConnector();
+        $myDb->openDBConnection();
+        if($myDb->connected)
         {
-          $row = $result->fetch_assoc();
-          $Title = $row['Nome'];
-          $Artist = $row['Artista'];
-          $Description = $row['Descrizione'];
-          $Category = $row['Categoria'];
-          $Date = $row['Data_upload'];
-          $qrStr = 'SELECT Opera FROM likes WHERE Opera="'.$Title.'"'.' AND Creatore="'.$Artist.'"';
-          $Likes = $myDb->doQuery($qrStr)->num_rows;
-          $qrStr = 'SELECT Opera FROM commenti WHERE Opera="'.$Title.'"'.' AND Creatore="'.$Artist.'"';
-          $Comments = $myDb->doQuery($qrStr)->num_rows;
-          $qrStr = 'SELECT Nome, Cognome FROM artisti WHERE Username="'.$Artist.'"';
+         if(isset($Title) && isset($Artist))
+         {
+          $qrStr = 'SELECT Artista, Nome, Descrizione, Categoria, Data_upload FROM opere WHERE Artista ="'.$Artist.'"'.' AND Nome ="'.$Title.'"';
           $result = $myDb->doQuery($qrStr);
-          $row = $result->fetch_assoc();
-          $ArtistName = $row['Nome'] . $row['Cognome'];
-          $isLiked = false;
-
-          if ( is_session_started() === FALSE || (!isset($_SESSION['Username']))){
+          if(isset($result) && ($result->num_rows === 1))
+          {
+            $row = $result->fetch_assoc();
+            $Title = $row['Nome'];
+            $Artist = $row['Artista'];
+            $Description = $row['Descrizione'];
+            $Category = $row['Categoria'];
+            $Date = $row['Data_upload'];
+            $qrStr = 'SELECT Opera FROM likes WHERE Opera="'.$Title.'"'.' AND Creatore="'.$Artist.'"';
+            $Likes = $myDb->doQuery($qrStr)->num_rows;
+            $qrStr = 'SELECT Opera FROM commenti WHERE Opera="'.$Title.'"'.' AND Creatore="'.$Artist.'"';
+            $Comments = $myDb->doQuery($qrStr)->num_rows;
+            $qrStr = 'SELECT Nome, Cognome FROM artisti WHERE Username="'.$Artist.'"';
+            $result = $myDb->doQuery($qrStr);
+            $row = $result->fetch_assoc();
+            $ArtistName = $row['Nome'] . $row['Cognome'];
             $isLiked = false;
-          }else if(isset($_SESSION['Username'])){
-            $isLiked = boolImageLiked($Artist,$_SESSION['Username'],$Title)['Result'];
+
+            if ( is_session_started() === FALSE || (!isset($_SESSION['Username']))){
+              $isLiked = false;
+            }else if(isset($_SESSION['Username'])){
+              $isLiked = boolImageLiked($Artist,$_SESSION['Username'],$Title)['Result'];
+            }
           }
+          else
+             echo "<script> window.location.replace('404.php') </script>";
+         }
+         else
+           echo "<script> window.location.replace('404.php') </script>";
         }
         else
-           echo "<script> window.location.replace('404.php') </script>";
-       }
-       else
-         echo "<script> window.location.replace('404.php') </script>";
-      }
-      else
-        echo '<script>alert(\'Database problem!\');</script>';
-    ?>
-    <h1 id="artworkTitle"><?php echo $Title; ?></h1>
-    <div id="imageAndCommentSection" class="container1024">
-    <!--Lense-->
-      <div id="imageContainer">
-        <div class="img-magnifier-glass" id="glass"></div>
-        <img id="myimage" src=<?php echo "'Images/Art/".rawurlencode($Artist)."/".rawurlencode($Title).".jpeg'";?>  onLoad="magnify('myimage', 3)" alt=<?php echo '"'.$Title.'"' ?> >
-      </div>
-    <!--Description-->
-        <div id="description-comments">
-          <div class="commentator">Description</div>
-          <div id="main-description"><?php echo $Description; ?></div>
-          <div><?php echo ' <div class="commentator">By: <a href="gallery.php?gallerySearch='.$Artist.'">'.$Artist.'</a></div>' ?></div>
-          <div><div class="commentator">Artist: <?php echo $ArtistName; ?></div></div>
-          <div><div class="commentator">Uploaded on: <?php echo $Date; ?></div></div>
-          <div><div class="commentator">Category: <?php echo $Category; ?></div></div>
+          echo '<script>alert(\'Database problem!\');</script>';
+      ?>
+      <div class="container1024">
+      <h1 id="artworkTitle"><?php echo $Title; ?></h1>
+      <div id="imageAndDescription">
+      <!--Lense and image-->
+        <div id="imageContainer">
+          <div class="img-magnifier-glass" id="glass"></div>
+          <img id="myimage" src=<?php echo "'Images/Art/".rawurlencode($Artist)."/".rawurlencode($Title).".jpeg'";?> alt=<?php echo '"'.$Title.'"' ?> />
+        </div>
+      <!--Description-->
+          <div id="description-comments">
+            <div class="commentator">Description</div>
+            <div id="main-description"><?php echo $Description; ?></div>
+            <div><?php echo ' <div class="commentator">By: <a href="gallery.php?gallerySearch='.$Artist.'">'.$Artist.'</a></div>' ?></div>
+            <div><div class="commentator">Artist: <?php echo $ArtistName; ?></div></div>
+            <div><div class="commentator">Uploaded on: <?php echo $Date; ?></div></div>
+            <div><div class="commentator">Category: <?php echo $Category; ?></div></div>
+            <?php
+              echo '<input type="hidden" value="'.$Artist.'" name="nameArtist"/>';
+              echo '<input type="hidden" value="'.$Title.'" name="nameImage"/>';
+              echo '<div class="wrapper">';
+              echo '  <div class="width-15">';
+              if($isLiked == true){
+                echo '<div class="like-btn like-btn-added" onclick="btnLikeOnClick(this)" id="LikeBtn_1"></div>';
+              }else{
+                echo '<div class="like-btn" onclick="btnLikeOnClick(this)" id="LikeBtn_1"></div>';
+              }
+              echo '  </div>';
+              echo '  <div class="width-85">';
+              echo '<p class="customLink commentator" id="Likes_1" onclick="btnLikedByOnClick(this)">Likes: '.getLikesByItem($Artist,$Title)['Result'].'</p>';
+              echo '  </div></div>';
+            ?>
+            <div><div class="commentator">Comments: <?php echo $Comments; ?></div></div>
+          </div>
+          </div>
+          <div id="commentSection" class="container1024">
+          <div class="comment" id="topComment">
+          <div class="commentator">
           <?php
-            echo '<input type="hidden" value="'.$Artist.'" name="nameArtist"/>';
-            echo '<input type="hidden" value="'.$Title.'" name="nameImage"/>';
-            echo '<div class="wrapper">';
-            echo '  <div class="width-15">';
-            if($isLiked == true){
-              echo '<div class="like-btn like-btn-added" onclick="btnLikeOnClick(this)" id="LikeBtn_1"></div>';
-            }else{
-              echo '<div class="like-btn" onclick="btnLikeOnClick(this)" id="LikeBtn_1"></div>';
-            }
-            echo '  </div>';
-            echo '  <div class="width-85">';
-            echo '<p class="customLink commentator" id="Likes_1" onclick="btnLikedByOnClick(this)">Likes: '.getLikesByItem($Artist,$Title)['Result'].'</p>';
-            echo '  </div></div>';
+            if($myDb->connected && isset($_SESSION['Username']))
+                echo $_SESSION['Username'];
+              else
+                echo "Login to comment."
+           ?>
+           </div>
+           <?php
+            $en = !isset($_SESSION['Username']) ? "disabled=\"disabled\"" : "";
+           ?>
+           <textarea name="input-comment" id="texxt" rows="2" cols="10" <?php echo  $en?>> </textarea>
+        <?php
+            echo '<input type="button" value="comment" id="comment-btn" onclick="doComment(\''.$Title.'\',\''.$Artist.'\')" '.$en.'/></div>';
           ?>
-          <div><div class="commentator">Comments: <?php echo $Comments; ?></div></div>
-        </div>
-        </div>
-        <div id="commentSection" class="container1024">
-        <div class="comment">
-        <div class="commentator">
-        <?php
-          if($myDb->connected && isset($_SESSION['Username']))
-              echo $_SESSION['Username'];
-            else
-              echo "Login to comment."
-         ?>
-         </div>
-         <?php
-          $en = !isset($_SESSION['Username']) ? "disabled=\"disabled\"" : "";
-         ?>
-         <textarea name="input-comment" id="texxt" <?php echo  $en?>> </textarea>
-      <?php
-          echo '<input type="button" value="comment" id="comment-btn" onclick="doComment(\''.$Title.'\',\''.$Artist.'\')" '.$en.'></div>';
-        ?>
-        <?php
-            if($myDb->connected)
-            {
-              $qrStr = 'SELECT Commento, Utente FROM commenti WHERE Opera ="'.$Title.'"';
-              $result = $myDb->doQuery($qrStr);
-              if(isset($result) && ($result->num_rows > 0))
+          <?php
+              if($myDb->connected)
               {
-                while($row = $result->fetch_assoc())
+                $qrStr = 'SELECT * FROM commenti WHERE Opera ="'.$Title.'" ORDER BY ID DESC';
+                $result = $myDb->doQuery($qrStr);
+                if(isset($result) && ($result->num_rows > 0))
                 {
-                  echo '<div class="comment">';
-                  echo '  <div class="commentator"><a href="gallery.php?gallerySearch='.$row['Utente'].'">'.$row['Utente'].'</a></div>';
-                  echo $row['Commento']."</div>";
+                  while($row = $result->fetch_assoc())
+                  {
+                    echo '<div class="comment">';
+                    		echo '<div class="delComment" onclick="removeComment(this, '.$row['ID'].')"> x </div>';
+                    echo '  <div class="commentator"><a href="gallery.php?gallerySearch='.$row['Utente'].'">'.$row['Utente'].'</a></div>';
+                    echo $row['Commento']."</div>";
+                  }
                 }
               }
-            }
-          ?>
+            ?>
+        </div>
+		</div>
+      <?php require_once "footer.html"?>
+
       </div>
-    <?php require_once "footer.html"?>
-    </div>
     </body>
+</html>

@@ -10,7 +10,7 @@
     	echo '<script>alert(\'Login before!\');</script>';
         exit(0);
     }
-    if(!isset($Opera) || !isset($Creatore) || !isset($Commento))
+    if(!isset($Opera) || !isset($Creatore) || !isset($Commento) || $Commento === "")
     {
     	echo '<script>alert(\'Empty field!\');</script>';
         exit(0);
@@ -21,16 +21,17 @@
     $myDb->openDBConnection();
     
     if(!$myDb->connected) {
-        '<script>alert(\'Database problem!\');</script>';
+        echo '<script>alert(\'Database problem!\');</script>';
         exit(0);
     }
     
     if($myDb->doQuery($qrStr))
     {
     	echo '<div class="comment">';
+        echo '<div class="delComment" onclick="removeComment(this, '.$myDb->lastInsertID().')"> x </div>';
         echo '  <div class="commentator"><a href="gallery.php?gallerySearch='.$_SESSION['Username'].'">'.$_SESSION['Username'].'</a></div>';
         echo $Commento."</div>";
     }
     else
     	echo '<script>alert(\'Query failed!\');</script>';
-?>
+?>
