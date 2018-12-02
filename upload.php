@@ -49,8 +49,8 @@
               $myDb->openDBConnection();
               if(!file_exists("./Images/Art/$username"))
                 mkdir("./Images/Art/$username", 0777, true);
-              if($filesize>5242880 || $filesize==0)
-                echo '<p>File size is too big (max 5Mb)</p>';
+              if($filesize>5242880*4 || $filesize==0)
+                echo '<p>File size is too big (max 20Mb)</p>';
               else if($myDb->connected){
                 //check if title already exists
                 $result = $myDb->doQuery("select Nome from opere where Nome='".$title."' and Artista='".$username."'");

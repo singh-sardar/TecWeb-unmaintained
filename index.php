@@ -168,7 +168,7 @@
 		  <img src="Images/Team/davide_liu.jpg" alt='Team member face'/>
 		  <h2>Davide Liu</h2>
 		  <hr/>
-		  <p>Webmaster</p>
+		  <p>Web Grandmaster</p>
 		</div>
 		<div class="teamMember">
 		  <img src="Images/Team/harwinder_singh.jpg" alt='Team member face'/>
