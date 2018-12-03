@@ -133,7 +133,8 @@
                   while($row = $result->fetch_assoc())
                   {
                     echo '<div class="comment">';
-                    echo '<div class="delComment" onclick="removeComment(this, '.$row['ID'].')"> x </div>';
+                    if($row['Utente'] === $_SESSION['Username'] || $row['Utente']  === 'Admin')
+                    	echo '<div class="delComment" onclick="removeComment(this, '.$row['ID'].')"> x </div>';
                     echo '<a href="gallery.php?gallerySearch='.$row['Utente'].'">'.$row['Utente'].'</a>';
                     echo $row['Commento']."</div>";
                   }
@@ -146,4 +147,4 @@
 
       </div>
     </body>
-</html>
+</html>
