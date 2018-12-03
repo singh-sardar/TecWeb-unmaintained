@@ -29,18 +29,19 @@
   max-height: 37em;
   width: 70%;
   display: flex;
+  background-color: black;
 }
 
 #description-comments {
 float: left;
 display: table-cell;
 background-color: #f7f7f7;
-width: 27%;
+width: 30%;
 height: 37em;
-margin-left: 2%;
 overflow: auto;
 word-break: break-word;
-border: 1px solid #6a5acd;
+border-right: 1px solid #6a5acd;
+border-bottom: 1px solid #6a5acd;
 }
 #comment-btn {
   background-color: #6a5acd;
@@ -130,21 +131,15 @@ textarea[name=input-comment]
 
     #imageContainer
     {
-    	display:block;
-        margin:0;
-        max-width: 100%;
-        max-height: 100%;
         width: 100%;
         height: auto;
     }
 
     #myimage
     {
-    	max-width: 100%;
-        max-height: 100%;
     	height: 100%;
     	width: 100%;
-	}
+	  }
 
     #commentSection {
     margin: 0;
