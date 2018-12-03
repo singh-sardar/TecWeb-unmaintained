@@ -15,14 +15,14 @@ function doComment(Opera, Creatore)
     xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
     	 var res = this.response;
-         if(res.startsWith("<script>"))
-         	document.getElementById("imageAndCommentSection").innerHTML += res;
+         if(res.startsWith("--alert--"))
+         	alert(res.replace("--alert--", ""));
          else
          {
          	var topComment = document.getElementById("topComment");
             var topComment_txt = document.getElementById("topComment").innerHTML;
             topComment.remove();
-    	 	document.getElementById("commentSection").innerHTML = '<div class="comment" id="topComment">' + topComment_txt + '</div>' + res + document.getElementById("commentSection").innerHTML;
+    	 	document.getElementById("commentSection").innerHTML = '<div id="topComment" class="comment">' + topComment_txt + '</div>' + res + document.getElementById("commentSection").innerHTML;
          }
     }
     }
@@ -37,8 +37,8 @@ function removeComment(comment, ID){
     xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
     	 var res = this.response;
-         if(res.startsWith("<script>"))
-         	document.getElementById("imageAndCommentSection").innerHTML += res;
+         if(res.startsWith("--alert--"))
+         	alert(res.replace("--alert--", ""));
          else
     	 	comment.parentNode.style.display = "none";
     }

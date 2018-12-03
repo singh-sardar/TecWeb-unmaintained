@@ -7,12 +7,12 @@
 	$Commento = htmlspecialchars($_POST['Commento'], ENT_QUOTES, "UTF-8");
 
 	if(!isset($_SESSION['Username'])) {
-    	echo '<script>alert(\'Login before!\');</script>';
+    	echo '--alert--Login before!';
         exit(0);
     }
-    if(!isset($Opera) || !isset($Creatore) || !isset($Commento) || $Commento === "")
+    if(!isset($Opera) || !isset($Creatore)|| empty(trim($_POST['Commento'])))
     {
-    	echo '<script>alert(\'Empty field!\');</script>';
+    	echo '--alert--Empty field!';
         exit(0);
     }
 
@@ -21,7 +21,7 @@
     $myDb->openDBConnection();
 
     if(!$myDb->connected) {
-        echo '<script>alert(\'Database problem!\');</script>';
+        echo '--alert--Database problem!';
         exit(0);
     }
 
@@ -33,5 +33,5 @@
         echo $Commento."</div>";
     }
     else
-    	echo '<script>alert(\'Query failed!\');</script>';
-?>
+    	echo '--alert--Query failed!';
+?>
