@@ -2,7 +2,7 @@
  position: relative;
  margin 0;
  padding: 0;
-} 
+}
 
 .img-magnifier-glass {
   visibility: hidden;
@@ -17,48 +17,55 @@
 }
 
 #artworkTitle {
- margin-top: 0.5em;
- margin-bottom: 0.5em;
- text-align: center;
- font-weight: bold;
- font-size: 200%;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  text-align: center;
+  font-weight: bold;
+  font-size: 2.5em;
 }
 
 #imageContainer {
-	float: left;
-    padding: auto;
-	background-color: #f7f7f7;
-    width: 100%;
-    height: 37em;
-    max-height: 37em;
-	width: 70%;
-    display: table-cell;
+  float: left;
+  max-height: 37em;
+  width: 70%;
+  display: flex;
 }
 
 #description-comments {
 float: left;
 display: table-cell;
 background-color: #f7f7f7;
-padding: 0.5em;
-height: 35em;
-width: 30%;
+width: 27%;
 height: 37em;
-max-height: 37em;
+margin-left: 2%;
+overflow: auto;
+word-break: break-word;
+border: 1px solid #6a5acd;
 }
+#comment-btn {
+  background-color: #6a5acd;
+  color: white;
+  padding: 0.5em;
+  border: none;
+  cursor: pointer;
+  }
 
 #imageAndDescription {
 display: table;
 padding: 0em;
-max-height: 35em;
+max-height: 37em;
+width: 100%;
 }
 
 #myimage {
-margin: auto;
+/*margin: auto;
 display: block;
 max-height: 100%;
 max-width: 100%;
+*/
+  max-width: 100%;
+  max-height:37em;
 }
-
 #commentSection {
 margin-top: 0.2em;
 overflow-y: auto;
@@ -74,6 +81,8 @@ max-height: 35em;
 {
 font-style: italic;
 margin-bottom: 0.5em;
+padding-left: 0.5em;
+padding-right: 0.5em;
 }
 
 .delComment
@@ -81,19 +90,13 @@ margin-bottom: 0.5em;
 cursor: default;
 float: right;
 font-weight: bold;
+cursor: pointer;
 }
 
-.commentator
- {
- 	border-radius: 0.5em;
- 	padding-bottom: 0.5em;
- 	font-weight: bold;
- }
- 
+
 .comment
 {
 	background-color: #eaeaea;
-	/*border: 2px solid #636363;*/
  	border-radius: 0.5em;
  	padding: 0.5em;
 }
@@ -113,7 +116,7 @@ textarea[name=input-comment]
         height: 100%;
 		margin: 0;
 	}
-    
+
     #description-comments
     {
     	max-height: 100%;
@@ -124,7 +127,7 @@ textarea[name=input-comment]
         margin: 0;
         margin-top: 1%;
     }
-    
+
     #imageContainer
     {
     	display:block;
@@ -134,7 +137,7 @@ textarea[name=input-comment]
         width: 100%;
         height: auto;
     }
-    
+
     #myimage
     {
     	max-width: 100%;
@@ -142,8 +145,22 @@ textarea[name=input-comment]
     	height: 100%;
     	width: 100%;
 	}
-    
+
     #commentSection {
     margin: 0;
     }
+}
+
+.descriptionTitle {
+    text-align: center;
+    color: white;
+    background: black;
+    font-size: 1.4em;
+    padding: 0.5em;
+    background-image: linear-gradient(-90deg, #008f88,#4fa46d);
+}
+.imageInfo{
+  line-height: 25px;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
 }

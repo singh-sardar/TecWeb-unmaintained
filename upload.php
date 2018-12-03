@@ -101,7 +101,7 @@
       </div>
       <form action="" method="post" enctype="multipart/form-data" id="upload" onsubmit="return doUploadValidation(event)">
           <div class="container">
-          <label for="title">Title:</label>
+          <label for="title">Title (Max 20 characters):</label>
           <input id="title" type="text" placeholder="Title" name="title" maxlength="20" />
 
           <label for="category">Category:</label>

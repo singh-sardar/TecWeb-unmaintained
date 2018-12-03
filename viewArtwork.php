@@ -51,7 +51,7 @@
             $qrStr = 'SELECT Nome, Cognome FROM artisti WHERE Username="'.$Artist.'"';
             $result = $myDb->doQuery($qrStr);
             $row = $result->fetch_assoc();
-            $ArtistName = $row['Nome'] . $row['Cognome'];
+            $ArtistName = $row['Nome'] . " " . $row['Cognome'];
             $isLiked = false;
 
             if ( is_session_started() === FALSE || (!isset($_SESSION['Username']))){
@@ -79,46 +79,49 @@
         </div>
       <!--Description-->
           <div id="description-comments">
-            <div class="commentator">Description</div>
+            <div class="descriptionTitle">Description</div>
+            <div class="imageInfo">
+              <?php echo '</br>By: <a href="gallery.php?gallerySearch='.$Artist.'">'.$Artist.'</a></br>' ?>
+              Artist: <?php echo $ArtistName; ?></br>
+              Uploaded on: <?php echo $Date; ?></br>
+              Category: <?php echo $Category; ?></br>
+              Comments: <?php echo $Comments; ?>
+
+              <?php
+                echo '<input type="hidden" value="'.$Artist.'" name="nameArtist"/></br>';
+                echo '<input type="hidden" value="'.$Title.'" name="nameImage"/></br>';
+                echo '<div class="wrapper">';
+                echo '<div class="width-15">';
+                if($isLiked == true){
+                  echo '<div class="like-btn like-btn-added" onclick="btnLikeOnClick(this)" id="LikeBtn_1"></div>';
+                }else{
+                  echo '<div class="like-btn" onclick="btnLikeOnClick(this)" id="LikeBtn_1"></div>';
+                }
+                echo '  </div>';
+                echo '  <div class="width-85">';
+                echo '<p class="customLink" id="Likes_1" onclick="btnLikedByOnClick(this)">Likes: '.getLikesByItem($Artist,$Title)['Result'].'</p>';
+                echo '  </div></div>';
+              ?>
+                <hr></hr>
+            </div>
+
             <div id="main-description"><?php echo $Description; ?></div>
-            <div><?php echo ' <div class="commentator">By: <a href="gallery.php?gallerySearch='.$Artist.'">'.$Artist.'</a></div>' ?></div>
-            <div><div class="commentator">Artist: <?php echo $ArtistName; ?></div></div>
-            <div><div class="commentator">Uploaded on: <?php echo $Date; ?></div></div>
-            <div><div class="commentator">Category: <?php echo $Category; ?></div></div>
-            <?php
-              echo '<input type="hidden" value="'.$Artist.'" name="nameArtist"/>';
-              echo '<input type="hidden" value="'.$Title.'" name="nameImage"/>';
-              echo '<div class="wrapper">';
-              echo '  <div class="width-15">';
-              if($isLiked == true){
-                echo '<div class="like-btn like-btn-added" onclick="btnLikeOnClick(this)" id="LikeBtn_1"></div>';
-              }else{
-                echo '<div class="like-btn" onclick="btnLikeOnClick(this)" id="LikeBtn_1"></div>';
-              }
-              echo '  </div>';
-              echo '  <div class="width-85">';
-              echo '<p class="customLink commentator" id="Likes_1" onclick="btnLikedByOnClick(this)">Likes: '.getLikesByItem($Artist,$Title)['Result'].'</p>';
-              echo '  </div></div>';
-            ?>
-            <div><div class="commentator">Comments: <?php echo $Comments; ?></div></div>
           </div>
           </div>
           <div id="commentSection" class="container1024">
           <div class="comment" id="topComment">
-          <div class="commentator">
           <?php
             if($myDb->connected && isset($_SESSION['Username']))
                 echo $_SESSION['Username'];
               else
-                echo "Login to comment."
+                echo "Login to add a comment."
            ?>
-           </div>
            <?php
             $en = !isset($_SESSION['Username']) ? "disabled=\"disabled\"" : "";
            ?>
            <textarea name="input-comment" id="texxt" rows="2" cols="10" <?php echo  $en?>> </textarea>
         <?php
-            echo '<input type="button" value="comment" id="comment-btn" onclick="doComment(\''.$Title.'\',\''.$Artist.'\')" '.$en.'/></div>';
+            echo '<input type="button" value="Send" id="comment-btn" onclick="doComment(\''.$Title.'\',\''.$Artist.'\')" '.$en.'/></div>';
           ?>
           <?php
               if($myDb->connected)
@@ -130,8 +133,8 @@
                   while($row = $result->fetch_assoc())
                   {
                     echo '<div class="comment">';
-                    		echo '<div class="delComment" onclick="removeComment(this, '.$row['ID'].')"> x </div>';
-                    echo '  <div class="commentator"><a href="gallery.php?gallerySearch='.$row['Utente'].'">'.$row['Utente'].'</a></div>';
+                    echo '<div class="delComment" onclick="removeComment(this, '.$row['ID'].')"> x </div>';
+                    echo '<a href="gallery.php?gallerySearch='.$row['Utente'].'">'.$row['Utente'].'</a>';
                     echo $row['Commento']."</div>";
                   }
                 }

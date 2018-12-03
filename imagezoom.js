@@ -1,4 +1,10 @@
-function magnify(imgID, zoom) {
+
+window.onresize =function(event) {
+   magnify();
+};
+function magnify() {
+	var imgID='myimage';
+    var zoom=3;
   if (navigator.userAgent.match(/iPad|Android|webOS|iPhone|iPod|Blackberry/i))
     return;
 
@@ -27,8 +33,8 @@ function magnify(imgID, zoom) {
     pos = getCursorPos(e);
     x = pos.x;
     y = pos.y;
-    
-    
+
+
     if ((x > img.width - (w / zoom)) || (x < w / zoom) || (y > img.height - (h / zoom)) || (y < h / zoom)) {
    glass.style.visibility = 'hidden';
     }

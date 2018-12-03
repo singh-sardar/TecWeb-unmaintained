@@ -503,7 +503,7 @@ function doUploadValidation(event){
     	}
     }
 	if(description.length>1000){
-		document.getElementById("uploadMessage").innerHTML ="Description is too long (" + description.length.toString() + " characters)";
+		document.getElementById("uploadMessage").innerHTML ="Description is too long";
 		returnValue=false;
 	}
 
