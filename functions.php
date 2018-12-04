@@ -185,6 +185,6 @@
     }
 
     function escapePathTraversal($path){
-        return str_replace("/", "&#x2F;", str_replace(".", "&#x2E;", $path));
+        return str_replace("/", "", str_replace(".", "", $path));
     }
-?>
+?>
