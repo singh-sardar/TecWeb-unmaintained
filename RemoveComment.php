@@ -16,7 +16,7 @@
         echo '--alert--Database problem!';
         exit(0);
     }
-    if(!$myDb->doQuery($qrstr)) {
+    if($myDb->doQuery($qrstr)->num_rows !== 1) {
     	echo '--alert--Artwork not found or wrong artwork owner';
         exit(0);
     }
