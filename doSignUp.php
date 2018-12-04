@@ -14,7 +14,10 @@
 	$pwd=password_hash($pwd,PASSWORD_BCRYPT);
 	if($myDb->connected){
     	if(empty($usr) || empty($pwd) || empty($name) || empty($surname))
+        {
         	echo 'Please fill all the fields';
+            exit(0);
+        }
 		$result = $myDb->doQuery("insert into artisti values ('$usr','$pwd','$name','$surname')");//excecute query
 		if($result === TRUE){//if inserted
 			echo "Success";
