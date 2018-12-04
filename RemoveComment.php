@@ -9,7 +9,7 @@
     }
 	$qrstr = "SELECT ID FROM commenti WHERE ID=".$ID;
     if ($_SESSION['Username'] !== 'Admin')
-    	$qrstr .= " AND Creatore='".$_SESSION['Username']."'";
+    	$qrstr .= " AND Utente='".$_SESSION['Username']."'";
     $myDb= new DbConnector();
     $myDb->openDBConnection();
     if(!$myDb->connected) {

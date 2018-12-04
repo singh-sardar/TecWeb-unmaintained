@@ -118,10 +118,11 @@
            ?>
            <?php
             $en = !isset($_SESSION['Username']) ? "disabled=\"disabled\"" : "";
+            $dis = !isset($_SESSION['Username']) ? "openModal('LoginModal')" : "doComment('$Title','$Artist')";
            ?>
            <textarea name="input-comment" id="texxt" rows="2" cols="10" <?php echo  $en?>> </textarea>
         <?php
-            echo '<input type="button" value="Send" id="comment-btn" onclick="doComment(\''.$Title.'\',\''.$Artist.'\')" '.$en.'/></div>';
+            echo '<input type="button" value="Send" id="comment-btn" onclick="'.$dis.'"/></div>';
           ?>
           <?php
               if($myDb->connected)
@@ -133,7 +134,7 @@
                   while($row = $result->fetch_assoc())
                   {
                     echo '<div class="comment">';
-                    if(isset($_SESSION['Username']) && ($row['Utente'] === $_SESSION['Username'] || strtolower($_SESSION['Username']) === 'admin'))
+                    if($row['Utente'] === $_SESSION['Username'] || strtolower($_SESSION['Username']) === 'admin')
                     	echo '<div class="delComment" onclick="removeComment(this, '.$row['ID'].')"> x </div>';
                     echo '<a href="gallery.php?gallerySearch='.$row['Utente'].'">'.$row['Utente'].'</a>';
                     echo $row['Commento']."</div>";
