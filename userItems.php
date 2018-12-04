@@ -38,7 +38,7 @@
                     $result = array();
                     $qrStr = "";
                     if($myDb->connected){
-                        if($_SESSION['Username'] === 'admin'){
+                        if(strtolower($_SESSION['Username']) === 'admin'){
                             $qrStr = "SELECT Nome,Artista FROM opere";
                         }else{
                             $qrStr = "SELECT Nome,Artista FROM opere WHERE Artista='".strtolower($_SESSION['Username'])."'";
@@ -58,8 +58,8 @@
                     }
                 }
             ?>
-            
-        </ul> 
+
+        </ul>
         <?php
             printPagination($mostraPagination,$j);
         ?>
