@@ -465,7 +465,7 @@ function btnPaginationOnClick(id){
 		btnForward.style.display = 'none';
 	}
 	//cookie
-	setCookie("divPagNumber",divNumber,1);
+	//setCookie("divPagNumber",divNumber,1,window.location.pathname);
 }
 
 //btn pagination back on click
@@ -513,17 +513,19 @@ function doUploadValidation(event){
 }
 
 function initializePagination(){
-	if(getCookie('divPagNumber') == "")
-		btnPaginationOnClick("btnPagination1");
-	else
-		btnPaginationOnClick("btnPagination"+getCookie('divPagNumber'));
+	//
+	//if(getCookie('divPagNumber') == "")
+	//	btnPaginationOnClick("btnPagination1");
+	//else
+	//	btnPaginationOnClick("btnPagination"+getCookie('divPagNumber'));
+	btnPaginationOnClick("btnPagination1");
 }
 
-function setCookie(cname, cvalue, exdays) {
+function setCookie(cname, cvalue, exdays, domain) {
     var d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
     var expires = "expires="+d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/;domain="+domain;
 }
 
 function getCookie(cname) {
