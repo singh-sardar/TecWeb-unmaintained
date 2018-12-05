@@ -8,7 +8,7 @@
 		</div>
 		<div class="container">
             <div class="inputSearch">
-                <input type="text" placeholder="Cerca per categoria, artista o descrizione .." name="gallerySearch"/>
+                <input type="text" placeholder="Search for category, artist or description..." name="gallerySearch"/>
                 <button class="btnSearch" type="submit"><span class="searchIcon"></span></button>
             </div>
 		</div>
