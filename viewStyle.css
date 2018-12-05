@@ -134,13 +134,6 @@ textarea[name=input-comment]
         width: 100%;
         height: auto;
     }
-
-    #myimage
-    {
-    	height: 100%;
-    	width: 100%;
-	  }
-
     #commentSection {
     margin: 0;
     }
