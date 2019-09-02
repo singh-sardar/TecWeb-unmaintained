@@ -6,5 +6,5 @@ This version of the project was published on [this address](http://artbit.alterv
 
 **Everything was developed from scratch, no external library was used.**
 
-A second version of the site was developed with the aim of using less js and ajax. It can be found at [this repository](https://github.com/singh-sardar/TecWeb)
+A second version of the website was developed with the aim of using less js and ajax. It can be found at [this repository](https://github.com/singh-sardar/TecWeb)
 
